@@ -1,0 +1,61 @@
+- var _ = lang._('login');
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title #{_('Login')} | PraxManager 
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
+  body
+    .container
+      #loginbox.mainbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2(style='margin-top:50px;')
+        .panel.panel-info
+          .panel-heading
+            .panel-title PraxManager | #{_('Sign In')}
+            div(style='float:right; font-size: 80%; position: relative; top:-10px')
+              a#forgot(href='#') #{_('Forgot password?')}
+          .panel-body(style='padding-top:30px')
+            #login-alert.alert.alert-danger.col-sm-12(style='display:none') #{_('Invalid username or password')}
+            form#loginform.form-horizontal(role='form')
+              .input-group(style='margin-bottom: 25px')
+                span.input-group-addon
+                  i.glyphicon.glyphicon-user
+                input#login-username.form-control(type='text', name='email', value='', placeholder='email')
+              .input-group(style='margin-bottom: 25px')
+                span.input-group-addon
+                  i.glyphicon.glyphicon-lock
+                input#login-password.form-control(type='password', name='password', placeholder='password')
+              .form-group(style='margin-top:10px')
+                // Button
+                .col-sm-12.controls
+                  a#btn-login.btn.btn-success(href='#') #{_('Login')}  
+              .form-group
+                .col-md-12.control
+                  div(style='border-top: 1px solid#888; padding-top:15px; font-size:85%')
+                    a(href='/terms_of_service.html')
+                      | #{_('Terms and Conditions')}
+                      
+      #resetbox.mainbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2(style='margin-top:50px; display:none;')
+        .panel.panel-info
+          .panel-heading
+            .panel-title PraxManager | #{_('Forgot password')}
+          .panel-body(style='padding-top:30px')
+            #reset-alert.alert.alert-danger.col-sm-12(style='display:none') #{_('Email address not found')}
+            #reset-success.alert.alert-success.col-sm-12(style='display:none') #{_('Reset password url sent, please check your email')}
+            form#loginform.form-horizontal(role='form')
+              .input-group(style='margin-bottom: 25px')
+                span.input-group-addon
+                  i.glyphicon.glyphicon-user
+                input#reset-email.form-control(type='text', name='email', value='', placeholder='email')
+              .form-group(style='margin-top:10px')
+                // Button
+                .col-sm-12.controls
+                  a#btn-reset.btn.btn-success(href='#') #{_('Forgot password')}  
+              .form-group
+                .col-md-12.control
+                  div(style='border-top: 1px solid#888; padding-top:15px; font-size:85%')
+                    a(href='/terms_of_service.html')
+                      | #{_('Terms and Conditions')}
+                      
+    script(src='/js/lib/jquery.js')
+    script(src='/js/login.js')

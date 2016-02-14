@@ -1,0 +1,227 @@
+extends layout
+
+block footer
+	- var _ = lang._('internships');
+	script(src='/js/modules/internships.js')
+	script(type="text/ng-template", id="addStudentModal.html")
+		.modal-header
+			h3.modal-title #{_('Add Student')}
+		.modal-body
+			.form-group
+				label
+					input(type="checkbox", ng-model="useTag")
+					|  Add students by tag
+			.form-group(ng-hide="useTag")
+				label Search
+				input.form-control(type="text", ng-model="searchText")
+				
+			.form-group(ng-hide="useTag")
+				label Students
+				select.form-control(ng-model="selected", ng-options="user.FirstName + ' ' + user.LastName + ' - ' + user.Email + ' ['+user.Tag+']' for user in users | filter:{Email:searchText}:hasValue")
+			
+			.form-group(ng-show="useTag")
+				label Tags
+				select.form-control(ng-model="tag", ng-options="tag for tag in tags")
+				
+		.modal-footer
+			button.btn.btn-primary(ng-click="add()") #{_('Add Student')}
+			button.btn.btn-warning(ng-click="close()") #{_('Cancel')}
+			
+			
+	script(type="text/ng-template", id="addFormModal.html")
+		.modal-header
+			h3.modal-title #{_('Add Form')}
+		.modal-body
+			.form-group
+				select.form-control(ng-model="selected", ng-options="form.Name for form in forms track by form._id")
+					
+		.modal-footer
+			button.btn.btn-primary(ng-click="add()") #{_('Add Form')}
+			button.btn.btn-warning(ng-click="close()") #{_('Cancel')}
+			
+	script(type="text/ng-template", id="addManagerModal.html")
+		.modal-header
+			h3.modal-title #{_('Add Internship Manager')}
+		.modal-body
+			.form-group
+				select.form-control(ng-model="selected", ng-options="user.FirstName + ' ' + user.LastName + ' - ' + user.Email for user in users track by user._id")
+					
+		.modal-footer
+			button.btn.btn-primary(ng-click="add()") #{_('Add Internship Manager')}
+			button.btn.btn-warning(ng-click="close()") #{_('Cancel')}
+			
+block content
+	- var _ = lang._('internships')
+	.row(ng-show="tableViewToolbar")
+		.col-lg-12
+			h1.page-header
+				| PraxManager  
+				small #{_('Internships')}
+			a.btn.btn-primary.pull-right(href='#add-internship', ng-click="addInternship()")
+				i.fa.fa-plus
+				|  #{_('Add Internship')}
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li.active
+					i.fa.fa-bank
+					|  #{_('Internships')}
+	.row.ng-hide(ng-show="formViewToolBar")
+		.col-lg-12
+			h1.page-header
+				| PraxManager  
+				small #{_('Add Internship')}
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li.active
+					i.fa.fa-plus
+					|  #{_('Add Internship')}
+	if identity.getUser().Type == 'admin'			
+		.alert.alert-warning
+			strong #{_('Warning!')}
+			span  #{_('Make changes in this section as admin only if you know what you are doing.')}
+					
+	.row(ng-show="tableView", ng-cloak)
+		.col-lg-12
+			table.table.table-bordered.table-hover.table-striped
+				thead
+					tr
+						th #{_('Internship Name')}
+						th.hidden-xs #{_('Institution')}
+						th.hidden-xs #{_('Start Date')}
+						th.hidden-xs #{_('End Date')}
+						th #{_('Manage')}
+				tbody
+					tr(ng-repeat="internship in internships")
+						td {{internship.Name}}
+						td.hidden-xs {{internship.Institution}}
+						td.hidden-xs {{internship.StartDate | date:'yyyy-MM-dd' : 'UTC'}}
+						td.hidden-xs {{internship.EndDate | date:'yyyy-MM-dd' : 'UTC'}}
+						td
+							.dropdown
+								button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown")
+									| #{_('Manage')} 
+									span.caret
+								ul.dropdown-menu
+									li
+										a(href='/internships/results/{{internship._id}}')
+											i.fa.fa-tasks
+											|  #{_('Manage Internship')}
+									li
+										a(href='/my_internship/{{internship._id}}', target="_blank")
+											i.fa.fa-user
+											|  #{_('View as student')}
+									li
+										a(href='#', ng-click="editInternship(internship)") 
+											i.fa.fa-pencil-square-o
+											|  #{_('Edit')}
+									li
+										a(href='#', ng-click="archiveInternship(internship)")
+											i.fa.fa-archive
+											|  #{_('Archive')}
+									li
+										a(href='#', ng-click="deleteInternship(internship)") 
+											i.fa.fa-times
+											|  #{_('Delete')}
+							
+							
+	form.row.ng-hide(ng-show="formViewBasic", name="basicInfoForm", ng-cloak)
+		.col-lg-6
+				.form-group
+					label #{_('Intership Name (required)')}
+					input.form-control(ng-model="internship.Name", required)
+					p.help-block #{_('Name of the internship')}
+				
+					label #{_('Start date (required)')}
+					.input-group
+						input.form-control(ng-model="internship.StartDate", datepicker-popup="yyyy-MM-dd", is-open="startDatePikerOpened", close-text="Close", ng-required="true")
+						span.input-group-btn
+							button.btn.btn-default(ng-click="openStartDateDatepiker($event)")
+								.glyphicon.glyphicon-calendar
+					p.help-block #{_('Start day of the internship')}
+					label #{_('Measure presence in (required)')}
+					select.form-control(ng-model="internship.ColectDataType", required)
+						option(value="day") #{_('days')} 
+						option(value="time") #{_('hours and minutes')}
+					p.help-block #{_('How the time interval will be summarized')} 
+					
+					label #{_('Description')}
+					textarea.form-control(ng-model="internship.Description")
+		.col-lg-6
+				.form-group
+					label #{_('Institution (required)')}
+					input.form-control(ng-model="internship.Institution", required)
+					p.help-block #{_('Name of the institution of the internship')}
+					label #{_('End Date (required)')}
+					.input-group
+						input.form-control(ng-model="internship.EndDate", datepicker-popup="yyyy-MM-dd", is-open="endDatePikerOpened", close-text="Close", ng-required="true")
+						span.input-group-btn
+							button.btn.btn-default(ng-click="openEndDateDatepiker($event)")
+								.glyphicon.glyphicon-calendar
+					p.help-block #{_('End day of the internship')}
+					label #{_('A student can change his answer for (required)')}
+					select.form-control(ng-model="internship.CompletionLimit", required)
+						option(value="last3days") #{_('Last 3 days')}
+						option(value="last7days") #{_('Last 7 days')}
+						option(value="last30days") #{_('Last 30 days')}
+					p.help-block #{_('How many days has the student to complete the forms')}
+					label #{_('Location')} 
+					input.form-control(ng-model="internship.Location")
+					p.help-block #{_('Internship location')}
+					
+		.col-lg-12
+				.form-group
+					.btn-toolbar
+						a.btn.btn-primary(href='#next', ng-click="next()", ng-disabled="basicInfoForm.$invalid") #{_('Next')}
+						button.btn.btn-default(ng-click="cancel()") #{_('Cancel')}
+					
+	.row.ng-hide(ng-show="formViewAdvance", ng-cloak)
+		.col-lg-6
+			.well
+				button.btn.btn-primary(ng-click="addStudent()")
+					i.fa.fa-plus
+					| #{_('Add students to internship')} 
+			ul.list-group
+				li.list-group-item(ng-repeat="student in students")
+					|  {{student.FirstName}} {{student.LastName}} [ {{student.Email}} ] [{{student.Tag}}] [
+					a(href='#delete', ng-click="deleteStudent(student, $index)")
+						i.fa.fa-times
+					| ]
+					
+		.col-lg-6
+			.well
+				button.btn.btn-primary(ng-click="addForm()")
+					i.fa.fa-plus
+					|  #{_('Add forms to internship')}
+			ul.list-group
+				li.list-group-item(ng-repeat="form in forms")
+					|  {{form.Name}}  [{{form.Category}}] [
+					a(href='#delete', ng-click="deleteForm(form, $index)")
+						i.fa.fa-times
+					| ]
+					
+	.row.ng-hide(ng-show="formViewAdvance", ng-cloak)
+		.col-lg-6
+			.well
+				button.btn.btn-primary(ng-click="addInternshipManager()")
+					i.fa.fa-plus
+					| #{_('Add Manager to internship')}
+			ul.list-group
+				li.list-group-item(ng-repeat="user in managers")
+					|  {{user.FirstName}}  {{user.LastName}} [{{user.Email}}] [
+					a(href='#delete', ng-click="deleteManager(form, $index)")
+						i.fa.fa-times
+					| ]
+	.row.ng-hide(ng-show="formViewAdvance", ng-cloak)
+		.col-lg-12
+			from
+				.form-group
+					.btn-toolbar
+						a.btn.btn-primary(href='#save', ng-click="save()") #{_('Save')}
+						button.btn.btn-default(ng-click="cancel()")  #{_('Cancel')}
+							
+					
+						

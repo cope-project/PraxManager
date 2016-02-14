@@ -1,0 +1,145 @@
+extends layout
+
+block footer
+	- var _ = lang._('users');
+	script(src="/js/lib/jquery.form.min.js")
+	script(src="/js/modules/users.js")
+	script(type="text/ng-template" id="editUserModal.html")
+		.modal-header
+			h3.modal-title #{_('Edit User')}
+		form.modal-body(name="editUserForm")
+			.alert.alert-danger(ng-show="error")
+				span.glyphicon.glyphicon-exclamation-sign
+				span.sr-only #{_('Error')}
+				span  #{_('Email address already in use or other validation error')}
+			.form-group
+				label #{_('First Name (required)')}
+			input.form-control(ng-model='user.FirstName', required)
+				
+			.form-group
+				label #{_('Last Name (required)')}
+				input.form-control(ng-model='user.LastName', required)
+				
+			.form-group
+				label #{_('Email (required)')}
+				input.form-control(ng-model='user.Email', required, email, ng-readonly="user._id != undefined")
+				
+			.form-group
+				label #{_('Type (required)')}
+				select.form-control(ng-model='user.Type', required)
+					// option(value="admin") #{_('Administrator')}
+					option(value="teacher") #{_('Teacher')}
+					option(value="student") #{_('Student')}
+					
+			.form-group
+				label #{_('Tag')}
+				input.form-control(ng-model='user.Tag')
+		.modal-footer
+			button.btn.btn-primary(ng-click="saveUser()", ng-disabled="editUserForm.$invalid") #{_('Save User')}
+			button.btn.btn-default(ng-click="cancel()") #{_('Cancel')}
+			
+			
+	script(type="text/ng-template" id="sendUserPasswordModal.html")
+		.modal-header
+			h3.modal-title #{_('Send new password')}
+		.modal-body
+			.alert.alert-danger(ng-show="error")
+				span.glyphicon.glyphicon-exclamation-sign
+				span.sr-only #{_('Error')}
+				span  #{_('An error occurred while updating the password')}
+			p #{_('Change Password for')} {{user.FirstName}} {{user.LastName}} ({{user.Email}})
+			span #{_('This operation will replace the existing password with a new password')}.
+			br
+			span #{_('The new password will be sent to the user via email')}
+				
+		.modal-footer
+			button.btn.btn-primary(ng-click="sendPassword()", ng-disabled="sendPasswordLock") #{_('Send new password')}
+			button.btn.btn-default(ng-click="cancel()") #{_('Cancel')}
+			
+	script(type="text/ng-template" id="uploadUsers.html")
+		.modal-header
+			h3.modal-title #{_('Upload Users')}
+		.modal-body
+			.alert.alert-danger(ng-show="error")
+				span.glyphicon.glyphicon-exclamation-sign
+				span.sr-only #{_('Error')}
+				span  #{_('An error occurred while uploading users')}
+				
+			.alert.alert-success(ng-show="uploaded")
+				span.glyphicon.glyphicon-exclamation-sign
+				span.sr-only #{_('Success')}
+				span  #{_('The users have been uploaded successfully')}
+			
+			.progress(ng-show="uploading")
+				.progress-bar.progress-bar-striped.active(style="width:100%")
+					| #{_('Uploading users')}
+				
+			form(method="post", enctype="multipart/form-data", ng-submit="uploadUsers($event)",  action="/api/users/upload")
+				.form-group
+					.row
+						.col-lg-6
+							input(type="file", name="upload_file")
+						.col-lg-6
+							input.pull-right(type="submit", value="#{_('Upload Users')}")
+					
+			span(ng-show="uploaded")
+				| #{_('Users uploaded')} {{response.uploaded}}, #{_('skipped')} {{response.skipped}} 
+				
+		.modal-footer
+			button.btn.btn-default(ng-click="close()") #{_('Close')}
+			
+block content
+	- var _ = lang._('users');
+	.row
+		.col-lg-12
+			h1.page-header
+				| PraxManager  
+				small #{_('Users')}
+			.btn-group.pull-right
+				a.btn.btn-primary(href='#', ng-click="uploadUsers()")
+					i.fa.fa-upload
+					|  #{_('Upload Users')}
+				a.btn.btn-primary(href='#', ng-click="addUser()")
+					i.fa.fa-plus
+					|  #{_('Add User')}
+                
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li.active
+					i.fa.fa-users
+					|  #{_('Users')}
+	.row
+		.col-lg-12
+			table.table.table-bordered.table-hover.table-striped
+				thead
+					tr
+						th #{_('First Name')}
+						th #{_('Last Name')}
+						th.hidden-xs #{_('Email')}
+						th.hidden-xs #{_('Type')}
+						th.hidden-xs #{_('Moodle Account')}
+						th(width="15%") #{_('Actions')}
+						
+				tbody
+					tr(ng-repeat="user in users")
+						td {{user.FirstName}}
+						td {{user.LastName}}
+						td.hidden-xs {{user.Email}}
+						td.hidden-xs {{user.Type}}
+						td.hidden-xs {{user.MoodleAccount}}
+						td
+							.dropdown
+								button(type="button", data-toggle="dropdown")
+									| #{_('Edit')} 
+									span.caret
+								ul.dropdown-menu.dropdown-menu-right(role="menu", aria-labelledby="dLabel")
+									li
+										a(href='#edit', ng-click="editUser(user)") #{_('Edit')} 
+									li
+										a(href='#edit', ng-click="sendPassword(user)") #{_('Send Password')}
+									li
+										a(href='#edit', ng-click="deleteUser(user)") #{_('Delete')}
+										
+									

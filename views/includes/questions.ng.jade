@@ -1,0 +1,241 @@
+- var _ = lang._('includes.questions');
+
+// questionControlTrueOrFalse
+script(type="text/ng-template", id="questionControlTrueOrFalse.html")
+	b {{position}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	
+	form.form-group
+		input(type="radio", value="1", name="{{questionId}}", ng-model="question.Value", ng-disabled="studentReadOnly")  
+		|  #{_('True')} 
+		input(type="radio", value="0",name="{{questionId}}", ng-model="question.Value", ng-disabled="studentReadOnly")  
+		|  #{_('False')}
+
+	.form-group
+		label #{_('Student Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="#{_('Explain your option here')}", ng-disabled="studentReadOnly")
+	div(ng-show="showTeacherReview")
+		b #{_('Teacher Evaluation')}:
+		form.form-group
+			input(type="radio", value="1", name="t{{questionId}}", ng-model="question.TeacherValue", ng-disabled="teacherReadOnly")  
+			|  #{_('True')} 
+			input(type="radio", value="0",name="t{{questionId}}", ng-model="question.TeacherValue", ng-disabled="teacherReadOnly")
+			|  #{_('False')}
+		.form-group
+			label #{_('Teacher Comment')}:
+			textarea.form-control(ng-model="question.TeacherComment", placeholder="#{_('Give feedback to the student here')}", ng-disabled="teacherReadOnly")
+
+// questionControlYesOrNo
+script(type="text/ng-template", id="questionControlYesOrNo.html")
+	b {{position}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	form.form-group
+		input(type="radio", value="1", name="{{questionId}}", ng-model="question.Value", ng-disabled="studentReadOnly")
+		| #{_('Yes')} 
+			
+		input(type="radio", value="0",name="{{questionId}}", ng-model="question.Value", ng-disabled="studentReadOnly") 
+		|#{_('No')} 
+
+	.form-group
+		label #{_('Student Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="#{_('Explain your option here')}", ng-disabled="studentReadOnly")
+	div(ng-show="showTeacherReview")
+		b #{_('Teacher Evaluation')}:
+		form.form-group
+			input(type="radio", value="1", name="t{{questionId}}", ng-model="question.TeacherValue", ng-disabled="teacherReadOnly")
+			| #{_('Yes')} 
+				
+			input(type="radio", value="0",name="t{{questionId}}", ng-model="question.TeacherValue", ng-disabled="teacherReadOnly") 
+			|#{_('No')} 
+
+		.form-group
+			label #{_('Teacher Comment')}:
+			textarea.form-control(ng-model="question.TeacherComment", placeholder="#{_('Give feedback to the student here')}", ng-disabled="teacherReadOnly")
+		
+				
+// questionControlMultipleChoiceSingleAnswer
+script(type="text/ng-template", id="questionControlMultipleChoiceSingleAnswer.html")
+	b {{position}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	br(ng-show="question.Description")
+	br(ng-show="question.Description")
+	form.radio-row.form-group(ng-repeat="option in question.Options")
+		input(type="radio", name="t{{questionId}}", value="{{option}}", ng-model="question.Value", ng-disabled="studentReadOnly")
+		|  {{option}} 
+
+	.form-group
+		label #{_('Student Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="#{_('Explain your option here')}", ng-disabled="studentReadOnly")
+		
+	div(ng-show="showTeacherReview")
+		b #{_('Teacher Evaluation')}:
+		form.radio-row.form-group(ng-repeat="option in question.Options")
+			input(type="radio", name="t{{questionId}}", value="{{option}}", ng-model="question.TeacherValue", ng-disabled="teacherReadOnly")
+			|  {{option}} 
+
+		.form-group
+			label #{_('Teacher Comment')}:
+			textarea.form-control(ng-model="question.TeacherComment", placeholder="#{_('Give feedback to the student here')}", ng-disabled="teacherReadOnly")
+			
+
+// questionControlMultipleChoiceMultipleAnswer
+script(type="text/ng-template", id="questionControlMultipleChoiceMultipleAnswer.html")
+	b {{position}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	br(ng-show="question.Description")
+	br(ng-show="question.Description")
+	.form-group.radio-row(ng-repeat="option in question.Options")
+		input(type="checkbox", name="{{questionId}}", value="{{option}}" ng-model="question.Value[$index]", , ng-disabled="studentReadOnly")
+		|  {{option}} 
+
+	.form-group
+		label #{_('Student Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="#{_('Explain your option here')}", ng-disabled="studentReadOnly")
+	div(ng-show="showTeacherReview")
+		b #{_('Teacher Evaluation')}:
+		.form-group.radio-row(ng-repeat="option in question.Options")
+			input(type="checkbox", name="t{{questionId}}", value="{{option}}" ng-model="question.TeacherValue[$index]", , ng-disabled="teacherReadOnly")
+			|  {{option}} 
+
+		.form-group
+			label #{_('Teacher Comment')}:
+			textarea.form-control(ng-model="question.TeacherComment", placeholder="#{_('Give feedback to the student here')}", ng-disabled="teacherReadOnly")
+
+
+// questionControlShortAnswer
+script(type="text/ng-template", id="questionControlShortAnswer.html")
+	b {{position}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.form-group
+		textarea.form-control(ng-model="question.Value", ng-disabled="studentReadOnly")
+
+	.form-group
+		label #{_('Student Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="#{_('Explain your option here')}", ng-disabled="studentReadOnly")
+		
+	div(ng-show="showTeacherReview")
+		.form-group
+			label #{_('Teacher Comment')}:
+			textarea.form-control(ng-model="question.TeacherComment", placeholder="#{_('Give feedback to the student here')}", ng-disabled="teacherReadOnly")
+		
+// questionControlNumberAnswer
+script(type="text/ng-template", id="questionControlNumberAnswer.html")
+	b {{position}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.form-group
+		input.form-control(ng-model="question.Value", ng-disabled="studentReadOnly", type="number")
+
+	.form-group
+		label #{_('Student Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="#{_('Explain your option here')}", ng-disabled="studentReadOnly")
+		
+	div(ng-show="showTeacherReview")
+		b #{_('Teacher Evaluation')}:
+		.form-group
+			input.form-control(ng-model="question.TeacherValue", ng-disabled="teacherReadOnly", type="number")
+		.form-group
+			label #{_('Teacher Comment')}:
+			textarea.form-control(ng-model="question.TeacherComment", placeholder="#{_('Give feedback to the student here')}", ng-disabled="teacherReadOnly")
+	
+// questionControlVideoRecording
+script(type="text/ng-template", id="questionControlVideoRecording.html")
+	b {{position}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.alert.alert-warning(ng-show="error") {{error}}
+	div(ng-show="question.Value")
+		// video(width="320", height="240", controls, src="/api/files/{{question.Value._id}}/data")
+		a(href='/api/files/{{question.Value._id}}/data') #{_('Download Video File')}
+	form(method="post", enctype="multipart/form-data", ng-submit="uploadVideo($event)",  action="/api/files", ng-hide="studentReadOnly")
+		.form-group
+			input(type="file", name="upload_file", ng-disabled="studentReadOnly", accept="video/*", capture="camcorder")
+			input(type="hidden", name="type", value="video", ng-disabled="studentReadOnly")
+			input(type="submit", value="#{_('Upload Video')}", ng-disabled="studentReadOnly")
+
+	.form-group
+		label #{_('Student Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="#{_('Explain your option here')}", ng-disabled="studentReadOnly")
+		
+	div(ng-show="showTeacherReview")
+		.form-group
+			label #{_('Teacher Comment')}:
+			textarea.form-control(ng-model="question.TeacherComment", placeholder="#{_('Give feedback to the student here')}", ng-disabled="teacherReadOnly")
+			
+// questionControlAudioRecording
+script(type="text/ng-template", id="questionControlAudioRecording.html")
+	b {{position}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.alert.alert-warning(ng-show="error") {{error}}
+	div(ng-show="question.Value")
+		// audio(controls, src='/api/files/{{question.Value._id}}/data')
+		a(href='/api/files/{{question.Value._id}}/data') #{_('Download Audio File')}
+	form(method="post", enctype="multipart/form-data", ng-submit="uploadAudio($event)",  action="/api/files", ng-hide="studentReadOnly")
+		.form-group
+			input(type="file", name="upload_file", ng-disabled="studentReadOnly", accept="audio/*", capture="microphone")
+			input(type="hidden", name="type", value="audio", ng-disabled="studentReadOnly")
+			input(type="submit", value="#{_('Upload Audio')}", ng-disabled="studentReadOnly")
+
+	.form-group
+		label #{_('Student Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="#{_('Explain your option here')}", ng-disabled="studentReadOnly")
+		
+	div(ng-show="showTeacherReview")
+		.form-group
+			label #{_('Teacher Comment')}:
+			textarea.form-control(ng-model="question.TeacherComment", placeholder="#{_('Give feedback to the student here')}", ng-disabled="teacherReadOnly")
+
+// questionControlPhoto
+script(type="text/ng-template", id="questionControlPhoto.html")
+	b {{position}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.alert.alert-warning(ng-show="error") {{error}}
+	div(ng-show="question.Value")
+		img(src="/api/files/{{question.Value._id}}/data", height="400", style="width:100%;")
+		br
+		a(href='/api/files/{{question.Value._id}}/data') #{_('Download Image')}
+	form(method="post", enctype="multipart/form-data", ng-submit="uploadVideo($event)",  action="/api/files", ng-hide="studentReadOnly")
+		.form-group
+			input(type="file", name="upload_file", ng-hide="studentReadOnly", accept="image/*", capture="camcorder")
+			input(type="hidden", name="type", value="image", ng-disabled="studentReadOnly")
+			input(type="submit", value="#{_('Upload Image')}", ng-disabled="studentReadOnly")
+
+	.form-group
+		label #{_('Student Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="#{_('Explain your option here')}", ng-disabled="studentReadOnly")
+	div(ng-show="showTeacherReview")
+		.form-group
+			label #{_('Teacher Comment')}:
+			textarea.form-control(ng-model="question.TeacherComment", placeholder="#{_('Give feedback to the student here')}", ng-disabled="teacherReadOnly")
+			
+// questionControlDocument
+script(type="text/ng-template", id="questionControlDocument.html")
+	b {{position}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.alert.alert-warning(ng-show="error") {{error}}
+	div(ng-show="question.Value")
+		a(href='/api/files/{{question.Value._id}}/data') #{_('Download Document')}
+	form(method="post", enctype="multipart/form-data", ng-submit="uploadDocument($event)",  action="/api/files", ng-hide="studentReadOnly")
+		.form-group
+			input(type="file", name="upload_file", ng-disabled="studentReadOnly")
+			input(type="hidden", name="type", value="document", ng-disabled="studentReadOnly")
+			input(type="submit", value="#{_('Upload Document')}", ng-disabled="studentReadOnly")
+
+	.form-group
+		label #{_('Student Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="#{_('Explain your option here')}", ng-disabled="studentReadOnly")
+		
+	div(ng-show="showTeacherReview")
+		.form-group
+			label #{_('Teacher Comment')}:
+			textarea.form-control(ng-model="question.TeacherComment", placeholder="#{_('Give feedback to the student here')}", ng-disabled="teacherReadOnly")
+			
+			

@@ -1,0 +1,23 @@
+- var _ = lang._('includes.sidebar');
+- var cb = parseInt(Math.random() * 100000000);
+
+// Sidebar Menu Items - These collapse to the responsive navigation menu on small screens
+.collapse.navbar-collapse.navbar-ex1-collapse
+	ul.nav.navbar-nav.side-nav
+		li
+			a(href='/internships?cb=' + cb)
+				i.fa.fa-fw.fa-bank
+				|  #{_('Internships')}
+		li
+			a(href='/forms?cb=' + cb)
+				i.fa.fa-fw.fa-check-square
+				|  #{_('Forms')}
+		if identity.getUser().Type == 'admin'
+			li
+				a(href='/users?cb=' + cb)
+					i.fa.fa-fw.fa-users
+					|  #{_('Users')}
+		li
+			a(href='/export?cb='  + cb)
+				i.fa.fa-fw.fa-file-excel-o
+				| #{_('Export')} 

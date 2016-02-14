@@ -1,0 +1,50 @@
+{
+    "mongodb": "mongodb://127.0.0.1/prax",
+    "domain":"ro.prax.cope-project.eu",
+	"lang":"ro",
+    "session":{
+		"secret": "secret_key",
+		"resave": false,
+		"saveUninitialized": true
+    },
+    "moodle": {
+		"enable": false,
+		"secret": "",
+		"version": "2.8",
+		"account": "54cc8a1483d811001731df89",
+		"database": {
+			"host": "localhost",
+			"database": "moodle",
+			"user": "root",
+			"password": "test",
+			"prefix": "cope_",
+			"port":3311
+		}
+    },
+    
+   "email": {
+        "host":    "smtp.mailgun.org",
+        "from": "Cope Project <copeproject@cope-project.eu>",
+        "connectionTimeout": 10000,
+        "port": 2525,
+        "auth": {
+            "user": "postmaster@sandboxe3e341776f5042f3819d6e669f16f1b0.mailgun.org",
+            "pass": "0bb1de8c943778bd200ddcccef0ded38"
+         }
+    },
+
+    
+    "plugins": {
+		"formatters": {
+			"default": "Default HTML"
+		}
+    },
+    
+    "storage": {
+		"dest": "./data/"
+    },
+    
+    "forms": { 
+        "categories": ["Category 1", "Category 1", "Category 1"]
+    }
+}

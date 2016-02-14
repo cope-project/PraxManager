@@ -1,0 +1,41 @@
+doctype html
+html(lang="en")
+head
+	meta(charset="utf-8")
+	meta(name="viewport" content="width=device-width, initial-scale=1.0")
+	title= title+" | PraxManager"
+	link(href="/css/bootstrap.min.css" rel="stylesheet")
+	link(href="/css/fullcalendar.css" rel="stylesheet")
+	link(href="/css/style.css" rel="stylesheet")
+	link(href="/css/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css")
+	script!= 'var PraxManager_lang = "' + lang.id + '";'
+	block head
+body(data-ng-app='PraxManager')
+	#wrapper(style="padding-left: 0px;")
+		// Navigation
+		nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+			include ./includes/head.jade
+			// /.navbar-collapse
+		#page-wrapper
+			.container-fluid(ng-controller=''+mod)
+				// Page Heading
+				block content
+				// /.row
+			// /.container-fluid
+		// /#page-wrapper
+		div(style='color: #ccc; text-align:center; ') PraxManager &copy; 2014
+		div(style='color: #ccc; text-align:center; ')
+			img(src='/images/erasmus_plus.jpg', height='100')
+	// /#wrapper
+	// jQuery
+	script(src='/js/lib/jquery.js')
+	script(src='/js/lib/bootstrap.js')
+	script(src="/js/lib/angular.min.js")
+	script(src="/js/lib/ui-bootstrap.min.js")
+	script(src="/js/lib/moment-with-locales.js")
+	script(src="/js/lib/moment-timezone-with-data-2010-2020.js")
+	script(src="/js/lib/angular-moment.min.js")
+	script(src="/js/lib/fullcalendar.js")
+	script(src="/js/lib/calendar.js")
+	script(src="/js/app.js")
+	block footer

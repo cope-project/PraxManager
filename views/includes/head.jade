@@ -1,0 +1,41 @@
+- var _ = lang._('includes.head');
+// Brand and toggle get grouped for better mobile display
+.navbar-header
+	button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+		span.sr-only #{_('Toggle navigation')}
+		span.icon-bar
+		span.icon-bar
+		span.icon-bar
+	a.navbar-brand(href='/') 
+		img(src="/images/lifeline5.png", height="32")
+		// | PraxManager
+// Top Menu Items
+ul.nav.navbar-right.top-nav
+	li.dropdown
+		a.dropdown-toggle(href='#', data-toggle='dropdown')
+			i.fa.fa-user
+			=' ' + identity.getUserDisplayName()
+			b.caret
+		ul.dropdown-menu
+			li
+				a(href='/profile')
+					i.fa.fa-fw.fa-user
+					| #{_('Profile')} 
+			li
+				a(href='/inbox')
+					i.fa.fa-fw.fa-envelope
+					| #{_('Inbox')} 
+			li
+				a(href='/settings')
+					i.fa.fa-fw.fa-gear
+					| #{_('Settings')}
+			li.divider
+			li
+				a(href='/student', target="_blank")
+					i.fa.fa-fw.fa-user
+					| #{_('Student View')}
+			li.divider
+			li
+				a(href='/auth/logout')
+					i.fa.fa-fw.fa-power-off
+					| #{_('Log Out')} 

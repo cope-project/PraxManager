@@ -1,0 +1,32 @@
+extends layout
+
+block footer
+	script(src='js/modules/home.js')
+	
+block content
+	- var _ = lang._('index');
+	.row
+		.col-lg-12
+			h1.page-header
+				| PraxManager  
+				small #{_('Welcome !')}
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='index.html')  PraxManager
+				li.active
+					i.fa.fa-location-arrow
+					|  #{_('Start')}
+					
+			h3 #{_('Welcome to PraxManager')}
+			p 
+				| #{_('You can start by creating a new')} 
+				a(href='/internships') #{_('Internship')} 
+				| #{_('or by defining a new')}  
+				a(href='/forms') #{_('Form template')}.
+				
+			h3 #{_('What is PraxManager ?')}
+			p #{_('PraxManager is on line instrument destined to monitor and evaluate the practical training of the students in several specializations from healthcare education field, offering in the same time an overview on the evolution of the students during their training and the performance of the schools in time.')} 
+			p #{_('PRAX-Manager, the software developed in the project is tested and documented during the project lifetime, in local context, in the daily activities of other partner schools and in transnational mobilities for students.')}
+				
+				

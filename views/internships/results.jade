@@ -1,0 +1,73 @@
+extends ../layout
+
+block head
+	script!= 'var PraxManager_internshipId = "' + internshipId + '";'
+	
+block footer
+	- var _ = lang._('internships.results');
+	script(src='/js/modules/internship_students.js')
+	script(type="text/ng-template" id="sendNotification.html")
+		.modal-header
+			h3.modal-title #{_('Student Notification')}
+		.modal-body
+			.form-group
+				label #{_('Message')}:
+				textarea.form-control(ng-model="notification.Message", placeholder="Type your message here")
+		.modal-footer
+			button.btn.btn-primary(ng-click="send()" ng-disabled="!notification.Message") #{_('Send')}
+			button.btn.btn-default(ng-click="close()") #{_('Close')}
+			
+block content
+	- var _ = lang._('internships.results');
+	.row(ng-cloak)
+		.col-lg-12
+
+			h1.page-header
+				| PraxManager  
+				small #{_('Internship Students')} ({{internship.Name}})
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li
+					i.fa.fa-bank
+					a(href='/internships')  #{_('Internships')}
+				li.active
+					i.fa.fa-users
+					|  #{_('Students')}
+					
+	.row(ng-cloak)
+		.col-lg-12
+			table.table.table-bordered.table-hover.table-striped
+				thead
+					tr
+						th #{_('Name')}
+						th #{_('Email')}
+						th #{_('Tag')}
+						th #{_('Manage')}
+				tbody
+					tr(ng-repeat="user in internshipStudents")
+						td {{user.FirstName}} {{user.LastName}}
+						td {{user.Email}}
+						td {{user.Tag || '#{_('None')}' }}
+						td
+							.dropdown
+								button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown")
+									| #{_('Manage Student')}
+									span.caret
+								ul.dropdown-menu
+									li
+										a(href='/internships/results/{{internship._id}}/student_forms/{{user._id}}')
+											i.fa.fa-list
+											|  #{_('Submited Forms')}
+									li 
+										a(href='/internships/results/{{internship._id}}/student_presence/{{user._id}}')
+											i.fa.fa-clock-o
+											|  #{_('Student Presence')}
+									
+									li
+										a(ng-click="sendStudentNotification(user)")
+											i.fa.fa-envelope 
+											|  #{_('Send Notification')}
+											
+	

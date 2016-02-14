@@ -1,0 +1,60 @@
+extends layout
+
+block content
+	- var _ = lang._('settings');
+	.row
+		.col-lg-12
+			h1.page-header
+				| PraxManager  
+				small #{_('Settings')}
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li.active
+					i.fa.fa-cog
+					|  #{_('Settings')}
+	.row
+		.col-lg-6
+			.form-group
+				label #{_('Language')}:
+				select.form-control
+					option(value='cz') #{_('Czech')}
+					option(value='dk') #{_('Danish')}
+					option(value='en') #{_('English')}
+					option(value='en') #{_('Spanish')}
+					option(value='ro') #{_('Romanian')}
+					option(value='tk') #{_('Turkish')}
+					option(value='it') #{_('Italian')}
+					option(value='ca') #{_('Catalan')}
+					
+				p.help-block #{_('Default application language')}
+
+		.col-lg-6
+			.form-group
+				label #{_('Send Email Notifications')}:
+				select.form-control
+					option(value='all') #{_('All')}
+					option(value='none') #{_('None')}
+				p.help-block #{_('Send application notifications via Email')}
+				
+		.col-lg-6
+			.form-group
+				label #{_('Timezone')}:
+				select.form-control
+					option(value='utc') #{_('UTC - Coordinated Universal Time (UTC)')}
+					option(value='eet') #{_('EET - Eastern European Time Zone (UTC+02:00)')}
+					option(value='cet') #{_('CET – Central European Time (UTC+01:00)')}
+					
+					
+				p.help-block #{_('Application time zone')} 
+
+		.col-lg-6
+		
+	.row
+		.col-lg-12
+			from
+				.form-group
+					.btn-toolbar
+						a.btn.btn-primary(href='#save') #{_('Save')}
+						button.btn.btn-default #{_('Cancel')}	

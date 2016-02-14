@@ -1,0 +1,73 @@
+extends layout
+
+
+block footer
+	script(src='/js/modules/export.js')
+	
+block content
+	- var _ = lang._('export');
+	.row
+		.col-lg-12
+			h1.page-header
+				| PraxManager  
+				small #{_('Reports')}
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li.active
+					i.fa.fa-file-excel-o
+					|  #{_('Export')} 
+	.row
+		.col-lg-12
+			.panel.panel-default
+				.panel-heading
+					h3.panel-title
+						i.fa.fa-bar-chart-o.fa-fw
+						| #{_('Student Presence')} 
+						
+				.panel-body
+					.row
+						.col-lg-6
+							.form-group
+								label #{_('Intership')}
+								select.form-control(ng-options="internship.Name for internship in internships", ng-model="internship")
+							.form-group
+								label #{_('Student')} 
+								select.form-control(ng-disabled="!internship", ng-options="user.FirstName + ' ' + user.LastName + ' - ' + user.Email for user in internship.AssignedUsers", ng-model="student")
+									
+					.row
+						.col-lg-12
+							from
+								.form-group
+									.btn-toolbar
+										a.btn.btn-primary(ng-disabled="!internship", ng-href="/api/checkin/csv?internshipId={{internship._id}}&userId={{student._id}}") #{_('Download Presence')}
+	.row
+		.col-lg-12
+			.panel.panel-default
+				.panel-heading
+					h3.panel-title
+						i.fa.fa-bar-chart-o.fa-fw
+						|  #{_('Export Internship Summary')}
+						
+				.panel-body
+					.row
+						.col-lg-6
+							.form-group
+								label #{_('Intership')}
+								select.form-control(ng-options="internship.Name for internship in internships", ng-model="aggregate.internship")
+					.row
+						.col-lg-6
+							.form-group
+								label #{_('Form')}
+								select.form-control(ng-options="form.Name for form in aggregate.internship.AssignedForms", ng-model="aggregate.form")
+
+					.row
+						.col-lg-12
+							from
+								.form-group
+									.btn-toolbar
+										a.btn.btn-primary(href='/api/forms_data/summary/csv?internshipId={{aggregate.internship._id}}&formId={{aggregate.form._id}}', ng-disabled="!aggregate.internship || !aggregate.form") #{_('Download Summary')} 
+										
+										
+				

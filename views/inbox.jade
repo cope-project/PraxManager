@@ -1,0 +1,35 @@
+extends layout
+
+block footer
+	script(src="/js/modules/inbox.js")
+block content
+	- var _ = lang._('inbox');
+	.row
+		.col-lg-12
+			h1.page-header
+				| PraxManager  
+				small #{_('Inbox')}
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li.active
+					i.fa.fa-inbox
+					|  #{_('Inbox')}
+	.row
+		.col-lg-12
+			table.table.table-bordered.table-hover.table-striped
+				thead
+					tr
+						th #{_('From')}
+						th #{_('Message')}
+						th #{_('Action')}
+						
+				tbody
+					tr(ng-repeat="message in notifications")
+						td {{message.From}}
+						td {{message.Message}}
+						td
+							a(href='#edit') #{_('Delete')}
+						
+			

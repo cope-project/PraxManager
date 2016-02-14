@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+// load debug
+var debug = require('debug')('PraxManager');
+
+// load app
+var app = require('../app');
+
+// set app port
+app.set('port', process.env.PORT || 3000);
+
+// start server
+var server = app.listen(app.get('port'), '0.0.0.0', function() {
+  debug('Express server listening on port ' + server.address().port);
+});

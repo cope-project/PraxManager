@@ -1,0 +1,84 @@
+extends ../layout
+
+block head
+	script!= 'var PraxManager_internshipId = "' + internshipId + '";'
+	script!= 'var PraxManager_studentId = "' + studentId + '";'
+
+block footer
+	- var _ = lang._('internships.presence');
+	script(src='/js/modules/internship_student_presence.js')
+	script(type="text/ng-template" id="presenceModal.html")
+		.modal-header
+			h3.modal-title #{_('Student Presence')}
+		.modal-body
+			.form-group
+				label #{_('Student Presence Confirmation')}:
+				select.form-control(ng-model="checkin.Status")
+					option(value="pending") #{_('Pending')}
+					option(value="approved") #{_('Approved')}
+					option(value="rejected") #{_('Rejected')}
+			.form-group(ng-show="checkin.Status == 'rejected'")
+				label #{_('Rejection Comment')}
+				textarea.form-control(ng-model="checkin.RejectionComment")
+			.form-group
+				label #{_('Student Comment')}
+				textarea.form-control(readonly="readonly", ng-model="checkin.Comment")
+			.form-group(ng-show="checkin.MediaFileComment")
+				label 
+					| #{_('Uploaded Media File')}: 
+					a(href="/api/files/{{checkin.MediaFileComment._id}}/data") {{checkin.MediaFileComment.FileName}}
+		.modal-footer
+			button.btn.btn-primary(ng-click="save()") #{_('Save')}
+			button.btn.btn-default(ng-click="close()") #{_('Close')}
+
+block content
+	- var _ = lang._('internships.presence');
+	.row(ng-cloak)
+		.col-lg-12
+
+			h1.page-header
+				| PraxManager  
+				small #{_('Internship Student Presence')} ({{student.FirstName}} {{student.LastName}})
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li
+					i.fa.fa-bank
+					a(href='/internships')  #{_('Internships')}
+				li
+					i.fa.fa-users
+					a(href='/internships/results/{{internship._id}}')  #{_('Internships Students')} ({{internship.Name}})
+				li.active
+					i.fa.fa-list
+					|  #{_('Student Presence')}
+					
+	.row(ng-cloak)
+		.col-lg-12
+			table.table.table-bordered.table-hover.table-striped
+				thead
+					tr
+						th #{_('Name')}
+						th #{_('Date')}
+						th #{_('Checkin Date')}
+						th #{_('Logged Time')}
+						th #{_('Status')}
+						th #{_('Manage')}
+
+				tbody
+					tr(ng-repeat="checkin in checkins")
+						td {{student.FirstName}} {{student.LastName}} -  {{student.Email}}
+						td {{checkin.Date | date: yyyy-MM-dd}}
+						th {{checkin.CreateDate | date: yyyy-MM-dd}}
+						td {{checkin.Time}} 
+						th
+							span(ng-show="checkin.Status == 'pending'") #{_('Pending')}
+							span(ng-show="checkin.Status == 'approved'") #{_('Approved')}
+							span(ng-show="checkin.Status == 'rejected'") #{_('Rejected')}
+						td 
+							button.btn.btn-default(ng-click="editCheckin(checkin)") 
+								i.fa.fa-cog  
+								|  #{_('Manage')}
+
+			label(ng-show="internship.ColectDataType == 'time'") #{_('Total number of hours')}: {{timeSum}}
+			label(ng-show="internship.ColectDataType == 'day'") #{_('Total number of days')}: {{timeSum}}

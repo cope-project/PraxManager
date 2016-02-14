@@ -1,0 +1,45 @@
+@import url("sb-admin.css");
+
+input.ng-invalid, select.ng-invalid, textarea.ng-invalid{
+	border: 1px solid darkblue;
+}
+
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched{
+	border: 1px solid red;
+}
+
+a[ng-click]{
+    cursor: pointer;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.radio-row {
+	    margin-bottom: 5px;
+}
+
+@media(max-width:767px){
+	.navbar-inverse .navbar-nav>li>a {
+		color: #fff !important;
+	}
+}
+
+[ng-cloak].splash {
+    display: block !important;
+	text-align: center;
+}
+
+.splash {
+	display: none;
+}
+
+
+.page-header { 
+	margin: 0px;
+}
+
+#page-wrapper {
+	padding-top: 30px;
+}

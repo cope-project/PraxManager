@@ -1,0 +1,306 @@
+extends layout
+
+block footer
+	- var _ = lang._('forms');
+	script!= 'var PraxManager_Categories = ' + JSON.stringify(categories) + ';'
+	script(src="/js/lib/jquery.form.min.js")
+	script(src="/js/directives.js")
+	script(src="/js/modules/forms.js")
+	script(type="text/ng-template" id="newQuestion.html")
+		.modal-header
+			h3.modal-title #{_('Edit Question')}
+		form.modal-body(name="questionForm")
+			.form-group(ng-show="form")
+				label #{_('Type')}
+				select.form-control(ng-model='question.Type', required)
+					option(value="TrueOrFalse") #{_('True or false')}
+					option(value="YesOrNo") #{_('Yes or No')}
+					option(value="MultipleChoiceSingleAnswer") #{_('Multiple choice single answer')}
+					option(value="MultipleChoiceMultipleAnswer") #{_('Multiple choice multiple answer')}
+					option(value="ShortAnswer")  #{_('Short answer')}
+					option(value="NumberAnswer")  #{_('Number answer')}
+					option(value="VideoRecording")  #{_('Video recording')}
+					option(value="AudioRecording") #{_('Audio recording')}
+					option(value="Photo")  #{_('Photo')}
+					option(value="Document")  #{_('Document')}
+					
+				label #{_('Question / Task')}
+				textarea.form-control(ng-model="question.Question", required, placeholder="" + _('Type your question here ...'))
+				label #{_('Description')}
+				textarea.form-control(ng-model="question.Description", placeholder=""+ _('Short description ...'))
+				
+			.form-group(ng-show="(question.Type == 'MultipleChoiceSingleAnswer' || question.Type == 'MultipleChoiceMultipleAnswer') && form")
+				label #{_('Choices')}
+				button.form-control.btn.btn-success(ng-click="addChoice()") #{_('Add choice')}
+				hr
+				label(ng-repeat="option in options", style="display:block;")
+					input(type="checkbox")
+					| {{option}} [
+					a(ng-click="removeOption(option, $index)")  #{_('remove')}
+					|]
+				
+			.form-group(ng-show="addOption")
+				label   #{_('Choice')}
+				input.form-control(ng-model="option")
+		.modal-footer(ng-show="form")
+			button.btn.btn-primary(ng-click="addQuestion()", ng-disabled="questionForm.$invalid") #{_('Save Question')}
+			button.btn.btn-default(ng-click="cancel()") #{_('Cancel')}
+		
+		.modal-footer(ng-show="addOption")
+			button.btn.btn-primary(ng-click="addChoiceToQuestion()", ng-disabled="option.length == 0") #{_('Add choice')}
+			button.btn.btn-default(ng-click="cancelChoiceToQuestion()") #{_('Cancel')}
+	
+	script(type="text/ng-template" id="newSubject.html")
+		.modal-header
+			h3.modal-title  #{_('Edit Subject')}
+		form.modal-body(name="subjectForm")
+			.form-group
+				label  #{_('Name (required)')}
+				input.form-control(ng-model="subject.Name", required="required")
+			.form-group
+				label  #{_('Description')}
+				input.form-control(ng-model="subject.Description", placeholder="#{_('Please provide feedback on the following questions.')}")
+					
+		.modal-footer
+			button.btn.btn-primary(ng-click="addSubject()", ng-disabled="subjectForm.$invalid") #{_('Save Subject')}
+			button.btn.btn-default(ng-click="cancel()") #{_('Cancel')}
+	
+	script(type="text/ng-template" id="previewForm.html")
+		.modal-header
+			h3.modal-title #{_('Preview Form')}
+		.modal-body
+			<h3> #{_('Form Name')}: {{form.Name}} (#{_('Read Only')})</h3>
+			.panel.panel-default(ng-repeat="subject in form.Questions")
+				.panel-heading {{subject.Name}}
+				.panel-body {{subject.Description}}
+				ul.list-group
+					li.list-group-item(ng-repeat="question in subject.Questions")
+						question-ng(
+						position="$index" 
+						question="question" 
+						student-read-only="true"
+						teacher-read-only="true"
+						type="question.Type" 
+						show-teacher-review="true")
+		.modal-footer
+			button.btn.btn-default(ng-click="close()") #{_('Close')}
+			
+	script(type="text/ng-template" id="uploadForm.html")
+		.modal-header
+			h3.modal-title #{_('Upload Form')}
+		.modal-body
+			.alert.alert-danger(ng-show="error")
+				span.glyphicon.glyphicon-exclamation-sign
+				span.sr-only #{_('Error')}
+				span  #{_('An error occurred while uploading the form')}
+				
+			.alert.alert-success(ng-show="uploaded")
+				span.glyphicon.glyphicon-exclamation-sign
+				span.sr-only #{_('Success')}
+				span  #{_('The form has been uploaded')}
+			
+			.progress(ng-show="uploading")
+				.progress-bar.progress-bar-striped.active(style="width:100%")
+					| #{_('Uploading form')}
+				
+			form(method="post", enctype="multipart/form-data", ng-submit="uploadForm($event)",  action="/api/forms/upload")
+				.form-group
+					.row
+						.col-lg-6
+							input(type="file", name="upload_file")
+						.col-lg-6
+							input.pull-right(type="submit", value="#{_('Upload Form')}")
+				
+		.modal-footer
+			button.btn.btn-default(ng-click="close()") #{_('Close')}
+			
+			
+	include ./includes/questions.ng.jade
+block content
+	- var _ = lang._('forms');
+	.row(ng-show="tableViewToolBar")
+		.col-lg-12(style='padding-left:0px;')
+			h1.page-header
+				| PraxManager  
+				small #{_('Forms')}
+			.btn-group.pull-right
+				a.btn.btn-primary(ng-click="uploadForm()", class="hidden-xs")
+					i.fa.fa-upload
+					|  #{_('Upload Form')}
+				a.btn.btn-primary(ng-click="addForm()")
+					i.fa.fa-plus
+					|  #{_('Add Form')}
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li.active(class="hidden-xs")
+					i.fa.fa-check-square
+					|  #{_('Forms')}
+	.row.ng-hide(ng-show="editFormToolBar", ng-cloak)
+		.col-lg-12
+			h1.page-header
+				| PraxManager  
+				small #{_('Add Form')}
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li.active
+					i.fa.fa-plus
+					|  #{_('Add Form')}
+					
+	.row(ng-show="tableView", ng-cloak)
+		.col-log-12
+			table.table.table-bordered.table-hover.table-striped
+				thead
+					tr
+						th  #{_('Form Name')}
+						th  #{_('Category')}
+						th  #{_('Edit')}
+						
+				tbody
+					tr(ng-repeat="form in forms")
+						td {{form.Name}}
+						td {{form.Category}}
+						td
+							.dropdown
+								button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown")
+									|  #{_('Manage')}
+									span.caret
+								ul.dropdown-menu
+									li
+										a(ng-click="editForm(form)")
+											i.fa.fa-pencil-square
+											|  #{_('Edit')}
+									li
+										a(ng-click="duplicateForm(form)") 
+											i.fa.fa-files-o
+											|  #{_('Duplicate')}
+									li
+										a(ng-click="preview(form)") 
+											i.fa.fa-eye
+											|  #{_('Preview')}
+									li
+										a(href="/api/forms/{{form._id}}/download") 
+											i.fa.fa-download
+											|   #{_('Download')}
+									li
+										a(ng-click="deleteForm(form)") 
+											i.fa.fa-times
+											|   #{_('Delete')}
+							
+
+	form.row.ng-hide(ng-show="editFormView", name="editFormForm", ng-cloak)
+		.col-lg-6
+			.form-group
+				label  #{_('Form Name (required)')}
+				input.form-control(ng-model="form.Name", required)
+				p.help-block #{_('Name of the form')}
+			.form-group
+				label  #{_('Required for checkin (required)')}
+				select.form-control(ng-model="form.Type", required)
+					option(value='optional')  #{_('Optional')}
+					option(value='required')  #{_('Required')}
+				p.help-block #{_('The student needs to complete this form before checkin')}
+			.form-group
+				label #{_('This form needs to be filled (required)')}
+				select.form-control(ng-model="form.Interval", required)
+					option(value="once")  #{_('Once')}
+					option(value="daily")  #{_('Every day of the week')}
+				p.help-block #{_('Intervals for data colection')}
+		.col-lg-6
+			.form-group
+				label  #{_('Category (required)')}
+				select.form-control(ng-model="form.Category", required)
+					option(ng-repeat="category in categories" value="{{category}}") {{category}}
+				p.help-block #{_('Category of the form')}
+			.form-group
+				label  #{_('Completed By  (required)')}
+				select.form-control(ng-model="form.CompletedBy", required)
+					option(value='student') #{_('Student')}
+					option(value='student_and_teacher')  #{_('Student and teacher')}
+					
+			.form-group
+				label #{_('Print Template')}
+				select.form-control(ng-modal="form.PrintTemplate")
+					option(value="none")  #{_('None')}
+					
+	.row.ng-hide(ng-show="editFormView", ng-cloak)
+		.col-lg-12
+			.form-group
+				label #{_('Description')}: 
+				textarea.form-control(ng-model="form.Description")
+				p.help-block  #{_('Description of the form')}
+			.btn-group.pull-right
+				a.btn.btn-default(ng-click="addSubject()")
+					i.fa.fa-plus
+					|  #{_('Add subject')}
+				a.btn.btn-default(ng-click="preview()")
+					i.fa.fa-eye
+					| #{_('Preview')}
+				
+			br
+			br
+			
+	.row.ng-hide(ng-show="editFormView", ng-cloak)
+		.col-lg-12
+			hr
+	.row.ng-hide(ng-show="editFormView", ng-repeat="subject in form.Questions", ng-cloak)
+		.col-lg-12
+			.btn-group.pull-right
+				a.btn.btn-default(ng-click="addQuestion(subject)")
+					i.fa.fa-plus
+					|   #{_('Add Question')}
+				a.btn.btn-default(ng-click="editSubject(subject, $index)")
+					i.fa.fa-pencil-square
+					|   #{_('Edit')}
+				a.btn.btn-default(ng-click="deleteSubject(subject, $index)")
+					i.fa.fa-times
+					|   #{_('Delete')}
+			h3 {{subject.Name}}
+			table.table.table-bordered.table-hover.table-striped
+				thead
+					tr
+						th  #{_('Question / Task')}
+						th  #{_('Type')}
+						th  #{_('Edit')}
+				tbody
+					tr(ng-repeat="question in subject.Questions")
+						td {{$index + 1}}. {{question.Question}}
+						td 
+							span(ng-show="question.Type == 'TrueOrFalse'") #{_('True or false')}
+							span(ng-show="question.Type == 'YesOrNo'") #{_('Yes or No')}
+							span(ng-show="question.Type == 'MultipleChoiceSingleAnswer'") #{_('Multiple choice single answer')}
+							span(ng-show="question.Type == 'MultipleChoiceMultipleAnswer'") #{_('Multiple choice multiple answer')}
+							span(ng-show="question.Type == 'ShortAnswer'") #{_('Short answer')}
+							span(ng-show="question.Type == 'NumberAnswer'") #{_('Number answer')}
+							span(ng-show="question.Type == 'VideoRecording'") #{_('Video recording')}
+							span(ng-show="question.Type == 'AudioRecording'") #{_('Audio recording')}
+							span(ng-show="question.Type == 'Photo'") #{_('Photo')}
+							span(ng-show="question.Type == 'Document'") #{_('Document')}
+						td
+							.dropdown
+								button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown")
+									| #{_('Manage')}
+									span.caret
+								ul.dropdown-menu
+									li
+										a(ng-click="editQuestion(subject, question, $index)")
+											i.fa.fa-pencil-square
+											|  #{_('Edit')}
+									li
+										a(ng-click="duplicateQuestion(subject, question, $index)") 
+											i.fa.fa-files-o
+											|  #{_('Duplicate')}
+									li
+										a(ng-click="deleteQuestion(subject, question, $index)") 
+											i.fa.fa-times
+											|  #{_('Delete')}
+	.row.ng-hide(ng-show="editFormView", ng-cloak)
+		.col-lg-12
+			from
+				.form-group
+					.btn-toolbar
+						button.btn.btn-primary(ng-click="save()", ng-disabled="editFormForm.$invalid || form.Questions.length == 0")  #{_('Save')}
+						button.btn.btn-default(ng-click="cancel()")  #{_('Cancel')}

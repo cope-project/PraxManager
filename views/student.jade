@@ -1,0 +1,36 @@
+extends student_layout
+
+block footer
+	script(src="/js/modules/my_internships.js")
+	
+block content
+	- var _ = lang._('student');
+	.row
+		.col-lg-12
+			h1.page-header
+				| PraxManager  
+				small  #{_('My Internships')}
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li.active
+					i.fa.fa-calendar
+					|   #{_('My Internships')}
+
+	.row(ng-cloak)
+		.col-lg-12
+			if identity.getUser().Type == 'admin'			
+				.alert.alert-warning
+					strong #{_('Warning!')}
+					span  #{_('Access this section as admin only if you know what you are doing.')}
+		.col-lg-12
+			ul.list-group
+				li.list-group-item(ng-repeat="internship in internships")
+					a(href='/my_internship/{{internship._id}}') 
+						span {{internship.Name}} 
+						span.hidden-xs  / ({{internship.StartDate | date:"yyyy-MM-dd"}} - {{internship.EndDate  | date:"yyyy-MM-dd"}}) 
+					a.btn.btn-primary.btn-xs.pull-right(href='/my_internship/{{internship._id}}')
+						|  #{_('Expand')}
+						i.glyphicon.glyphicon-chevron-right
+				

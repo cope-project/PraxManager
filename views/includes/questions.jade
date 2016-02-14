@@ -1,0 +1,165 @@
+- var _ = lang._('includes.questions');
+
+// questionControlTrueOrFalse
+script(type="text/ng-template", id="questionControlTrueOrFalse.html")
+	b {{$index + 1}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	
+	form.form-group
+		input(type="radio", value="1", name="F{{$parent.$index}}TF{{$index}}", ng-model="question.Value", ng-disabled="form.readOnly")
+		| #{_('True')} 
+			
+		input(type="radio", value="0",name="F{{$parent.$index}}TF{{$index}}", ng-model="question.Value", ng-disabled="form.readOnly") 
+		| #{_('False')}
+
+	.form-group
+		label #{_('Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="Explain your option here", ng-disabled="form.readOnly")
+		
+script(type="text/ng-template", id="questionControlYesOrNo.html")
+	b {{$index + 1}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	form.form-group
+		input(type="radio", value="1", name="F{{$parent.$index}}TF{{$index}}", ng-model="question.Value", ng-disabled="form.readOnly")
+		| #{_('Yes')} 
+			
+		input(type="radio", value="0",name="F{{$parent.$index}}TF{{$index}}", ng-model="question.Value", ng-disabled="form.readOnly") 
+		|#{_('No')} 
+
+	.form-group
+		label #{_('Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="Explain your option here", ng-disabled="form.readOnly")
+				
+// questionControlMultipleChoiceSingleAnswer
+script(type="text/ng-template", id="questionControlMultipleChoiceSingleAnswer.html")
+	b {{$index + 1}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	br(ng-show="question.Description")
+	br(ng-show="question.Description")
+	form.radio-row.form-group(ng-repeat="option in question.Options")
+		input(type="radio", name="F{{$parent.$parent.$index}}MCSA{{$parent.$index}}R", value="{{option}}", ng-model="question.Value", ng-disabled="form.readOnly")
+		|  {{option}} 
+
+	.form-group
+		label #{_('Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="Explain your option here", ng-disabled="form.readOnly")
+
+// questionControlMultipleChoiceMultipleAnswer
+script(type="text/ng-template", id="questionControlMultipleChoiceMultipleAnswer.html")
+	b {{$index + 1}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	br(ng-show="question.Description")
+	br(ng-show="question.Description")
+	.form-group.radio-row(ng-repeat="option in question.Options")
+		input(type="checkbox", name="F{{$parent.$index}}MCMA{{$index}}", value="{{option}}" ng-model="question.Value[$index]", , ng-disabled="form.readOnly")
+		|  {{option}} 
+
+	.form-group
+		label #{_('Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="Explain your option here", ng-disabled="form.readOnly")
+		
+// questionControlShortAnswer
+script(type="text/ng-template", id="questionControlShortAnswer.html")
+	b {{$index + 1}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.form-group
+		textarea.form-control(ng-model="question.Value", ng-disabled="form.readOnly")
+
+	.form-group
+		label #{_('Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="Explain your option here", ng-disabled="form.readOnly")
+		
+// questionControlShortAnswer
+script(type="text/ng-template", id="questionControlNumberAnswer.html")
+	b {{$index + 1}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.form-group
+		input.form-control(ng-model="question.Value", ng-disabled="form.readOnly", type="number")
+
+	.form-group
+		label #{_('Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="Explain your option here", ng-disabled="form.readOnly")
+	
+// questionControlVideoRecording
+script(type="text/ng-template", id="questionControlVideoRecording.html")
+	b {{$index + 1}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.alert.alert-warning(ng-show="error") {{error}}
+	div(ng-show="question.Value")
+		// video(width="320", height="240", controls, src="/api/files/{{question.Value._id}}/data")
+		a(href='/api/files/{{question.Value._id}}/data') Download Video File
+	form(method="post", enctype="multipart/form-data", ng-submit="uploadVideo($event)",  action="/api/files", ng-hide="form.readOnly")
+		.form-group
+			input(type="file", name="upload_file", ng-disabled="form.readOnly", accept="video/*", capture="camcorder")
+			input(type="hidden", name="type", value="video", ng-disabled="form.readOnly")
+			input(type="submit", value="Upload Video", ng-disabled="form.readOnly")
+
+	.form-group
+		label #{_('Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="Explain your option here", ng-disabled="form.readOnly")
+	
+// questionControlAudioRecording
+script(type="text/ng-template", id="questionControlAudioRecording.html")
+	b {{$index + 1}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.alert.alert-warning(ng-show="error") {{error}}
+	div(ng-show="question.Value")
+		// audio(controls, src='/api/files/{{question.Value._id}}/data')
+		a(href='/api/files/{{question.Value._id}}/data') Download Audio File
+	form(method="post", enctype="multipart/form-data", ng-submit="uploadAudio($event)",  action="/api/files", ng-hide="form.readOnly")
+		.form-group
+			input(type="file", name="upload_file", ng-disabled="form.readOnly", accept="audio/*", capture="microphone")
+			input(type="hidden", name="type", value="audio", ng-disabled="form.readOnly")
+			input(type="submit", value="Upload Audio", ng-disabled="form.readOnly")
+
+	.form-group
+		label #{_('Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="Explain your option here", ng-disabled="form.readOnly")
+
+// questionControlPhoto
+script(type="text/ng-template", id="questionControlPhoto.html")
+	b {{$index + 1}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.alert.alert-warning(ng-show="error") {{error}}
+	div(ng-show="question.Value")
+		img(src="/api/files/{{question.Value._id}}/data", height="400", style="width:100%;")
+		br
+		a(href='/api/files/{{question.Value._id}}/data') Download Image
+	form(method="post", enctype="multipart/form-data", ng-submit="uploadVideo($event)",  action="/api/files", ng-hide="form.readOnly")
+		.form-group
+			input(type="file", name="upload_file", ng-hide="form.readOnly", accept="image/*", capture="camcorder")
+			input(type="hidden", name="type", value="image", ng-disabled="form.readOnly")
+			input(type="submit", value="Upload Image", ng-disabled="form.readOnly")
+
+	.form-group
+		label #{_('Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="Explain your option here", ng-disabled="form.readOnly")
+			
+// questionControlDocument
+script(type="text/ng-template", id="questionControlDocument.html")
+	b {{$index + 1}}. {{question.Question}}
+	br
+	| {{question.Description}}
+	.alert.alert-warning(ng-show="error") {{error}}
+	div(ng-show="question.Value")
+		a(href='/api/files/{{question.Value._id}}/data') Download Document
+	form(method="post", enctype="multipart/form-data", ng-submit="uploadDocument($event)",  action="/api/files", ng-hide="form.readOnly")
+		.form-group
+			input(type="file", name="upload_file", ng-disabled="form.readOnly")
+			input(type="hidden", name="type", value="document", ng-disabled="form.readOnly")
+			input(type="submit", value="Upload Document", ng-disabled="form.readOnly")
+
+	.form-group
+		label #{_('Comment')}:
+		textarea.form-control(ng-model="question.Comment", placeholder="Explain your option here", ng-disabled="form.readOnly")
+			
+			

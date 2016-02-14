@@ -1,0 +1,38 @@
+{
+	"student": {
+		"home_page": "/student",
+		"allowed_paths":{
+			"^/student": ["GET"],
+			"^/auth/logout":["GET"],
+			"^/notifications": ["GET"],
+			"^/api/internships/my": ["GET"],
+			"^/my_internship/.+": ["GET"],
+			"^/api/internships/.+": ["GET"],
+			"^/api/checkin/.+": ["GET", "POST", "PUT"],
+			"^/api/checkin/.+/checkedin": ["GET"],
+			"^/api/forms_data":["GET", "POST"],
+			"^/api/forms_data/.+":["GET", "PUT"],
+			"^/api/forms_data/exists_general":["GET"],
+			"^/api/files":["GET", "POST"],
+			"^/api/forms/.+":["GET"],
+			"^/settings":["GET"],
+			"^/inbox":["GET"],
+			"^/profile":["GET"],
+			"^/api/my":["GET", "PUT"],
+			"^/api/my.+":["GET", "POST", "PUT"]
+		}
+	},
+	
+	"teacher": {
+		"home_page": "/internships",
+		"allowed_paths": {
+			"^/internships": ["GET"],
+			"^/api/internships.?": ["GET", "POST", "PUT", "DELETE"],
+			"^/forms": ["GET"],
+			"^/api/forms.?": ["GET", "POST", "PUT", "DELETE"],
+			"^/api/users.?": ["GET"],
+			"^/export": ["GET"],
+			"^/notifications/send_student_notification":["POST"]
+		}
+	}
+}

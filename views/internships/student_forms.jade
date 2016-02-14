@@ -1,0 +1,86 @@
+extends ../layout
+
+block head
+	script!= 'var PraxManager_internshipId = "' + internshipId + '";'
+	script!= 'var PraxManager_studentId = "' + studentId + '";'
+	
+block footer
+	- var _ = lang._('internships.forms');
+	script(src="/js/lib/jquery.form.min.js")
+	script(src='/js/modules/internship_student_forms.js')
+	script(src='/js/directives.js')
+	script(type="text/ng-template" id="formEdit.html")
+		.modal-header
+			h3.modal-title #{_('Form')}: {{form.Name}}
+		.modal-body
+			label
+				input(type="checkbox", ng-model="teacherReview")
+				| #{_('Teacher Evaluation')}
+			.panel.panel-default(ng-repeat="subject in form.Questions")
+				.panel-heading {{subject.Name}}
+				.panel-body {{subject.Description}}
+				ul.list-group
+					li.list-group-item(ng-repeat="question in subject.Questions")
+						question-ng(
+						position="$index" 
+						question="question" 
+						student-read-only="true"
+						teacher-read-only="false"
+						type="question.Type" 
+						show-teacher-review="teacherReview")
+						
+		.modal-footer
+			button.btn.btn-primary(ng-click="saveForm(form)", ng-disabled="!isValid() || form.readOnly") #{_('Save')}
+			button.btn.btn-default(ng-click="close()") #{_('Close')}
+
+
+	include ./../includes/questions.ng.jade
+			
+	
+block content
+	- var _ = lang._('internships.forms');
+	.row(ng-cloak)
+		.col-lg-12
+
+			h1.page-header
+				| PraxManager  
+				small #{_('Internship Forms Student')} ({{student.FirstName}} {{student.LastName}})
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li
+					i.fa.fa-bank
+					a(href='/internships')  #{_('Internships')}
+				li
+					i.fa.fa-users
+					a(href='/internships/results/{{internship._id}}')  #{_('Internships Students')} ({{internship.Name}})
+				li.active
+					i.fa.fa-list
+					|  #{_('Student Forms')}
+	.row(ng-cloak)
+		.col-lg-12(ng-repeat="form_group in forms")
+			.page-header
+				h4 #{_('Submit teacher review')}: {{form_group.Name}}
+			table.table.table-bordered.table-hover.table-striped(ng-show="form_group.Forms.length != 0")
+				thead
+					tr
+						th #{_('Form Name')}
+						th #{_('Date')}
+						th.hidden-xs #{_('Submit Date')}
+						th #{_('Type')}
+						th #{_('Review')}
+				tbody
+					tr(ng-repeat="form in form_group.Forms")
+						td 
+							a(ng-click="viewForm(form)") {{form.FormData.Name}} 
+						td {{form.Date | amDateFormat:'dddd, MMMM Do YYYY'}}
+						td.hidden-xs {{form.CreateDate | amDateFormat:'dddd, MMMM Do YYYY'}}
+						td 
+							span(ng-show="form.FormData.Interval == 'once'") #{_('General Form')}
+							span(ng-show="form.FormData.Interval == 'daily'") #{_('Daily Form')}
+						td
+							.dropdown
+								button.btn.btn-default.dropdown-toggle(type="button", ng-click="reviewForm(form)")
+									| #{_('Review')}  
+									i.fa.fa-eye

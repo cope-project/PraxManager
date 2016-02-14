@@ -1,0 +1,77 @@
+extends ../student_layout
+
+block footer
+	- var _ = lang._('profile');
+	script(src="/js/modules/profile.js")
+	script(type="text/ng-template" id="changePasswordModal.html")
+		.modal-header
+			h3.modal-title #{_('Change Password')}
+		.modal-body
+			.form-group
+				label #{_('Old Password')}
+				input.form-control(ng-model='user.Password')
+			.form-group
+				label #{_('New Password')}
+				input.form-control(ng-model='user.NewPassword')
+			.form-group
+				label #{_('Retype New Password')}
+				input.form-control(ng-model='user.RetypeNewPassword')
+		.modal-footer
+			button.btn.btn-primary(ng-click="changePassword()") #{_('Change Password')}
+			button.btn.btn-default(ng-click="cancel()") #{_('Cancel')}
+			
+block content
+	- var _ = lang._('profile');
+	.row
+		.col-lg-12
+			h1.page-header
+				| PraxManager  
+				small #{_('User Profile')}
+			a.btn.btn-primary.pull-right(href='#change_password', ng-click="changePassword()")
+				i.fa.fa-lock
+				|  #{_('Change Password')}
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li.active
+					i.fa.fa-user
+					|  #{_('Profile')}
+	.row
+		.col-lg-6
+			.form-group
+				label #{_('First Name')}:
+				input.form-control(ng-model="user.FirstName")
+				p.help-block #{_("User's first name")}
+
+		.col-lg-6
+			.form-group
+				label #{_('Last Name')}:
+				input.form-control(ng-model="user.LastName")
+				p.help-block #{_("User's last name")}
+	.row
+		.col-lg-6
+			.form-group
+				label #{_('Email')} :
+				input.form-control(ng-model="user.Email", disabled='disabled')
+				p.help-block #{_('Login email address')}
+
+		.col-lg-6
+			.form-group
+				label #{_('Type')}:
+				select.form-control(disabled='disabled', ng-model="user.Type")
+					option(value='admin') #{_('Administrator')}
+					option(value='teacher') #{_('Teacher')}
+					option(value='student') #{_('Student')}
+				p.help-block #{_('Type of user')}
+	.row
+		.col-lg-12
+			from
+				.form-group
+					.btn-toolbar
+						button.btn.btn-primary(ng-click="saveProfile()") #{_('Save')}
+						button.btn.btn-default #{_('Cancel')}
+						
+
+	
+	

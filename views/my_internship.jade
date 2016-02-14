@@ -1,0 +1,170 @@
+extends student_layout
+
+block head
+	script!= 'var PraxManager_internshipId = "' + internshipId + '";'
+	
+block footer
+	- var _ = lang._('my_internship');
+	script(src="/js/lib/jquery.form.min.js")
+	script(src="/js/directives.js")
+	script(src="/js/modules/my_internship.js")
+	script(type="text/ng-template" id="checkinModal.html")
+		.modal-header
+			h3.modal-title #{_('Checkin')}  {{day | amDateFormat:'dddd, MMMM Do YYYY'}}
+		.modal-body(name="checkinForm")
+			.alert.alert-danger(ng-show="error")
+				span.glyphicon.glyphicon-exclamation-sign
+				span.sr-only #{_('Error')}
+				span #{_('Error while checking in')}
+
+			.form-group(ng-show="internship.ColectDataType == 'time'")
+				label #{_('Hours (required)')}:
+				input.form-control(ng-model="checkin.Time", type="number" name="start" min="0" max="24")
+				
+			.form-group
+				label #{_('Comment')}:
+				textarea.form-control(ng-model="checkin.Comment", placeholder="." + _('Please leave a comment here or upload a audio / video file'))
+
+			.alert.alert-warning(ng-show="error") {{error}}
+			.alert.alert-success(ng-show="isFileUploaded") #{_('The media file has been uploaded')}
+			
+			div(ng-show="checkin.MediaFileComment")
+				a(href='/api/files/{{file._id}}/data') #{_('Download Audio File')} ({{file.FileName}})
+				
+			.progress(ng-show="uploading")
+				.progress-bar.progress-bar-striped.active(style="width: 100%") #{_('Uploading ...')}
+				
+
+			form(method="post", enctype="multipart/form-data", ng-submit="uploadAudio($event)",  action="/api/files", ng-hide="isAppleIOS")
+				.form-group
+					input(type="file", name="upload_file", ng-disabled="form.readOnly", accept="audio/*", capture="microphone")
+					input(type="hidden", name="type", value="audio", ng-disabled="form.readOnly")
+					input(type="submit", value="Upload Audio", ng-disabled="form.readOnly")
+
+			form(method="post", enctype="multipart/form-data", ng-submit="uploadAudio($event)",  action="/api/files", ng-show="isAppleIOS")
+				.form-group
+					input(type="file", name="upload_file", ng-disabled="form.readOnly", accept="video/*", capture="video/*;capture=camcorder")
+					input(type="hidden", name="type", value="video", ng-disabled="form.readOnly")
+					input(type="submit", value="Upload Video", ng-disabled="form.readOnly")
+				
+		.modal-footer
+			button.btn.btn-primary(ng-click="doCheckin()", ng-disabled="checkinForm.$invalid || uploading") #{_('Checkin')}
+			button.btn.btn-default(ng-click="cancel()") #{_('Cancel')}
+			
+	script(type="text/ng-template" id="submitForm.html")
+		.modal-header
+			h3.modal-title #{_('Form')}: {{form.Name}}
+		.modal-body
+			.panel.panel-default(ng-repeat="subject in form.Questions")
+				.panel-heading {{subject.Name}}
+				.panel-body {{subject.Description}}
+				ul.list-group
+					li.list-group-item(ng-repeat="question in subject.Questions")
+						question-ng(
+						position="$index" 
+						question="question" 
+						student-read-only="false"
+						teacher-read-only="true"
+						type="question.Type" 
+						show-teacher-review="false")
+		.modal-footer
+			button.btn.btn-primary(ng-click="saveForm(form)", ng-disabled="!isValid() || form.readOnly") #{_('Save')}
+			button.btn.btn-default(ng-click="close()") #{_('Close')}
+
+	include ./includes/questions.ng.jade
+			
+block content
+	- var _ = lang._('my_internship');
+	.row(ng-cloak)
+		.col-lg-12
+			
+			h1.page-header
+				| PraxManager  
+				small {{internship.Name}} #{_('Internship')}
+
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/student')  PraxManager
+				li.active
+					i.fa.fa-calendar
+					|   {{internship.Name}} #{_('Internship')}
+					span.hidden-xs {{internship.StartDate | amDateFormat:'dddd, MMMM Do YYYY'}} - {{internship.EndDate | amDateFormat:'dddd, MMMM Do YYYY'}}
+	.row(ng-show="formWarning")
+		.col-lg-12
+			.alert.alert-warning
+				strong #{_('Warning!')}
+				span  #{_('You need to submit the form in order to checkin.')}
+	.row(ng-cloak)
+		.col-lg-6
+			.btn-group
+				button.btn.btn-primary(ng-click="checkin()", ng-disabled="!checkinWidget.enabled")
+					i.fa(ng-class="checkinWidget.icon")
+					|  {{checkinWidget.label}}
+					
+				a.btn.btn-primary(href="/my_internship/{{internship._id}}/summary")
+					i.fa.fa-book
+					|  #{_('Internship Summary')} 
+		.col-lg-6
+			span.pull-right(style="font-size: 25px;font-weight: bold;") #{_('Current Day')} : {{today | amDateFormat:'dddd, MMMM Do YYYY'}}
+	.row 
+		.col-lg-12
+			hr
+	.row(ng-cloak)
+		.col-lg-12
+			.span8.calendar(ui-calendar="calendar", ng-model="calendar.events", calendar="student_calendar")
+			br
+			.page-header
+				h3 #{_('Forms for')} {{today | amDateFormat:'dddd, MMMM Do YYYY'}}
+				
+			table.table.table-bordered.table-hover.table-striped(ng-show="dailyForms.length != 0")
+				thead
+					tr
+						th #{_('Form Name')}
+						th.hidden-xs #{_('Number of Questions')}
+						th #{_('Required')}
+						th #{_('Status')}
+						th #{_('Submit')}
+				tbody
+					tr(ng-repeat="form in dailyForms")
+						td {{form.Name}}
+						td.hidden-xs  {{form.QuestionsCount}}
+						td {{form.Type}}
+						td 
+							span(ng-show="form._existingId") #{_('Completed')}
+							span(ng-show="!form._existingId") #{_('Not completed')}
+						td
+							a.btn.btn-default(ng-click="submitForm(form, 'new')", ng-show="!form._existingId") #{_('Submit')}
+							a.btn.btn-default(ng-click="submitForm(form, 'edit')", ng-show="form._existingId && form.canEdit") #{_('Edit')} 
+							a.btn.btn-default(ng-click="submitForm(form, 'preview')", ng-show="form._existingId && !form.canEdit") #{_('Preview')}
+
+			p(ng-show="dailyForms.length == 0") 
+				span #{_('No forms to complete for')} {{ today | amDateFormat:'dddd, MMMM Do YYYY'}}
+				
+				
+			.page-header
+				h3 #{_('Internship review forms')}
+			table.table.table-bordered.table-hover.table-striped(ng-show="generalForms.length != 0 && hasInternshipEnded")
+				thead
+					tr
+						th #{_('Form Name')}
+						th.hidden-xs #{_('Number of Questions')} 
+						th #{_('Required')}
+						th #{_('Status')}
+						th #{_('Submit')}
+				tbody
+					tr(ng-repeat="form in generalForms")
+						td {{form.Name}}
+						td.hidden-xs  {{form.QuestionsCount}}
+						td {{form.Type}}
+						td 
+							span(ng-show="form._existingId") #{_('Completed')}
+							span(ng-show="!form._existingId") #{_('Not completed')}
+						td
+							a.btn.btn-default(ng-click="submitForm(form, 'new')", ng-show="!form._existingId") #{_('Submit')}
+							a.btn.btn-default(ng-click="submitForm(form, 'edit')", ng-show="form._existingId && form.canEdit") #{_('Edit')} 
+							a.btn.btn-default(ng-click="submitForm(form, 'preview')", ng-show="form._existingId && !form.canEdit") #{_('Preview')}
+							
+			p(ng-show="generalForms.length == 0 && hasInternshipEnded") #{_('No forms available to complete.')}
+			p(ng-show="!hasInternshipEnded") #{_('The internship has not completed yet')}
+				
