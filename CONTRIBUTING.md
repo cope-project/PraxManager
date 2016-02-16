@@ -24,7 +24,7 @@ If you can, please submit a merge request with the fix or improvements including
 In general bug fixes that include a regression test are merged quickly while new features without proper tests are least likely to receive timely feedback. 
 The workflow to make a merge request is as follows:
 
-1. Fork the project on GitLab Cloud
+1. Fork the project on Github
 1. Create a feature branch
 1. Write code
 1. Add your changes to the CHANGELOG
@@ -47,5 +47,5 @@ We will accept merge requests if:
 * It can be merged without problems (if not please use: git rebase master)
 * It does not break any existing functionality
 * It is not a catch all merge request but rather fixes a specific issue or implements a specific feature
-* It keeps the GitLab code base clean and well structured
+* It keeps the Github code base clean and well structured
 * We think other users will benefit from the same functionality
