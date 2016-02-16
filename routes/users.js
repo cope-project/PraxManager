@@ -40,7 +40,9 @@ router.get('/', function (req, res) {
 		query.Type = {'$in': types};
 	}
 	
-    return UserModel.find(query, function (err, users) {
+    return UserModel.find(query)
+	.sort({FirstName: 1, LastName: 1})
+	.exec(function (err, users) {
 
 		if (!err) {
 			return res.send(users);
