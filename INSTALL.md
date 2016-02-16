@@ -30,7 +30,7 @@ The minimum requirement by PraxManager is a linux server with 1 GB of RAM. PraxM
 
 1. Clone or download and unpack PraxManager
 1. Install nodejs dependencies (npm install)
-1. Create a new config file from config_sample.json (e.g. confgi.json)
+1. Create a new config file from config_sample.json (e.g. config.json)
 1. Create a new config file for pm2 form prax_manager_sample.json
 1. Run the instalation script (e.g. node bin/install.js )
 1. Start the app (e.g. pm2 start prax_manager.json)

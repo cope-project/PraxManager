@@ -4,7 +4,7 @@
  */
 
 // load config
-var config_file = process.env.CONFIG;
+var config_file = process.env.CONFIG || 'config.json';
 var config = require('./../' + config_file);
 
 // load mongoose
