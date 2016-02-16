@@ -46,7 +46,7 @@ block content
 						th #{_('Tag')}
 						th #{_('Manage')}
 				tbody
-					tr(ng-repeat="user in internshipStudents")
+					tr(ng-repeat="user in internshipStudents | orderBy:'FirstName'")
 						td {{user.FirstName}} {{user.LastName}}
 						td {{user.Email}}
 						td {{user.Tag || '#{_('None')}' }}
