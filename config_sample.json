@@ -28,8 +28,8 @@
         "connectionTimeout": 10000,
         "port": 2525,
         "auth": {
-            "user": "postmaster@sandboxe3e341776f5042f3819d6e669f16f1b0.mailgun.org",
-            "pass": "0bb1de8c943778bd200ddcccef0ded38"
+            "user": "user",
+            "pass": "password"
          }
     },
 
