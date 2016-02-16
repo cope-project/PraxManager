@@ -8,3 +8,5 @@
 ## Moodle integration
 
 ## Troubleshooting
+
+## How to install PraxManager 

@@ -5,7 +5,7 @@ This documents has the humble task to document and explain the features availabl
 PraxManager allows teachers and managers to track the procedures performed by 
 students while in practice in hospitals and clinics.
 
-## Internsips
+## Internships
 
 ## Forms
 
