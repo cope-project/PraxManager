@@ -47,8 +47,8 @@ router.get('/login', function (req, res) {
 router.post('/login', function (req, res) {
     var identity = new Identity(req.session);
 
-    var email = req.body.email;
-    var password = req.body.password;
+    var email = req.body.email.trim();
+    var password = req.body.password.trim();
 
     var login_success = false;
     UserModel.findOne({ Email: email, Password: passwordlib.hash(password) }, function (error, user) {
