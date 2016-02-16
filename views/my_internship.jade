@@ -88,8 +88,8 @@ block content
 					a(href='/student')  PraxManager
 				li.active
 					i.fa.fa-calendar
-					|   {{internship.Name}} #{_('Internship')}
-					span.hidden-xs {{internship.StartDate | amDateFormat:'dddd, MMMM Do YYYY'}} - {{internship.EndDate | amDateFormat:'dddd, MMMM Do YYYY'}}
+					|   {{internship.Name}} #{_('Internship')} 
+					span.hidden-xs  {{internship.StartDate | amDateFormat:'dddd, MMMM Do YYYY'}} - {{internship.EndDate | amDateFormat:'dddd, MMMM Do YYYY'}}
 	.row(ng-show="formWarning")
 		.col-lg-12
 			.alert.alert-warning
