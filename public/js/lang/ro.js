@@ -16,5 +16,13 @@ loadLanguagePack({
     'Approved': 'Aprobat',
     'Rejected':'Respins',
     'Edit Checkin':'Editează Check In',
-    'Checked in':'Înregistrat'
+    'Checked in':'Înregistrat',
+    'Sunday': 'Duminică',
+    'Monday': 'Luni',
+    'Tuesday': 'Marţi',
+    'Wednesday': 'Miercuri',
+    'Thursday': 'Joi',
+    'Friday': 'Vineri',
+    'Saturday': 'Sâmbătă',
+    'Once': 'O singura data'
 });

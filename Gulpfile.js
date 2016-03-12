@@ -25,6 +25,7 @@ var vendorcss = [
 	'public/css/sb-admin.css',
 	'public/css/fullcalendar.css',
 	'public/css/font-awesome-4.1.0/css/font-awesome.min.css',
+	'public/js/lib/ng-tags-input/ng-tags-input.css',
 	'public/js/lib/ng-tags-input/ng-tags-input.bootstrap.css'
 ];
 

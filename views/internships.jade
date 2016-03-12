@@ -111,6 +111,10 @@ block content
 											i.fa.fa-tasks
 											|  #{_('Manage Internship')}
 									li
+										a(href='/internships/register/{{internship._id}}')
+											i.fa.fa-list-alt
+											|  #{_('Register')}
+									li
 										a(href='/my_internship/{{internship._id}}', target="_blank")
 											i.fa.fa-user
 											|  #{_('View as student')}

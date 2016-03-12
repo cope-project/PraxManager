@@ -269,6 +269,20 @@ router.get('/internships/results/:id', function(req, res) {
 });
 
 /**
+ * Internship register
+ */
+router.get('/internships/register/:id', function(req, res) {
+    var identity = new Identity(req.session);
+    return res.render('internships/register', { 
+        title: 'Internship register', 
+        'identity' : identity, 
+        'mod' : 'InternshipRegisterController', 
+        internshipId: req.params.id , 
+        'lang': lang
+        });
+});
+
+/**
  * Internship student submited forms
  */
 router.get('/internships/results/:id/student_forms/:student_id', function(req, res) {

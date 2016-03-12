@@ -208,8 +208,8 @@ block content
 				// select.form-control(ng-model="form.Interval", required)
 				//	option(value="once")  #{_('Once')}
 				//	option(value="daily")  #{_('Every day of the week')}
-				tags-input(ng-model="form.Interval")
-					auto-complete(source="intervals")
+				tags-input(ng-model="form.Interval1", min-tags="1")
+					auto-complete(source="loadIntervals($query)", min-length="0")
 				p.help-block #{_('Intervals for data colection')}
 		.col-lg-6
 			.form-group

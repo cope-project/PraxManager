@@ -6,8 +6,8 @@
 	/**
 	 * Forms controller
 	 */
-    NSPraxManager.controller('FormsController', ['$scope', '$http', '$modal', '$timeout',
-	function ($scope, $http, $modal, $timeout) {
+    NSPraxManager.controller('FormsController', ['$scope', '$http', '$modal', '$timeout','$q',
+	function ($scope, $http, $modal, $timeout, $q) {
 		var defaultForm = {Category: 'general', 'Questions': [], 'CompletedBy': 'student'};
 	$scope.forms = []
 	$scope.form = defaultForm;
@@ -29,6 +29,7 @@
 	$scope.editingModel = false;
 	
 	$http.get('/api/forms').success(function (forms) {
+		
 	   $scope.forms = forms;
 	});
 	
@@ -37,9 +38,22 @@
 	$scope.tableView = true
 	$scope.editFormView = false
 	
-	$scope.intervals = [
-		{text: ''}
+	var intervals = [
+		{text: $t('Sunday')},
+		{text: $t('Monday')},
+		{text: $t('Tuesday')},
+		{text: $t('Wednesday')},
+		{text: $t('Thursday')},
+		{text: $t('Friday')},
+		{text: $t('Saturday')},
+		{text: $t('Once')},
 	];
+	
+	$scope.loadIntervals = function (query) {
+		var deferred = $q.defer();
+		deferred.resolve(intervals);
+		return deferred.promise;
+	};
 	
 	/**
 	 * Edit form

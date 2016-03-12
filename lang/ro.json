@@ -198,6 +198,9 @@
             "Manage": "Administrează",
             "Total number of hours": "Număr total ore",
             "Total number of days": "Număr total zile"
+        },
+        "register": {
+            
         }
     },
     "layout": {

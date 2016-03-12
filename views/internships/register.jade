@@ -1,0 +1,64 @@
+extends ../layout
+
+block head
+	script!= 'var PraxManager_internshipId = "' + internshipId + '";'
+	
+block footer
+	- var _ = lang._('internships.register');
+	script(src='/js/modules/internship_register.js')
+	script(type="text/ng-template" id="checkPresence.html")
+		.modal-header
+			h3.modal-title #{_('Student Notification')}
+		.modal-body
+			.form-group
+				label #{_('Message')}:
+				textarea.form-control(ng-model="notification.Message", placeholder="Type your message here")
+		.modal-footer
+			button.btn.btn-primary(ng-click="send()" ng-disabled="!notification.Message") #{_('Send')}
+			button.btn.btn-default(ng-click="close()") #{_('Close')}
+			
+block content
+	- var _ = lang._('internships.register');
+	.row(ng-cloak)
+		.col-lg-12
+
+			h1.page-header
+				| PraxManager  
+				small #{_('Internship Register')} ({{internship.Name}})
+			ol.breadcrumb
+				li
+					i.fa.fa-home
+					a(href='/')  PraxManager
+				li
+					i.fa.fa-bank
+					a(href='/internships')  #{_('Internships')}
+				li.active
+					i.fa.fa-users
+					|  #{_('Register')}
+	.row
+		.col-lg-3(style="padding-bottom:10px;")
+			.input-group
+				input.form-control(datepicker-popup="yyyy-MM-dd", ng-model="date", close-text="Close", ng-change="onDateChange()", is-open="isDatepickerOpen")
+				.input-group-btn
+					button.btn.btn-default(ng-click="openPicker($event)")
+						i.glyphicon.glyphicon-calendar
+	.row(ng-cloak)
+		.col-lg-12
+			table.table.table-bordered.table-hover.table-striped(ng-show="checkins.length > 0")
+				thead
+					tr
+						th #{_('Name')}
+						th #{_('Email')}
+						th #{_('Comment')}
+						th #{_('Approve')}
+				tbody
+					tr(ng-repeat="checkin in checkins | orderBy:'user.FirstName'")
+						td {{checkin.user.FirstName}} {{checkin.user.LastName}}
+						td {{checkin.user.Email}}
+						td {{checkin.Comment || '#{_('None')}' }}
+						td
+							input(type="checkbox", ng-model="checkin.Approve", ng-change="onApprove(checkin)")
+			div(ng-show="checkins.length === 0")
+				span #{_('No student checkins for:')} {{date}}
+											
+	

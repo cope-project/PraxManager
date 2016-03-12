@@ -144,7 +144,7 @@ router.put('/:id', function (req, res) {
 });
 
 /**
- * Query checkins
+ * Query checkins by user
  */
 router.get('/query', function (req, res) {
     var identity = new Identity(req.session);
@@ -153,6 +153,27 @@ router.get('/query', function (req, res) {
 		'AccountId': identity.getAccountId(),
 		'UserId': req.query.userId,
 
+    };
+
+    CheckinModel.find(query, function (error, checkins) {
+		if (error) {
+			return res.send(error, 500);
+		}
+
+		return res.status(200).send(checkins).end();
+    });
+});
+
+/**
+ * Query checkins by date
+ */
+router.get('/query_by_date', function (req, res) {
+    var identity = new Identity(req.session);
+	var date = moment(req.query.date).startOf('day').utc().format();
+    var query = {
+		'InternshipId': req.query.internshipId,
+		'AccountId': identity.getAccountId(),
+		'Date': date,
     };
 
     CheckinModel.find(query, function (error, checkins) {

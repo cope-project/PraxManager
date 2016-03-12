@@ -3,7 +3,7 @@
  */
 
 // define application
-var NSPraxManager = angular.module('PraxManager', ['ui.calendar', 'ui.bootstrap', 'angularMoment'])
+var NSPraxManager = angular.module('PraxManager', ['ui.calendar', 'ui.bootstrap', 'angularMoment', 'ngTagsInput', 'ui.bootstrap.datepicker'])
 
 !function() {
     /**
