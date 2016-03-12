@@ -98,7 +98,7 @@
 			 * Delete internship
 			 */
 			$scope.deleteInternship = function (internship) {
-				if (!confirm("Are you sure you want to delete this internship.")) {
+				if (!confirm($t("Are you sure you want to delete this internship ?"))) {
 					return;
 				}
 
@@ -111,7 +111,7 @@
 			};
 
 			$scope.archiveInternship = function (internship) {
-				if (!confirm("Are you sure you want to archive this internship.")) {
+				if (!confirm($t("Are you sure you want to archive this internship ?"))) {
 					return;
 				}
 				$http.post('/api/internships/' + internship._id + '/archive').success(function () {
@@ -219,7 +219,7 @@
 			 * Remove student form internship
 			 */
 			$scope.deleteStudent = function (student, index) {
-				if (!confirm("Are you sure you want to remove this student.")) {
+				if (!confirm("Are you sure you want to remove this student ?")) {
 					return;
 				}
 				$scope.students.splice(index, 1);
@@ -229,7 +229,7 @@
 			 * Remove form from internship
 			 */
 			$scope.deleteForm = function (form, index) {
-				if (!confirm("Are you sure you want to remove this form.")) {
+				if (!confirm($t("Are you sure you want to remove this form ?"))) {
 					return;
 				}
 				$scope.forms.splice(index, 1);
@@ -239,7 +239,7 @@
 			 * Remove manager form internship
 			 */
 			$scope.deleteManager = function (manager, index) {
-				if (!confirm("Are you sure you want to remove this manager.")) {
+				if (!confirm($t("Are you sure you want to remove this manager ?"))) {
 					return;
 				}
 				$scope.managers.splice(index, 1);

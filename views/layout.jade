@@ -5,10 +5,8 @@ head
 	meta(charset="utf-8")
 	meta(name="viewport" content="width=device-width, initial-scale=1.0")
 	title= title+" | PraxManager"
-	link(href="/css/bootstrap.min.css" rel="stylesheet")
-	link(href="/css/fullcalendar.css" rel="stylesheet")
+	link(href="/build/vendor.css" rel="stylesheet")
 	link(href="/css/style.css" rel="stylesheet")
-	link(href="/css/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css")
 	script!= 'var PraxManager_userType = "' + identity.getUser().Type + '";'
 	script!= 'var PraxManager_lang = "' + lang.id + '";'
 	block head
@@ -27,20 +25,11 @@ body(data-ng-app='PraxManager')
 				block content
 				// /.row
 			// /.container-fluid
-		// /#page-wrapper
 		div(style='color: #ccc; text-align:center; ') #{_('PraxManager - CoPE Project')}
 		div(style='color: #ccc; text-align:center; ')
 			img(src='/images/erasmus_plus.jpg', height='50')
-	// /#wrapper
-	// jQuery
-	script(src='/js/lib/jquery.js')
-	script(src='/js/lib/bootstrap.js')
-	script(src="/js/lib/angular.min.js")
-	script(src="/js/lib/ui-bootstrap.min.js")
-	script(src="/js/lib/moment-with-locales.js")
-	script(src="/js/lib/angular-moment.min.js")
-	script(src="/js/lib/fullcalendar.js")
-	script(src="/js/lib/calendar.js")
+	script(src="/build/vendor.js")
 	script(src="/js/lib/angular-i18n/" + lang.js)
 	script(src="/js/app.js")
+	script(src="/js/lang/" + lang.id + '.js')
 	block footer

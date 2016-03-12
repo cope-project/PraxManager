@@ -31,7 +31,6 @@ router.put('', function (req, res) {
     
     return UserModel.findOne(query, function (error, user) {
 	
-	console.log(error);
 	if(error){
 	    return res.send(error, 500);
 	}
@@ -77,8 +76,6 @@ router.put('/change_password', function (req, res) {
 	}
 	
 	user.Password = passwordlib.hash(req.body.NewPassword);
-	
-	console.log(user.Password, req.body.NewPassword);
 	
 	user.save(function (error) {
 	    if (error) {

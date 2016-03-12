@@ -5,25 +5,25 @@
 // define application
 var NSPraxManager = angular.module('PraxManager', ['ui.calendar', 'ui.bootstrap', 'angularMoment'])
 
-!function () {
+!function() {
     /**
      * Notifications controller
      */
-    NSPraxManager.controller('NotificationsController', ['$scope', '$http', function ($scope, $http) {
+    NSPraxManager.controller('NotificationsController', ['$scope', '$http', function($scope, $http) {
 	       $scope.notifications = []
 
-	       $http.get('/notifications').success(function (notifications) {
+	       $http.get('/notifications').success(function(notifications) {
             $scope.notifications = notifications
 	       })
 
     }])
-    
+
     // setup timezone
     //moment.tz.add('Etc/UTC|Etc/Universal');
     NSPraxManager.constant('angularMomentConfig', { timezone: null });
-    
+
     // setup application
-    NSPraxManager.run(['amMoment', function (amMoment) {
+    NSPraxManager.run(['amMoment', function(amMoment) {
         if (PraxManager_lang == 'dk') {
             PraxManager_lang = 'da';
         }
@@ -41,9 +41,22 @@ var NSPraxManager = angular.module('PraxManager', ['ui.calendar', 'ui.bootstrap'
 
     NSPraxManager.unsavedChanges = false;
 
-    window.onbeforeunload = function (e) {
+    window.onbeforeunload = function(e) {
         if (NSPraxManager.unsavedChanges) {
-            return 'The current window has unsaved changes.';
+            return $t('The current window has unsaved changes.');
         }
     };
 } ();
+
+// translate
+window.$t = function (m) {return m};
+
+function loadLanguagePack(dict) {
+    window.$t = function(message) {
+        if (dict[message]) {
+            return dict[message];
+        }
+
+        return message;
+    };
+}

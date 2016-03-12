@@ -1,5 +1,3 @@
-@import url("sb-admin.css");
-
 input.ng-invalid, select.ng-invalid, textarea.ng-invalid{
 	border: 1px solid darkblue;
 }

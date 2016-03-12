@@ -37,6 +37,10 @@
 	$scope.tableView = true
 	$scope.editFormView = false
 	
+	$scope.intervals = [
+		{text: ''}
+	];
+	
 	/**
 	 * Edit form
 	 */
@@ -106,7 +110,7 @@
 	 * Delete form
 	 */
 	$scope.deleteForm = function (form) {
-		if(!confirm("Are you sure you want to delete this form.")){
+		if(!confirm($t("Are you sure you want to delete this form ?"))){
 			return;
 		}
 	    $http['delete']('/api/forms/' + form._id)
@@ -244,7 +248,7 @@
 	 * Delete subject
 	 */
 	$scope.deleteSubject = function (subject, $index) {
-		if(!confirm("Are you sure you want to delete this subject.")){
+		if(!confirm($t("Are you sure you want to delete this subject ?"))){
 			return;
 		}
 	    $scope.form.Questions.splice($index, 1);
@@ -296,9 +300,8 @@
 	 * Duplicate question
 	 */
 	$scope.duplicateQuestion = function (subject, question, $index) {
-	    console.log(subject);
 	    var newQ = angular.copy(question);
-	    newQ.Question = newQ.Question + ' ( Copy ) ';
+	    newQ.Question = newQ.Question + ' ( '+$t('Copy')+' ) ';
 	    subject.Questions.push(newQ);
 	};
 	
@@ -306,7 +309,7 @@
 	 * Delete question
 	 */
 	$scope.deleteQuestion = function (subject, question, $index) {
-		if(!confirm("Are you sure you want to delete this question.")){
+		if(!confirm($t("Are you sure you want to delete this question ?"))){
 			return;
 		}
 	    subject.Questions.splice($index, 1);
@@ -464,7 +467,7 @@
 						return;
 					}
 				
-				$scope.error = 'File upload error.'
+				$scope.error = $t('File upload error.');
 				
 				})}, success: function(response) {
 					$scope.$apply(function($scope) {

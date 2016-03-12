@@ -70,4 +70,30 @@ block content
 										a.btn.btn-primary(href='/api/forms_data/summary/csv?internshipId={{aggregate.internship._id}}&formId={{aggregate.form._id}}', ng-disabled="!aggregate.internship || !aggregate.form") #{_('Download Summary')} 
 										
 										
-				
+	.row
+		.col-lg-12
+			.panel.panel-default
+				.panel-heading
+					h3.panel-title
+						i.fa.fa-bar-chart-o.fa-fw
+						| #{_('Export Student Forms')} 
+						
+				.panel-body
+					.row
+						.col-lg-6
+							.form-group
+								label #{_('Intership')}
+								select.form-control(ng-options="internship.Name for internship in internships", ng-model="internship")
+							.form-group
+								label #{_('Form')}
+								select.form-control(ng-options="form.Name for form in internship.AssignedForms", ng-model="form")
+							.form-group
+								label #{_('Student')} 
+								select.form-control(ng-disabled="!internship", ng-options="user.FirstName + ' ' + user.LastName + ' - ' + user.Email for user in internship.AssignedUsers", ng-model="student")
+									
+					.row
+						.col-lg-12
+							from
+								.form-group
+									.btn-toolbar
+										a.btn.btn-primary(ng-disabled="!internship || !form", ng-href="/api/checkin/csv?internshipId={{internship._id}}&userId={{student._id}}") #{_('Download Forms')}

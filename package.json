@@ -25,5 +25,11 @@
     "connect-mongo":"~0.8.0",
     "moment": "~2.10.6",
     "xlsx":"~0.8.0"
+  },
+  "devDependencies":{
+    "gulp":"*",
+    "gulp-concat":"*",
+    "gulp-uglify":"*",
+	"gulp-cssmin":"*"
   }
 }

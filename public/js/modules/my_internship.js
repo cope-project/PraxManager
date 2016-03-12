@@ -17,7 +17,7 @@
 	$scope.dailyForms = [];
 	
 	$scope.checkinWidget = {
-		label: 'Checkin Current Day',
+		label: $t('Checkin Current Day'),
 		enabled: false,
 		icon:'fa-check-circle-o'
 	};
@@ -56,7 +56,7 @@
 			        	
 			        	if(date.isSame(cell.start)){
 			        	    element.css({'background': '#fcf8e3'})
-			        	    element.html('<span class="label label-info hidden-xs">Current Day</span><span class="label label-info hidden-sm hidden-md hidden-lg">CD</span>');
+			        	    element.html('<span class="label label-info hidden-xs">'+$t('Current Day')+'</span><span class="label label-info hidden-sm hidden-md hidden-lg">CD</span>');
 			        	}else{
 				            var cellIsBefore = cell.start.utc().isBefore(moment($scope.internship.StartDate).utc());
 				            var cellIsAfter =  cell.start.utc().isAfter(moment($scope.internship.EndDate).utc());
@@ -84,7 +84,7 @@
 		            
 		            if(date.utc().format() == $scope.today.format()){
 			        	cell.css({'background': '#fcf8e3'})
-			        	cell.html('<span class="label label-info hidden-xs">Current Day</span><span class="label label-info hidden-sm hidden-md hidden-lg">CD</span>');
+			        	cell.html('<span class="label label-info hidden-xs">'+$t('Current Day')+'</span><span class="label label-info hidden-sm hidden-md hidden-lg">CD</span>');
 			        	return;
 		            }
 		            renderCellContent(date, cell);
@@ -101,17 +101,17 @@
 				noCheckinFound = false;
 		        if(checkin.Status == 'pending'){
 		           	cell.css({'background': '#d9edf7'});
-		            cell.html('<span class="label label-info hidden-xs">Pending</span><span class="label label-info hidden-sm hidden-md hidden-lg">P</span>');
+		            cell.html('<span class="label label-info hidden-xs">'+$t('Pending')+'</span><span class="label label-info hidden-sm hidden-md hidden-lg">P</span>');
 		        }
 
 		        if(checkin.Status == 'approved'){
 		            cell.css({'background': '#dff0d8'});
-		            	cell.html('<span class="label label-success hidden-xs">Approved</span><span class="label label-success hidden-sm hidden-md hidden-lg">A</span>');
+		            	cell.html('<span class="label label-success hidden-xs">'+$t('Approved')+'</span><span class="label label-success hidden-sm hidden-md hidden-lg">A</span>');
 		            }
 
 		        if(checkin.Status == 'rejected'){
 		            cell.css({'background': '#fcf8e3'});
-		            cell.html('<span class="label label-danger hidden-xs">Rejected</span><span class="label label-danger hidden-sm hidden-md hidden-lg">R</span>');
+		            cell.html('<span class="label label-danger hidden-xs">'+$t('Rejected')+'</span><span class="label label-danger hidden-sm hidden-md hidden-lg">R</span>');
 		        }
 		    }
 		});
@@ -150,7 +150,7 @@
 		});
 
 		if(!formsCompleted){
-			$scope.checkinWidget.label = 'Checkin Current Day';
+			$scope.checkinWidget.label = $t('Checkin Current Day');
 			$scope.checkinWidget.enabled = false;
 			$scope.formWarning = true;
 			return;
@@ -171,14 +171,14 @@
 		if(isTodayChecked){
 			if($scope.currentCheckin.Status === 'pending'){
 				$scope.checkinWidget.enabled = true;
-				$scope.checkinWidget.label = 'Edit Checkin';
+				$scope.checkinWidget.label = $t('Edit Checkin');
 			}else{
 				$scope.checkinWidget.enabled = false;
-				$scope.checkinWidget.label = 'Checked in';
+				$scope.checkinWidget.label = $t('Checked in');
 			}
 
 		}else{
-			$scope.checkinWidget.label = 'Checkin Current Day';
+			$scope.checkinWidget.label = $t('Checkin Current Day');
 			$scope.checkinWidget.enabled = true;
 			$scope.currentCheckin = null;
 		}
@@ -617,7 +617,7 @@
 					return;
 		    	}
 		    
-		    $scope.error = 'File upload error.'
+		    $scope.error = $t('File upload error.');
 		    
 	        })}, success: function(response) {
 	            $scope.$apply(function($scope) {
