@@ -39,14 +39,14 @@
 	$scope.editFormView = false
 	
 	var intervals = [
-		{text: $t('Sunday')},
-		{text: $t('Monday')},
-		{text: $t('Tuesday')},
-		{text: $t('Wednesday')},
-		{text: $t('Thursday')},
-		{text: $t('Friday')},
-		{text: $t('Saturday')},
-		{text: $t('Once')},
+		{text: $t('Sunday'), value: 'Sunday'},
+		{text: $t('Monday'), value: 'Monday'},
+		{text: $t('Tuesday'), value: 'Tuesday'},
+		{text: $t('Wednesday'), value: 'Wednesday'},
+		{text: $t('Thursday'), value: 'Thursday'},
+		{text: $t('Friday'), value: 'Friday'},
+		{text: $t('Saturday'), value: 'Saturday'},
+		{text: $t('Once'), value: 'Once'},
 	];
 	
 	$scope.loadIntervals = function (query) {

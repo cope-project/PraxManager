@@ -114,6 +114,7 @@ block content
 		.col-lg-12
 			.span8.calendar(ui-calendar="calendar", ng-model="calendar.events", calendar="student_calendar")
 			br
+			p #{_('Description')} : {{internship.Description}}
 			.page-header
 				h3 #{_('Forms for')} {{today | amDateFormat:'dddd, MMMM Do YYYY'}}
 				
