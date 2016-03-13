@@ -8,6 +8,7 @@ var cssmin = require('gulp-cssmin');
 
 // define vendor deps
 var vendorjs = [
+	'public/js/lib/support.js',
 	'public/js/lib/jquery.js',
 	'public/js/lib/bootstrap.js',
 	'public/js/lib/angular.min.js',
