@@ -12,10 +12,24 @@ block footer
 		.modal-body
 			.form-group
 				label #{_('Message')}:
-				textarea.form-control(ng-model="notification.Message", placeholder="Type your message here")
+				textarea.form-control(ng-model="notification.Message", placeholder="#{_('Type your message here')}")
 		.modal-footer
 			button.btn.btn-primary(ng-click="send()" ng-disabled="!notification.Message") #{_('Send')}
 			button.btn.btn-default(ng-click="close()") #{_('Close')}
+			
+	script(type="text/ng-template" id="internshipGrades.html")
+		.modal-header
+			h3.modal-title #{_('Internship Grades')}
+		.modal-body
+			p 
+				b #{_('Student')}:
+				span  {{student.FirstName}} {{student.LastName}}
+			.form-group
+				label #{_('Final Grade')}:
+				input.form-control(ng-model="finalGrade", type="number", max="10", min="1")
+		.modal-footer
+			button.btn.btn-primary(ng-click="save()" ng-disabled="!finalGrade") #{_('Save')}
+			button.btn.btn-default(ng-click="close()") #{_('Cancel')}
 			
 block content
 	- var _ = lang._('internships.results');
@@ -64,6 +78,10 @@ block content
 										a(href='/internships/results/{{internship._id}}/student_presence/{{user._id}}')
 											i.fa.fa-clock-o
 											|  #{_('Student Presence')}
+									li 
+										a(ng-click="gradesModal(user)")
+											i.fa.fa-star
+											|  #{_('Grades')}
 									
 									li
 										a(ng-click="sendStudentNotification(user)")
