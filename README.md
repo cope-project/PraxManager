@@ -3,6 +3,8 @@ PraxManager
 
 What is PraxManager ?
 
+![PraxManager](https://raw.githubusercontent.com/cope-project/PraxManager/master/docs/printscreen.png)
+
 PraxManager is an online instrument destined to monitor and evaluate the practical training of the students in several specializations from healthcare education field, offering in the same time an overview on the evolution of the students during their training and the performance of the schools in time.
 
 PraxManager, the software developed in the project is tested and documented during the project lifetime, in local context, in the daily activities of other partner schools and in transnational mobilities for students.
