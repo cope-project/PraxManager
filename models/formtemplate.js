@@ -17,7 +17,7 @@ var FormTemplateSchema = new Schema({
 	'Questions': {type:Array, 'default':[]},
 	'QuestionsCount': {type:Number, 'default':0},
 	'Interval': {type:String, 'default':'daily', enum: ['daily', 'once']},
-	'Intervals': {type:Array, 'default': [{text: $t('Once'), value: 'Once'}]}, 
+	'Intervals': {type:Array, 'default': [{text: 'Once', value: 'Once'}]}, 
 	'Type': {type:String, 'default':'optional', enum: ['optional', 'required']},
 	'CompletedBy': {type:String, 'default':'student', enum: ['student', 'teacher', 'student_and_teacher']},
 	'Status': {type:String, 'default':'active',enum: ['active', 'deleted']},
