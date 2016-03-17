@@ -1,3 +1,28 @@
+// czech translation
 loadLanguagePack({
-    // no translation for english
+	'The current window has unsaved changes.': 'V tomto okně jste provedli změny, které nejsou uloženy!',
+	'Are you sure you want to delete this form ?': 'Skutečně chcete smazat tento dotazník?',
+	'Are you sure you want to delete this subject ?': 'Skutečně chcete smazat tento předmět?',
+	'Are you sure you want to delete this question ?' : 'Skutečně chcete smazat tuto otázku?',
+	'Copy' : 'Kopírovat',
+	'File upload error.': 'Chyba nahrávání souboru',
+	'Are you sure you want to delete this internship ?' : 'Skutečně chcete smazat tuto praxi?',
+	'Are you sure you want to archive this internship ?': 'Skutečně chcete převést tuto praxi do archivu?',
+	'Are you sure you want to remove this student ?':'Skutečně chcete odstranit účet tohoto studenta?',
+	'Are you sure you want to remove this manager ?': 'Skutečně chcete odstranit účet tohoto správce?',
+	'Checkin Current Day': 'Check in ziua curenta',
+	'Current Day': 'Aktuální den',
+	'Pending': 'Čeká na schválení',
+	'Approved': 'Schváleno',
+	'Rejected':'Zamítnuto',
+	'Edit Checkin':'Upravit docházku',
+	'Checked in':'Docházka zadána',
+	'Sunday': 'Neděle',
+	'Monday': 'Pondělí',
+	'Tuesday': 'Úterý',
+	'Wednesday': 'Středa',
+	'Thursday': 'Čtvrtek',
+	'Friday': 'Pátek',
+	'Saturday': 'Sobota',
+	'Once': 'Jednorázově'
 });
