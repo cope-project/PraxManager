@@ -1,5 +1,8 @@
 extends layout
 
+block footer
+	script(src="/js/modules/settings.js")
+	
 block content
 	- var _ = lang._('settings');
 	.row
@@ -18,7 +21,7 @@ block content
 		.col-lg-6
 			.form-group
 				label #{_('Language')}:
-				select.form-control
+				select.form-control(ng-model="language", readonly)
 					option(value='cz') #{_('Czech')}
 					option(value='dk') #{_('Danish')}
 					option(value='en') #{_('English')}
@@ -33,7 +36,7 @@ block content
 		.col-lg-6
 			.form-group
 				label #{_('Send Email Notifications')}:
-				select.form-control
+				select.form-control(readonly, ng-model="notifications")
 					option(value='all') #{_('All')}
 					option(value='none') #{_('None')}
 				p.help-block #{_('Send application notifications via Email')}
@@ -41,7 +44,7 @@ block content
 		.col-lg-6
 			.form-group
 				label #{_('Timezone')}:
-				select.form-control
+				select.form-control(readonly, ng-model="timezone")
 					option(value='utc') #{_('UTC - Coordinated Universal Time (UTC)')}
 					option(value='eet') #{_('EET - Eastern European Time Zone (UTC+02:00)')}
 					option(value='cet') #{_('CET – Central European Time (UTC+01:00)')}

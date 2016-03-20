@@ -1,5 +1,8 @@
 extends ../student_layout
 
+block footer
+	script(src="/js/modules/settings.js")
+	
 block content
 	- var _ = lang._('settings');
 	.row
@@ -18,7 +21,7 @@ block content
 		.col-lg-6
 			.form-group
 				label #{_('Language')}:
-				select.form-control
+				select.form-control(ng-model="language", readonly)
 					option(value='cz') #{_('Czech')}
 					option(value='dk') #{_('Danish')}
 					option(value='en') #{_('English')}
