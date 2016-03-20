@@ -16,7 +16,11 @@
         "Form Day": "Data formularului",
         "Format": "Formatare",
         "Default HTML": "HTML Implicit",
-        "Download Form": "Descarcă formular"
+        "Download Form": "Descarcă formular",
+        "Export Internship Summary": "Exporta Sumar Stagiu",
+        "Download Summary": "Descarcă Sumar",
+        "Export Student Forms": "Exporta Formulare Cursanți",
+        "Download Forms":"Descarcă Formulare"
     },
     "forms": {
         "Edit Question": "Editeaza întrebarea",
@@ -79,7 +83,9 @@
         "Manage": "Administrare",
         "Upload Form": "Incarca formular",
         "This form needs to be filled (required)": "Acest formular trebuie sa fie completat (obligatoriu)",
-        "Type": "Tip Intrebare"
+        "Type": "Tip Intrebare",
+        "Category":"Categoria",
+        "Required for checkin (required)":"Dupa checkin (necesar)"
     },
     "inbox": {
         "Inbox": "Căsuță intrari",
@@ -114,13 +120,13 @@
         "Manage Internship": "Administrare stagiu",
         "Edit": "Editează",
         "Delete": "Șterge",
-        "Intership Name (required)": "Numele stagiului (obligatoriu)",
+        "Internship Name (required)": "Numele stagiului (obligatoriu)",
         "Name of the internship": "Numele stagiului (ex. AMG III 2015 - Ginecologie)",
         "Start date (required)": "Data de început (obligatoriu)",
         "Start day of the internship": "Prima zi a stagiului",
         "Collect Data Type (required)": "Modul de culegere a datelor (ore/zile)",
-        "Day based": "Zilnic",
-        "Time based": "Pe ore",
+        "days": "zile",
+        "hours and minutes": "ore si minute",
         "How the time interval will be summarized": "Pe ce interval de timp vor fi colectate datele",
         "Description": "Descriere",
         "Institution (required)": "Instituție (obligatoriu)",
@@ -142,18 +148,33 @@
         "Measure presence in (required)": "Masoara prezenta in (obligatoriu)",
         "Warning!": "Atentie!",
         "Make changes in this section as admin only if you know what you are doing.": "Asigurati-va ca stiti ceea ce faceti cand faceti modificari in aceasta sectiune.",
+        "Register":"Catalog",
+        "View as student":"Vizualizare student",
+        "Archive": "Arhivare",
         "results": {
             "Internship Students": "Cursanți participanți la stagiu",
             "Internships": "Stagii de practică",
             "Students": "Cursanți",
             "Name": "Nume",
-            "Email": "e-mail",
-            "Tag": "Adaugă",
+            "Email": "Email",
+            "Tag": "Eticheta",
             "Manage": "Administrează",
             "Manage Student": "Administrează cursant",
             "Submited Forms": "Formulare trimise",
             "Student Presence": "Prezența cursanului",
-            "Send Notification": "Trimite notificare"
+            "Send Notification": "Trimite notificare",
+            "Grades": "Note",
+            "Internship Grades": "Note Practica",
+            "Student":"Cursantul",
+            "Final Grade":"Nota Finala",
+            "Save": "Salveaza",
+            "Cancel": "Anuleaza",
+            "Student Notification": "Trimite notificare",
+            "Message": "Mesaj",
+            "Type your message here": "Scrieți mesajul dumneavoastra aici",
+            "Send": "Trimite",
+            "Close": "Inchide",
+            "None": "Niciunul"
         },
         "forms": {
             "Form": "Formular",
@@ -174,7 +195,9 @@
             "View": "Vizualizază",
             "Edit": "Editează",
             "Submit teacher review": "Înregistrează observațiile tutorelui de practică",
-            "Edit review": "Editează formular completat de cursant"
+            "Edit review": "Editează formular completat de cursant",
+            "Teacher Evaluation":"Evaluare tutore",
+            "Review": "Recenzie"
         },
         "presence": {
             "Student Presence": "Prezența cursantului",
@@ -200,7 +223,15 @@
             "Total number of days": "Număr total zile"
         },
         "register": {
-            
+            "Internship Register": "Catalog Stagiu",
+            "Internships": "Stagii de practică",
+            "Register": "Catalog",
+            "Name": "Nume",
+            "Email":"Email",
+            "Comment":"Comentariu",
+            "Approve":"Prezent",
+            "None":"Nespecificat",
+            "No student checkins for": "Nici un cursant nu a facut checkin pentru data"
         }
     },
     "layout": {
@@ -246,7 +277,9 @@
         "No forms available to complete": "Nu există formulare de completat",
         "The internship has not completed yet": "Stagiul de practică nu s-a finalizat încă",
         "You need to submit the form in order to checkin.": "Trebuie sa completati formularul pentru a putea face check-in.",
-        "Warning!":"Atentie!"
+        "Warning!":"Atentie!",
+        "Description": "Descriere",
+        "No forms available to complete.": "Nu existentă formulare de completat."
     },
     "my_internship_summary": {
         "My Internships": "Stagiile mele de practică",
@@ -308,7 +341,7 @@
         "Email address already in use or other validation error": "Adresă de e-mail aflată deja în uz sau altă eroare de validare",
         "First Name (required)": "Prenume (obligatoriu)",
         "Last Name (required)": "Nume de familie (obligatoriu)",
-        "Email (required)": "e-mail (obligatoriu)",
+        "Email (required)": "Email (obligatoriu)",
         "Type (required)": "Tip (obligatoriu)",
         "Administrator": "Administrator",
         "Teacher": "Tutore",
@@ -324,19 +357,20 @@
         "Add User": "Adaugă utilizator",
         "First Name": "Prenume",
         "Last Name": "Nume",
-        "Email": "e-mail",
+        "Email": "Email",
         "Type": "Tip",
         "Moodle Account": "Cont Moodle",
         "Actions": "Acțiuni",
         "Edit": "Editează",
-        "Send Passowrd": "Trimite parolă",
+        "Send Password": "Trimite parolă",
         "Delete": "Șterge",
         "Your account is now ready to use.": "Contul dumneavoastra este activ.",
         "Account successfully created": "Contul a fost creat cu success",
         "Your password has been updated by the Administrator": "Parola dumneavoastra a fost actualizata de Administrator",
         "Your new password is": "Noua dumneavoastra parola este",
         "Your password has been updated": "Parola dumneavoastra a fost actualizata",
-        "Upload Users": "Incarca cursanti"
+        "Upload Users": "Incarca cursanti",
+        "Tag": "Etichetă"
     },
     "includes": {
         "head": {
