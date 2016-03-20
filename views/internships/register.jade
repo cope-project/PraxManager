@@ -6,17 +6,7 @@ block head
 block footer
 	- var _ = lang._('internships.register');
 	script(src='/js/modules/internship_register.js')
-	script(type="text/ng-template" id="checkPresence.html")
-		.modal-header
-			h3.modal-title #{_('Student Notification')}
-		.modal-body
-			.form-group
-				label #{_('Message')}:
-				textarea.form-control(ng-model="notification.Message", placeholder="Type your message here")
-		.modal-footer
-			button.btn.btn-primary(ng-click="send()" ng-disabled="!notification.Message") #{_('Send')}
-			button.btn.btn-default(ng-click="close()") #{_('Close')}
-			
+
 block content
 	- var _ = lang._('internships.register');
 	.row(ng-cloak)
@@ -59,6 +49,6 @@ block content
 						td
 							input(type="checkbox", ng-model="checkin.Approve", ng-change="onApprove(checkin)")
 			div(ng-show="checkins.length === 0")
-				span #{_('No student checkins for:')} {{date}}
+				span #{_('No student checkins for')}: {{date}}
 											
 	
