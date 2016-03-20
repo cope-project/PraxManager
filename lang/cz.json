@@ -76,7 +76,10 @@
         "Add subject": "Přidat předmět",
         "Add Question": "Přidat otázku",
         "Save": "Uložit",
-        "Manage": "Upravit"
+        "Manage": "Upravit",
+        "Upload Form": "Nahrát dotazník",
+        "This form needs to be filled (required)": "Tento dotazník je nutné povinně vyplnit.",
+        "Type": "Typ"
     },
     "inbox": {
         "Inbox": "Inbox",
@@ -135,7 +138,10 @@
         "Add students to internship": "Přidat žáky",
         "Add forms to internship": "Přidat dotazník",
         "Add Manager to internship": "Přidat správce",
-        "Save": "",
+        "Save": "Uložit",
+        "Measure presence in (required)": "Způsob zadávání docházky (povinné)",
+        "Warning!": "Upozornění!",
+        "Make changes in this section as admin only if you know what you are doing.": "Změny v této agendě provádějte jen v případě, že víte, co děláte.",
         "results": {
             "Internship Students": "Seznam žáků na praxi",
             "Internships": "Seznam praxí",
@@ -192,6 +198,9 @@
             "Manage": "Spravovat",
             "Total number of hours": "Počet hodin (celkem)",
             "Total number of days": "Počet dní (celkem)"
+        },
+        "register": {
+
         }
     },
     "layout": {
@@ -235,7 +244,9 @@
         "No forms to complete for": "Žádné dotazníky k dokončení pro",
         "Internship review forms": "Přehled dotazníků k praxi",
         "No forms available to complete": "Žádné dotazníky k dokončení",
-        "The internship has not completed yet": "Praxe zatím nebyla dokončena"
+        "The internship has not completed yet": "Praxe zatím nebyla dokončena",
+        "You need to submit the form in order to checkin.": "Před zadáním docházky musíte vyplnit dotazník",
+        "Warning!":"Upozornění!"
     },
     "my_internship_summary": {
         "My Internships": "Moje praxe",
@@ -286,7 +297,9 @@
     },
     "student": {
         "My Internships": "Moje praxe",
-        "Expand": "Rozbalit"
+        "Expand": "Rozbalit",
+        "Warning!": "Upozornění!",
+        "Make changes in this section as admin only if you know what you are doing.": "Změny v této agendě provádějte jen v případě, že víte, co děláte."
     },
     "student_layout": {},
     "users": {
@@ -317,7 +330,13 @@
         "Actions": "Akce",
         "Edit": "Upravit",
         "Send Passowrd": "Odeslat heslo",
-        "Delete": "Smazat"
+        "Delete": "Smazat",
+        "Your account is now ready to use.": "Váš účet je připraven k použití.",
+        "Account successfully created": "Účet byl úspěšně vytvořen.",
+        "Your password has been updated by the Administrator": "Vaše heslo bylo aktualizováno administrátorem.",
+        "Your new password is": "Vaše nové heslo je",
+        "Your password has been updated": "Vaše heslo bylo aktualizováno",
+        "Upload Users": "Nahrát uživatele"
     },
     "includes": {
         "head": {
@@ -338,7 +357,11 @@
             "Download Video File": "Stáhnout video",
             "Download Audio File": "Stáhnout audio",
             "Download Image": "Stáhnout obrázek",
-            "Download Document": "Stáhnout dokument"
+            "Download Document": "Stáhnout dokument",
+            "Give feedback to the student here": "Zde zadejte zpětnou vazbu pro žáka",
+            "Teacher Evaluation": "Ohodnocení od učitele",
+            "Teacher Comment": "Komentář učitele",
+            "Student Comment": "Komentář žáka"
         },
         "sidebar": {
             "Internships": "Praxe",
@@ -346,5 +369,8 @@
             "Users": "Uživatelé",
             "Export": "Export"
         }
+    },
+    "notifications": {
+        "Notification from": "Upozornit od"
     }
 }
