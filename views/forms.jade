@@ -205,10 +205,7 @@ block content
 				p.help-block #{_('The student needs to complete this form before checkin')}
 			.form-group
 				label #{_('This form needs to be filled (required)')}
-				// select.form-control(ng-model="form.Interval", required)
-				//	option(value="once")  #{_('Once')}
-				//	option(value="daily")  #{_('Every day of the week')}
-				tags-input(ng-model="form.Intervals", min-tags="1")
+				tags-input(ng-model="form.Intervals", min-tags="1", on-tag-adding="canAdTag($tag)")
 					auto-complete(source="loadIntervals($query)", min-length="0")
 				p.help-block #{_('Intervals for data colection')}
 		.col-lg-6

@@ -39,13 +39,13 @@
 	$scope.editFormView = false
 	
 	var intervals = [
-		{text: $t('Sunday'), value: 'Sunday'},
-		{text: $t('Monday'), value: 'Monday'},
-		{text: $t('Tuesday'), value: 'Tuesday'},
-		{text: $t('Wednesday'), value: 'Wednesday'},
-		{text: $t('Thursday'), value: 'Thursday'},
-		{text: $t('Friday'), value: 'Friday'},
-		{text: $t('Saturday'), value: 'Saturday'},
+		{text: $t('Sunday'), value: 0},
+		{text: $t('Monday'), value: 1},
+		{text: $t('Tuesday'), value: 2},
+		{text: $t('Wednesday'), value: 3},
+		{text: $t('Thursday'), value: 4},
+		{text: $t('Friday'), value: 5},
+		{text: $t('Saturday'), value: 6},
 		{text: $t('Once'), value: 'Once'},
 	];
 	
@@ -53,6 +53,21 @@
 		var deferred = $q.defer();
 		deferred.resolve(intervals);
 		return deferred.promise;
+	};
+	
+	$scope.canAdTag = function (tag) {
+		var standAloneForm = !!$scope.form.Intervals.find(function (interval) {
+			return interval.value == 'Once';
+		});
+		if(standAloneForm){
+			return false;
+		}
+		
+		if(tag.value === 'Once' && $scope.form.Intervals.length > 0){
+			return false;
+		}
+		
+		return true;
 	};
 	
 	/**
