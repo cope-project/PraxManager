@@ -24,6 +24,9 @@ var InternshipModel = require('./../models/internship');
 // load excel library
 var Excel = require('./../lib/excel');
 
+// load language library
+var lang = require('./../lib/lang');
+
 /**
  * Create new checkin entry
  */
@@ -213,6 +216,8 @@ router.get('/my_checkins', function (req, res) {
  */
 router.get('/csv', function (req, res) {
     var identity = new Identity(req.session);
+	var _ = lang._('checkin');
+	
     var query = {
 		'InternshipId': req.query.internshipId,
 		'AccountId': identity.getAccountId(),
@@ -246,9 +251,9 @@ router.get('/csv', function (req, res) {
 
 					res.setHeader('Content-disposition', 'attachment; filename=summary_' + req.query.internshipId + '.xlsx');
 					res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-
-					var header = ['Internship', 'Collect Data', 'Student FullName,', 'Date',
-						'Create Date', 'Comment', 'Status', 'Time', 'Rejection Comment'];
+					
+					var header = [_('Internship'), _('Collect Data'), _('Student FullName'), _('Date'),
+						_('Create Date'), _('Comment'), _('Status'), _('Time'), _('Rejection Comment')];
 					var rows = [];
 					checkins.forEach(function (checkin) {
 						var fullName = user.FirstName + ' ' + user.LastName;
@@ -261,7 +266,7 @@ router.get('/csv', function (req, res) {
 
 					var wb = new Excel.Workbook();
 					var ws = Excel.Sheet.fromArray(rows);
-					ws.sheetName = 'Student Presence (' + internship.Name + ')';
+					ws.sheetName = _('Student Presence') + ' (' + internship.Name + ')';
 					wb.addSheet(ws);
 					return res.send(wb.toStream());
 				});
@@ -285,8 +290,8 @@ router.get('/csv', function (req, res) {
 					res.setHeader('Content-disposition', 'attachment; filename=summary_' + req.query.internshipId + '.xlsx');
 					res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 
-					var header = ['Internship', 'Collect Data', 'Student FullName,', 'Date',
-						'Create Date', 'Comment', 'Status', 'Time', 'Rejection Comment'];
+					var header = [_('Internship'), _('Collect Data'), _('Student FullName'), _('Date'),
+						_('Create Date'), _('Comment'), _('Status'), _('Time'), _('Rejection Comment')];
 					var rows = [];
 					checkins.forEach(function (checkin) {
 						// skip all teachers from reporting
@@ -305,7 +310,7 @@ router.get('/csv', function (req, res) {
 
 					var wb = new Excel.Workbook();
 					var ws = Excel.Sheet.fromArray(rows);
-					ws.sheetName = 'Student Presence (' + internship.Name + ')';
+					ws.sheetName =  _('Student Presence') + ' (' + internship.Name + ')';
 					wb.addSheet(ws);
 					return res.send(wb.toStream());
 				});

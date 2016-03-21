@@ -20,7 +20,18 @@
         "Export Internship Summary": "Exporta Sumar Stagiu",
         "Download Summary": "Descarcă Sumar",
         "Export Student Forms": "Exporta Formulare Cursanți",
-        "Download Forms":"Descarcă Formulare"
+        "Download Forms":"Descarcă Formulare",
+        "internship": {
+            "True": "Adevărat",
+            "False":"Fals",
+            "Yes": "Da",
+            "No":"Nu",
+            "Internship":"Stagiu de practică",
+            "Form":"Formular",
+            "Subject":"Subiect",
+            "Question / Task":"Întrebare / Sarcină",
+            "Total":"Total"
+        }
     },
     "forms": {
         "Edit Question": "Editeaza întrebarea",
@@ -85,7 +96,9 @@
         "This form needs to be filled (required)": "Acest formular trebuie sa fie completat (obligatoriu)",
         "Type": "Tip Intrebare",
         "Category":"Categoria",
-        "Required for checkin (required)":"Dupa checkin (necesar)"
+        "Required for checkin (required)":"Dupa checkin (necesar)",
+        "Internship Summary":"Rezumat stagiu",
+        "Empty":"Gol"
     },
     "inbox": {
         "Inbox": "Căsuță intrari",
@@ -244,7 +257,9 @@
         "Login": "Autentificare",
         "Terms and Conditions": "Termeni și condiții",
         "Forgot password": "Aţi uitat parola",
-        "Email address not found": "Adresa de email nu a fost găsită"
+        "Email address not found": "Adresa de email nu a fost găsită",
+        "Thank you for your registration! Your account is now ready to use.":"Va multumim pentru inregistrare! Contul dvs. este acum gata de utilizare.",
+        "Account successfully created":"Cont creat cu succes"
     },
     "my_internship": {
         "Checkin": "Checkin",
@@ -406,5 +421,17 @@
     },
     "notifications": {
         "Notification from": "Notificare de la"
+    },
+    "checkin": {
+        "Internship":"Stagiu",
+        "Collect Data":"Se colectează date",
+        "Student FullName":"Numele complet",
+        "Date":"Data",
+        "Create Date":"Data creării",
+        "Comment":"Cometariu",
+        "Status":"Status",
+        "Time":"Timp",
+        "Rejection Comment":"Comentariu",
+        "Student Presence":"Prezență cursant"
     }
 }

@@ -46,6 +46,7 @@ router.get('/login', function (req, res) {
  */
 router.post('/login', function (req, res) {
     var identity = new Identity(req.session);
+    var _ = lang._('login');
 
     var email = req.body.email.trim();
     var password = req.body.password.trim();
@@ -77,9 +78,9 @@ router.post('/login', function (req, res) {
                 if (error) {
                     return res.send({ logedin: false });
                 }
-                var message = "Thank you for your registration! Your account is now ready to use.\PraxManager: http://" + config.domain;
+                var message = _("Thank you for your registration! Your account is now ready to use.") + "\PraxManager: http://" + config.domain;
                 var e = user.FirstName + '' + user.LastName + ' <' + user.Email + '>';
-                emailer.sendNotificationEmail("PraxManager - Account successfully created", message, e, function (error) {
+                emailer.sendNotificationEmail("PraxManager -" + _("Account successfully created"), message, e, function (error) {
                     identity.login(account, user);
                     return res.send({ logedin: true, type: user.Type });
                 });

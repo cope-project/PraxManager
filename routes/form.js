@@ -20,7 +20,13 @@ var Export = require('./../lib/prax/export');
 
 // load excel library
 var Excel = require('./../lib/excel');
+
+// load moment library
 var moment = require('moment');
+
+// load language library
+var lang = require('./../lib/lang');
+
 
 /**
  * Create new form data entry
@@ -214,6 +220,8 @@ router.get('/query', function (req, res) {
  * Generate internship summary in csv format
  */
 router.get('/summary/csv', function (req, res) {
+	
+	var _ = lang._('forms');
 
     var identity = new Identity(req.session);
 
@@ -235,11 +243,11 @@ router.get('/summary/csv', function (req, res) {
 		res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		var wb = new Excel.Workbook();
 		var ws = Excel.Sheet.fromArray(summary);
-		var internshipName = 'Empty';
+		var internshipName = _('Empty');
 		if (summary[1]) {
 			internshipName = summary[1][0];
 		}
-		ws.sheetName = 'Internship Summary (' + internshipName + ')';
+		ws.sheetName = _('Internship Summary') + ' (' + internshipName + ')';
 		wb.addSheet(ws);
 		return res.send(wb.toStream());
 	});
