@@ -24,7 +24,7 @@ var account = new AccountModel({
     'InstitutionName': 'Default'
 });
 
-var ADMIN_EMAIL = 'admin@prax-manager.net';
+var ADMIN_EMAIL = 'admin@prax.cope-project.eu';
 var ADMIN_PASSWORD = 'default1';
 
 var userdata = {
