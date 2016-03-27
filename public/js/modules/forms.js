@@ -8,7 +8,7 @@
 	 */
     NSPraxManager.controller('FormsController', ['$scope', '$http', '$modal', '$timeout','$q',
 	function ($scope, $http, $modal, $timeout, $q) {
-		var defaultForm = {Category: 'general', 'Questions': [], 'CompletedBy': 'student'};
+		var defaultForm = {Category: 'general', 'Questions': [], 'CompletedBy': 'student', Intervals: []};
 	$scope.forms = []
 	$scope.form = defaultForm;
     $scope.categories = PraxManager_Categories;
@@ -66,7 +66,6 @@
 		if(tag.value === 'Once' && $scope.form.Intervals.length > 0){
 			return false;
 		}
-		
 		return true;
 	};
 	
@@ -88,7 +87,9 @@
 	 */
 	$scope.addForm = function () {
 	    	var default_subject = {Name: 'General', Questions: [], 'Description': ''};
-	    	$scope.form = {Category: 'general', 'Questions': [default_subject], 'CompletedBy': 'student', 'Interval': 'once', 'Type': 'optional'};
+	    	$scope.form = {Category: 'general', 'Questions': [default_subject], 
+			'CompletedBy': 'student', 'Type': 'optional',
+			Intervals: []};
 	    	//$scope.questions = [default_subject];
 	    	
 		$scope.tableViewToolBar = false;
