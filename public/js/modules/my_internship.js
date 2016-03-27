@@ -25,15 +25,22 @@
 			$http.get(url).success(function (data) {
 				if(data.exists){
 					var oneHour = moment().utc().subtract(1, 'hours');
-					var isStudentEditable = moment(data.form.CreateDate).utc().isBefore(oneHour);
 					data.form.FormData._existingId = data.form._id;
 					
-					if(isStudentEditable){
-						data.form.FormData.canEdit = false;
+					var standAloneForm = !!data.form.FormData.Intervals.find(function (interval) {
+						return interval.value === 'Once';
+					});
+					
+					var isStudentEditable = moment(data.form.CreateDate).utc().isBefore(oneHour);
+					if(!standAloneForm){
+						if(isStudentEditable){
+							data.form.FormData.canEdit = false;
+						}else{
+							data.form.FormData.canEdit = true;
+						}
 					}else{
 						data.form.FormData.canEdit = true;
 					}
-					
 					deferred.resolve(data.form.FormData);
 				}else{
 					$http.get('/api/forms/' + formId).success(function (data){
@@ -268,12 +275,6 @@
 	        	$scope.today = moment(internship.StartDate).utc().startOf('day');
 				return load($scope, internshipId, $scope.today);
 	    	 }
-		
-			if(moment().utc().isAfter(moment(internship.EndDate).utc())){
-		    	$scope.hasInternshipEnded = true;
-			}else{
-		    	$scope.hasInternshipEnded = false;
-			}
 			
 			onFormsLoaded(promises[1]);
 			$scope.checkCheckedIn();
