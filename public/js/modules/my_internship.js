@@ -2,15 +2,135 @@
  * My Internship module
  */
 !function () {
+	
+	var defaultIntervals = [		
+	{text: $t('Sunday'), value: 0},
+	{text: $t('Monday'), value: 1},
+	{text: $t('Tuesday'), value: 2},
+	{text: $t('Wednesday'), value: 3},
+	{text: $t('Thursday'), value: 4},
+	{text: $t('Friday'), value: 5},
+	{text: $t('Saturday'), value: 6}];
+	
+	/**
+	 * Fetch internship data service
+	 */
+	NSPraxManager.factory('StudentInternshipService', ['$http', '$q', function ($http, $q) {
+		/**
+		 * Fetch standalone form
+		 */
+		function loadStandAloneForm(internshipId, formId) {
+			var deferred = $q.defer();
+			var url = '/api/forms_data/exists_general?formTemplateId='+formId+'&internshipId=' + internshipId;
+			$http.get(url).success(function (data) {
+				if(data.exists){
+					var oneHour = moment().utc().subtract(1, 'hours');
+					var isStudentEditable = moment(data.form.CreateDate).utc().isBefore(oneHour);
+					data.form.FormData._existingId = data.form._id;
+					
+					if(isStudentEditable){
+						data.form.FormData.canEdit = false;
+					}else{
+						data.form.FormData.canEdit = true;
+					}
+					
+					deferred.resolve(data.form.FormData);
+				}else{
+					$http.get('/api/forms/' + formId).success(function (data){
+						deferred.resolve(data);
+					}).error(function (error) {
+						deferred.reject(error);
+					});
+				}
+			}).error(function (error) {
+				deferred.reject(error);
+			});
+			return deferred.promise;
+		}
+		
+		function loadFormForADay(internshipId, formId, day) {
+			var deferred = $q.defer();
+			var url = '/api/forms_data/exists_daily?formTemplateId='+formId+'&internshipId=' 
+	    	url += internshipId+'&date=' + day.format('YYYY-MM-DD');
+			$http.get(url).success(function (data) {
+				if(data.exists){
+					var oneHour = moment().utc().subtract(1, 'hours');
+					var isStudentEditable = moment(data.form.CreateDate).utc().isBefore(oneHour);
+					data.form.FormData._existingId = data.form._id;
+					
+					if(isStudentEditable){
+						data.form.FormData.canEdit = false;
+					}else{
+						data.form.FormData.canEdit = true;
+					}
+					deferred.resolve(data.form.FormData);
+				}else{
+					$http.get('/api/forms/' + formId).success(function (data){
+						deferred.resolve(data);
+					}).error(function (error) {
+						deferred.reject(error);
+					});
+				}
+			}).error(function (error) {
+				deferred.reject(error);
+			});
+			return deferred.promise;
+		}
+		
+		return {
+			loadCheckins: function (internshipId) {
+				var deferred = $q.defer();
+				$http.get('/api/checkin/my_checkins?internshipId='+internshipId)
+				.success(function (data) {deferred.resolve(data);})
+				.error(function (error) {deferred.reject(error);});
+				return deferred.promise;
+			},
+			
+			loadInternship: function (internshipId, day) {
+				var deferred = $q.defer();
+				var url = '/api/internships/' + internshipId;
+				$http.get(url).success(function (internship) {
+					var forms = [];
+					internship.AssignedForms.forEach(function (form) {
+						
+						if(!form.Intervals){ form.Intervals = defaultIntervals;}
+						
+						var standAloneForm = !!form.Intervals.find(function (interval) {
+							return interval.value === 'Once';
+						});
+						
+						if(standAloneForm){
+							forms.push(loadStandAloneForm(internshipId, form._id));
+						}else {
+							var hasFormForDay = !!form.Intervals.find(function (interval) {
+								return interval.value == day.day();
+							});
+							if(hasFormForDay){
+								forms.push(loadFormForADay(internshipId, form._id, day));
+							}
+						}
+					});
+					$q.all(forms).then(function (forms) {
+						deferred.resolve({internship: internship, forms: forms});
+					}, function (error) {
+						deferred.reject(error);
+					})
+				}).error(function (error) {
+					deferred.reject(error);
+				});
+				return deferred.promise;
+			}
+ 		};
+	}]);
+	
     /**
 	 * Student internship controller
 	 */
-    NSPraxManager.controller('MyInternshipController', ['$scope', '$http', '$modal', 'uiCalendarConfig', function ($scope, $http, $modal, uiCalendarConfig) {
+    NSPraxManager.controller('MyInternshipController', ['$scope', '$http', '$modal', 'uiCalendarConfig', 'StudentInternshipService', '$q',
+	function ($scope, $http, $modal, uiCalendarConfig, StudentInternshipService, $q) {
 		
 	$scope.internship = {};
 	$scope.checkins = [];
-
-	$scope.hasInternshipEnded = true;
 	
 	$scope.today = moment().utc().startOf('day');
 	$scope.generalForms = [];
@@ -23,75 +143,45 @@
 	};
 	
 	$scope.formWarning = false;
-	
 	$scope.currentCheckin = null;
 	
-	$scope.calendar = {events: []};
-	var calendar_options = {
-		 	events : [/*{start: '2015-08-24', end: '2015-08-25', rendering: 'background',backgroundColor: 'green'},*/],
-		 	height: 450,
-		        editable: true,
-		        firstDay: 1,
-		        timezone: 'UTC',
-		        header:{
-		          left: 'title',
-		          center: '',
-		          right: 'prev,next'
-		        },
-		        
-		        dayClick: function (date, jsEvent, view){
-		            var isBefore = date.isBefore(moment($scope.internship.StartDate).utc());
-		            var isAfter =  date.isAfter(moment($scope.internship.EndDate).utc());
+	/**
+	 * Calendar day click handler
+	 */
+	function dayClickHandler(date, jsEvent, view){
+		var isBefore = date.isBefore(moment($scope.internship.StartDate).utc());
+		var isAfter =  date.isAfter(moment($scope.internship.EndDate).utc());
+		
+		if(isBefore || isAfter){
+			return;
+		}
 		            
-		            if(isBefore || isAfter){
-		        		return;
-		            }
+		$scope.today = date;
+		var cellCnt = view.dayGrid.rowCnt * view.dayGrid.colCnt;
 		            
-		            $scope.today = date;
-		            var cellCnt = view.dayGrid.rowCnt * view.dayGrid.colCnt;
-		            
-		            for (var i = 0; i < cellCnt; i++) {
-			        	var cell = view.dayGrid.getCell(i);
-			        	var element = view.dayGrid.dayEls.eq(i);
-			        	
-			        	if(date.isSame(cell.start)){
-			        	    element.css({'background': '#fcf8e3'})
-			        	    element.html('<span class="label label-info hidden-xs">'+$t('Current Day')+'</span><span class="label label-info hidden-sm hidden-md hidden-lg">CD</span>');
-			        	}else{
-				            var cellIsBefore = cell.start.utc().isBefore(moment($scope.internship.StartDate).utc());
-				            var cellIsAfter =  cell.start.utc().isAfter(moment($scope.internship.EndDate).utc());
-				            if(!cellIsBefore && !cellIsAfter){
-				            	renderCellContent(cell.start, element);
-				            }
-			        	    
-			        	}
-		            }
-		            
-		            loadForms(function () {
-		            	$scope.checkCheckedIn();
-		            });
-		            
-		        },
-		        
-		        dayRender: function (date, cell){
-		            var isBefore = date.utc().isBefore(moment($scope.internship.StartDate).utc());
-		            var isAfter =  date.utc().isAfter(moment($scope.internship.EndDate).utc());
-		            
-		            if(isBefore || isAfter){
-		        		cell.css({'background-image': 'url("/images/line_pattern.jpg")'});
-		        		return;
-		            }
-		            
-		            if(date.utc().format() == $scope.today.format()){
-			        	cell.css({'background': '#fcf8e3'})
-			        	cell.html('<span class="label label-info hidden-xs">'+$t('Current Day')+'</span><span class="label label-info hidden-sm hidden-md hidden-lg">CD</span>');
-			        	return;
-		            }
-		            renderCellContent(date, cell);
-		        }
-	 };	
-
-	 /**
+		for (var i = 0; i < cellCnt; i++) {
+			var cell = view.dayGrid.getCell(i);
+			var element = view.dayGrid.dayEls.eq(i);
+			
+			if(date.isSame(cell.start)){
+				element.css({'background': '#fcf8e3'})
+				var html = '<span class="label label-info hidden-xs">';
+				html += $t('Current Day')+'</span><span class="label label-info hidden-sm hidden-md hidden-lg">CD</span>'
+				element.html(html);
+			}else{
+				var cellIsBefore = cell.start.utc().isBefore(moment($scope.internship.StartDate).utc());
+				var cellIsAfter =  cell.start.utc().isAfter(moment($scope.internship.EndDate).utc());
+				if(!cellIsBefore && !cellIsAfter){
+					renderCellContent(cell.start, element);
+				}
+				
+			}
+		}
+		
+		load($scope, PraxManager_internshipId, $scope.today)
+	};
+	
+	/**
 	  * Render calendar cell with data from backend
 	  */
 	function renderCellContent(date, cell){
@@ -121,19 +211,100 @@
 			cell.text('');
 		}
 	 }
+				
+	$scope.calendar = {events: []};
+	
+	var calendar_options = {
+		 	events : [],
+		 	height: 450,
+		        editable: true,
+		        firstDay: 1,
+		        timezone: 'UTC',
+		        header:{
+		          left: 'title',
+		          center: '',
+		          right: 'prev,next'
+		        },
+		        dayClick: dayClickHandler,
+		        
+		        dayRender: function (date, cell){
+		            var isBefore = date.utc().isBefore(moment($scope.internship.StartDate).utc());
+		            var isAfter =  date.utc().isAfter(moment($scope.internship.EndDate).utc());
+		            
+		            if(isBefore || isAfter){
+		        		cell.css({'background-image': 'url("/images/line_pattern.jpg")'});
+		        		return;
+		            }
+		            
+		            if(date.utc().format() == $scope.today.utc().format()){
+			        	cell.css({'background': '#fcf8e3'})
+						var html = '<span class="label label-info hidden-xs">'+$t('Current Day');
+						html += '</span><span class="label label-info hidden-sm hidden-md hidden-lg">CD</span>';
+			        	cell.html(html);
+			        	return;
+		            }
+		            renderCellContent(date, cell);
+		        }
+	 };	
 
 	 /**
-	  * Load checkins
+	  * Loads the internship into the ui
 	  */
-	function loadCheckins(loaded){
-		$http.get('/api/checkin/my_checkins?internshipId='+PraxManager_internshipId)
-		.success(function (data) {
-			$scope.checkins = data;
-			if(loaded){
-				loaded();
+	 function load($scope, internshipId, date) {
+		 var checkinsPromise = StudentInternshipService.loadCheckins(internshipId);
+		 var internshipPromise = StudentInternshipService.loadInternship(internshipId, date);
+		 
+		 $q.all([checkinsPromise, internshipPromise]).then(function (promises) {
+			 
+			 var internship = promises[1].internship;
+			 $scope.checkins = promises[0];
+			 $scope.internship = internship ;
+			 $scope.calendar = calendar_options;
+			 
+			 var isBefore = date.isBefore(moment(internship.StartDate).utc());
+	    	 var isAfter =  date.isAfter(moment(internship.EndDate).utc());
+	        
+	    	 if(isBefore || isAfter){
+	        	$scope.today = moment(internship.StartDate).utc().startOf('day');
+				return load($scope, internshipId, $scope.today);
+	    	 }
+		
+			if(moment().utc().isAfter(moment(internship.EndDate).utc())){
+		    	$scope.hasInternshipEnded = true;
+			}else{
+		    	$scope.hasInternshipEnded = false;
+			}
+			
+			onFormsLoaded(promises[1]);
+			$scope.checkCheckedIn();
+		 });
+	 }
+	 
+	 /**
+	  * Callback handler, loads the forms into the ui
+	  */
+	 function onFormsLoaded(data) {
+		 
+		 $scope.generalForms = [];
+		 $scope.dailyForms = [];
+		 
+		 return data.forms.forEach(function (form) {
+			if(!form.Intervals){ form.Intervals = defaultIntervals;}
+			
+			var standAloneForm = !!form.Intervals.find(function (interval) {
+				return interval.value === 'Once';
+			});
+			
+			if(standAloneForm){
+				$scope.generalForms.push(form);
+			}else{
+				$scope.dailyForms.push(form);
 			}
 		});
-	}
+	 }
+	 
+	 load($scope, PraxManager_internshipId, $scope.today);
+
 
 	/**
 	 * Update the state of the checkin button
@@ -184,146 +355,6 @@
 		}
 	};
 	
-
-	/**
-	 * Load student internship
-	 */
-	function loadInternship( internship_loaded ){
-		var url = '/api/internships/' + PraxManager_internshipId;
-	    
-	    $http.get(url).success(function (data, status, headers, config){
-			$scope.internship = data;
-
-	    	var isBefore = $scope.today.isBefore(moment($scope.internship.StartDate).utc());
-	    	var isAfter =  $scope.today.isAfter(moment($scope.internship.EndDate).utc());
-	        
-	    	if(isBefore || isAfter){
-	        	$scope.today = moment($scope.internship.StartDate).utc().startOf('day');
-	        	$scope.checkCheckedIn();
-	    	}
-		
-			if(moment().utc().isAfter(moment(data.EndDate).utc())){
-		    	$scope.hasInternshipEnded = true;
-			}else{
-		    	$scope.hasInternshipEnded = false;
-			}
-
-			loadForms(function () {
-				$scope.checkCheckedIn();
-			});
-
-			if(internship_loaded) {
-				internship_loaded();
-			}
-		});
-	}
-	
-	/**
-	 * Load internship forms
-	 */
-	function loadForms(daily_forms_loaded) {
-	    $scope.generalForms = [];
-	    $scope.dailyForms = [];
-		
-		for(var index in $scope.internship.AssignedForms){
-		    var form = $scope.internship.AssignedForms[index];
-		    
-		    if(form.Interval == "once"){
-				$scope.loadGeneralForm(form, daily_forms_loaded);
-		    }
-		
-		    if(form.Interval == "daily"){
-				$scope.loadDailyForm(form, daily_forms_loaded);
-		    }
-		}
-	}
-	
-	/**
-	 * Load internship general forms
-	 */
-	$scope.loadGeneralForm = function (form, general_forms_loaded) {
-	    var form_data = angular.copy(form);
-	    var url = '/api/forms_data/exists_general?formTemplateId='+form_data._id+'&internshipId=' + PraxManager_internshipId;
-	    $http.get(url).success(function (data) {
-		
-		var newForms = angular.copy($scope.generalForms);
-			
-		if(data.exists){
-		    data.form.FormData.readOnly = true;
-		    // the form is editable for 1h
-		    var isStudentEditable = moment(data.form.CreateDate).utc().isBefore(moment().utc().subtract(1, 'hours'));
-		    
-		    if(isStudentEditable){
-				data.form.FormData.canEdit = false;
-		    }else{
-				data.form.FormData.canEdit = true;
-		    }
-		    
-		    // set id for save
-		    data.form.FormData._existingId = data.form._id;
-		    $scope.generalForms.push(data.form.FormData);
-			if(general_forms_loaded){
-				general_forms_loaded();
-			}
-		}else{
-			$http.get('/api/forms/' + form_data._id).success(function (updated_form){
-				$scope.generalForms.push(updated_form);
-				if(general_forms_loaded){
-					general_forms_loaded();
-				}
-			});
-		    
-		}
-	});
-    };
-	
-	/**
-	 * Load internship general forms
-	 */
-	$scope.loadDailyForm = function (form, daily_forms_loaded) {
-		
-	    var form_data = angular.copy(form);
-	    var url = '/api/forms_data/exists_daily?formTemplateId='+form_data._id+'&internshipId=' 
-	    url += PraxManager_internshipId+'&date=' + $scope.today.utc()
-	    
-		$http.get(url).success(function (data) {
-			if(data.exists){
-			    data.form.FormData.readOnly = true;
-
-			    var isStudentEditable = moment(data.form.CreateDate).utc().isBefore(moment().utc().subtract(1, 'hours'));
-
-			    if(isStudentEditable){
-					data.form.FormData.canEdit = false;
-			    }else{
-					data.form.FormData.canEdit = true;
-			    }
-			    
-			    data.form.FormData._existingId = data.form._id;
-			    $scope.dailyForms.push(data.form.FormData);
-				if(daily_forms_loaded){
-					daily_forms_loaded();
-				}
-			}else{
-				$http.get('/api/forms/' + form_data._id).success(function (updated_form){
-					$scope.dailyForms.push(updated_form);
-					if(daily_forms_loaded){
-						daily_forms_loaded();
-					}
-				});
-				
-
-			}
-		});
-	    
-	} 
-	
-
-	/**
-	 * Returns template id for question type
-	 */
-	$scope.getTemplateUrl = function (question) {
-	    return 'questionControl'+question.Type+'.html'; 
-	};
 	
 	/**
 	 * Student checkin action
@@ -349,9 +380,7 @@
 	    });
 	    
 	    modalInstance.result.then(function () {
-	    	loadCheckins(function () {
-	    		$scope.checkCheckedIn();
-	    	});
+			load($scope, PraxManager_internshipId, $scope.today);
 	    }, function () {
 		      console.log('Modal dismissed at: ' + new Date());
 		});
@@ -380,95 +409,14 @@
 	    });
 	    
 	    modalInstance.result.then(function (question) {
-			loadForms(function () {
-				$scope.checkCheckedIn();
-			});
+			load($scope, PraxManager_internshipId, $scope.today);
 	    }, function () {
 	      // no result
 	    });
 	}
 	
-	// load data
-	loadInternship(function () {
-		loadCheckins(function () {
-			$scope.checkCheckedIn();
-			$scope.calendar = calendar_options;
-		});
-	});
-
-
     }]);
     
-	/**
-	 * Question controller
-	 */
-    NSPraxManager.controller('QuestionController', ['$scope', '$http', '$modal', function ($scope, $http, $modal) {
-	
-	$scope.error = false;
-	$scope.file = $scope.question.Value;
-	$scope.isFileUploaded = false;
-	
-	/**
-	 * Upload file form
-	 */
-	function uploadForm (form) {
-	    $(form).ajaxSubmit({error: function(xhr) {
-		$scope.$apply(function() {
-		    if(xhr.responseJSON){
-			$scope.error = xhr.responseJSON.Message;
-			return;
-		    }
-		    
-		    $scope.error = 'File upload error.'
-		    
-	        })}, success: function(response) {
-	            $scope.$apply(function() {
-	        	$scope.file = response;
-	        	$scope.isFileUploaded  = true;
-	        	$scope.question.Value = response;
-	        	$scope.error = false;
-	            });
-	        }
-	    });
-	}
-	
-	/**
-	 * Upload video form
-	 */
-	$scope.uploadVideo = function (e) {
-	    e.preventDefault();
-	    var form = angular.element(e.target);
-	    uploadForm(form);
-	};
-	
-	/**
-	 * Upload audio form
-	 */
-	$scope.uploadAudio = function (e) {
-	    e.preventDefault();
-	    var form = angular.element(e.target);
-	    uploadForm(form);
-	};
-	
-	/**
-	 * Upload photo form
-	 */
-	$scope.uploadPhoto = function (e) {
-	    e.preventDefault();
-	    var form = angular.element(e.target);
-	    uploadForm(form);
-	};
-	
-	/**
-	 * Upload document form
-	 */
-	$scope.uploadDocument = function (e) {
-	    e.preventDefault();
-	    var form = angular.element(e.target);
-	    uploadForm(form);
-	};
-	
-    }]);
     
 	/**
 	 * Form modal controller

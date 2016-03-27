@@ -130,7 +130,9 @@ block content
 					tr(ng-repeat="form in dailyForms")
 						td {{form.Name}}
 						td.hidden-xs  {{form.QuestionsCount}}
-						td {{form.Type}}
+						td
+							span(ng-show="form.Type == 'required'") #{_('Yes')}
+							span(ng-show="form.Type != 'required'") #{_('No')}
 						td 
 							span(ng-show="form._existingId") #{_('Completed')}
 							span(ng-show="!form._existingId") #{_('Not completed')}
@@ -145,27 +147,23 @@ block content
 				
 			.page-header
 				h3 #{_('Internship review forms')}
-			table.table.table-bordered.table-hover.table-striped(ng-show="generalForms.length != 0 && hasInternshipEnded")
+			table.table.table-bordered.table-hover.table-striped(ng-show="generalForms.length > 0")
 				thead
 					tr
 						th #{_('Form Name')}
 						th.hidden-xs #{_('Number of Questions')} 
-						th #{_('Required')}
 						th #{_('Status')}
 						th #{_('Submit')}
 				tbody
 					tr(ng-repeat="form in generalForms")
 						td {{form.Name}}
 						td.hidden-xs  {{form.QuestionsCount}}
-						td {{form.Type}}
 						td 
 							span(ng-show="form._existingId") #{_('Completed')}
 							span(ng-show="!form._existingId") #{_('Not completed')}
 						td
 							a.btn.btn-default(ng-click="submitForm(form, 'new')", ng-show="!form._existingId") #{_('Submit')}
 							a.btn.btn-default(ng-click="submitForm(form, 'edit')", ng-show="form._existingId && form.canEdit") #{_('Edit')} 
-							a.btn.btn-default(ng-click="submitForm(form, 'preview')", ng-show="form._existingId && !form.canEdit") #{_('Preview')}
-							
-			p(ng-show="generalForms.length == 0 && hasInternshipEnded") #{_('No forms available to complete.')}
-			p(ng-show="!hasInternshipEnded") #{_('The internship has not completed yet')}
+							a.btn.btn-default(ng-click="submitForm(form, 'preview')", ng-show="form._existingId && !form.canEdit") #{_('Preview')}	
+			p(ng-show="generalForms.length == 0") #{_('No forms available to complete.')}
 				

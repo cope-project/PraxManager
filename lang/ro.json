@@ -294,7 +294,9 @@
         "You need to submit the form in order to checkin.": "Trebuie sa completati formularul pentru a putea face check-in.",
         "Warning!":"Atentie!",
         "Description": "Descriere",
-        "No forms available to complete.": "Nu existentă formulare de completat."
+        "No forms available to complete.": "Nu existentă formulare de completat.",
+        "Yes": "Da",
+        "No": "Nu"
     },
     "my_internship_summary": {
         "My Internships": "Stagiile mele de practică",
