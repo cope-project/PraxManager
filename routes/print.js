@@ -35,6 +35,7 @@ var lang = require('./../lib/lang');
  */
 router.get('/student_presence', (req, res) => {
     let identity = new Identity(req.session);
+    var _ = lang._('print');
     let query = {
         'InternshipId': req.query.internshipId,
         'AccountId': identity.getAccountId(),
@@ -46,11 +47,11 @@ router.get('/student_presence', (req, res) => {
 		query.UserId = identity.getUserId()
 	}
     
-    let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    let days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')];
 
     // aggregate checkins to tabel format
     let checkinsToTabel = (checkins, internship) => {
-        let print = [['Week'].concat(days)];
+        let print = [[_('Week')].concat(days)];
         let tabel = checkins.reduce((tabel, dayData) => {
             let day = moment(dayData.Date);
             let week = day.week();

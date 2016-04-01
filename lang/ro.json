@@ -437,5 +437,17 @@
         "Rejection Comment":"Comentariu",
         "Student Presence":"Prezență cursant"
     },
-    "print": {}
+    "print": {
+        "Monday": "Luni",
+        "Tuesday": "Marţi",
+        "Wednesday": "Miercuri",
+        "Thursday": "Joi",
+        "Friday":"Vineri",
+        "Saturday":"Sâmbătă",
+        "Sunday":"Duminică",
+        "Week":"Săptămână",
+        "Student name": "Numele cursantului",
+        "Internship name":"Numele Stagiu",
+        "Internship presence":"Prezenţa stagiu"
+    }
 }
