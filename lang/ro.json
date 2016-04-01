@@ -233,7 +233,8 @@
             "Status": "Status",
             "Manage": "Administrează",
             "Total number of hours": "Număr total ore",
-            "Total number of days": "Număr total zile"
+            "Total number of days": "Număr total zile",
+            "Print / Download": "Printează / descarcă"
         },
         "register": {
             "Internship Register": "Catalog Stagiu",
@@ -308,7 +309,7 @@
         "Rejection Comment": "Motivație respingere",
         "Total number of hours": "Numărul total de ore",
         "Total number of days": "Numărul total de zile",
-        "Print / Download": "Printează/descarcă",
+        "Print / Download": "Printează / descarcă",
         "No data avalable": "Nu sunt date disponibile"
     },
     "profile": {
