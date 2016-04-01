@@ -48,7 +48,7 @@ block content
 			label(ng-show="internship.ColectDataType == 'time'") #{_('Total number of hours')}: {{timeSum}}
 			label(ng-show="internship.ColectDataType == 'day'") #{_('Total number of days')}: {{timeSum}}
 		.col-lg-6(ng-show="checkins.length != 0")
-			a.btn.btn-primary.pull-right(href="/samples/sample_form.pdf") #{_('Print / Download')}
+			a.btn.btn-primary.pull-right(href="/print/student_presence?internshipId={{internship._id}}&userId={{user._id}}") #{_('Print / Download')}
 		
 		.col-lg-12(ng-show="checkins.length == 0")
 			p #{_('No data avalable')}

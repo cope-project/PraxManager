@@ -19,7 +19,8 @@
 			"^/inbox":["GET"],
 			"^/profile":["GET"],
 			"^/api/my":["GET", "PUT"],
-			"^/api/my.+":["GET", "POST", "PUT"]
+			"^/api/my.+":["GET", "POST", "PUT"],
+			"^/print.+":["GET"]
 		}
 	},
 	

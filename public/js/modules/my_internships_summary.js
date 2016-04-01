@@ -8,6 +8,7 @@
     NSPraxManager.controller('MyInternshipSummaryController', ['$scope', '$http', function ($scope, $http) {
     	$scope.internship = {};
     	$scope.timeSum = 0;
+		$scope.user = {};
 
     	$http.get('/api/internships/'+ PraxManager_internshipId).success(function (internship) {
     		$scope.internship = internship;
@@ -22,6 +23,10 @@
 			    }
 			});
 		});
+		
+		$http.get('/api/my').success(function (user) {
+			$scope.user = user;
+		})
 
     }]);
 }();

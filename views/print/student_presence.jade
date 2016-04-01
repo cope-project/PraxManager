@@ -1,0 +1,26 @@
+- var _ = lang._('print');
+- var head = checkins.shift()
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title #{title} | PraxManager 
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
+  body
+    .container
+      h2 #{_('Internship presence')}
+      div.clear-fix
+        h4.pull-left #{_('Student name')} : #{user.FirstName} #{user.LastName} (#{user.Tag})
+        h4.pull-right #{_('Internship name')} : #{internship.Name}
+      table.table.table-bordered.table-hover
+        thead
+          tr
+            each header in head
+              th(style="text-align:center;")= header
+        tbody
+          each row in checkins
+            tr
+              each col in row
+                td(style="text-align:center;")= col
+          

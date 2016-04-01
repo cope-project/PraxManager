@@ -74,6 +74,11 @@ var users = require('./routes/users');
 var auth = require('./routes/auth');
 
 /**
+ * Print route
+ */
+var print = require('./routes/print');
+
+/**
  * Notifications api
  */
 var notifications =  require('./routes/notifications');
@@ -153,6 +158,9 @@ app.use(session(session_config));
 
 // web views
 app.use('/', routes);
+
+// print routes
+app.use('/print', print);
 
 /**
  * APIs
