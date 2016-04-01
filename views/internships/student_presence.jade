@@ -82,3 +82,4 @@ block content
 
 			label(ng-show="internship.ColectDataType == 'time'") #{_('Total number of hours')}: {{timeSum}}
 			label(ng-show="internship.ColectDataType == 'day'") #{_('Total number of days')}: {{timeSum}}
+			a.btn.btn-primary.pull-right(href="/print/student_presence?internshipId={{internship._id}}&userId={{student._id}}") Print / Download
