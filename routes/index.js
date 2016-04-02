@@ -23,6 +23,9 @@ var permissionslib = require('./../lib/prax/permissions');
 var config_file = process.env.CONFIG;
 var config = require('./../' + config_file);
 
+// load plugins
+var plugins = require('./../plugins/plugins.js');
+
 
 /**
  * Check user permissions
@@ -176,12 +179,17 @@ router.get('/internships', function(req, res) {
  */
 router.get('/forms', function(req, res) {
     var identity = new Identity(req.session);
+    var _plugins = plugins.getFormatPlugins()
+    .map(function (plugin) {
+        return {name: plugin.name, id: plugin.id};
+    });
     return res.render('forms', { 
       title: 'Forms', 
       'identity' : identity , 
       'mod' : 'FormsController', 
       'lang': lang,
-      'categories': config.forms.categories
+      'categories': config.forms.categories,
+      'plugins': JSON.stringify(_plugins)
       });
 });
 

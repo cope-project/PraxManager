@@ -13,6 +13,7 @@
 	$scope.form = defaultForm;
     $scope.categories = PraxManager_Categories;
 	$scope.questions = [];
+	$scope.plugins = PraxManager_plugins;
 	
 	$scope.$watch('form', function (newValue, oldValue) {
 		if(newValue != defaultForm){

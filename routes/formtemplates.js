@@ -60,7 +60,8 @@ router.post('', function (req, res) {
 		'Intervals': req.body.Intervals,
 		'Type': req.body.Type,
 		'CompletedBy': req.body.CompletedBy,
-		'Status': 'active'
+		'Status': 'active',
+		'PrintTemplate': req.body.PrintTemplate
     });
 
     formTemplate.save(function (error) {
@@ -86,6 +87,7 @@ router.put('/:id', function (req, res) {
 		form.Description = req.body.Description;
 		form.Questions = req.body.Questions;
 		form.QuestionsCount = req.body.QuestionsCount;
+		form.PrintTemplate = req.body.PrintTemplate;
 		form.Interval = req.body.Interval;
 		form.Type = req.body.Type;
 		form.CompletedBy = req.body.CompletedBy

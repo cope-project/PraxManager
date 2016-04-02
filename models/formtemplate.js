@@ -20,6 +20,7 @@ var FormTemplateSchema = new Schema({
 	'Intervals': {type:Array, 'default': [{text: 'Once', value: 'Once'}]}, 
 	'Type': {type:String, 'default':'optional', enum: ['optional', 'required']},
 	'CompletedBy': {type:String, 'default':'student', enum: ['student', 'teacher', 'student_and_teacher']},
+	'PrintTemplate': {type: String, 'default': 'default'},
 	'Status': {type:String, 'default':'active',enum: ['active', 'deleted']},
 	'CreateDate': {type: Date, 'default': Date.now},
 	'UpdateDate': {type: Date, 'default': Date.now}

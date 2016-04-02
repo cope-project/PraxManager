@@ -1,5 +1,7 @@
 extends layout
-
+block head
+	script!= 'var PraxManager_plugins = ' + plugins + ';'
+	
 block footer
 	- var _ = lang._('forms');
 	script!= 'var PraxManager_Categories = ' + JSON.stringify(categories) + ';'
@@ -222,8 +224,8 @@ block content
 					
 			.form-group
 				label #{_('Print Template')}
-				select.form-control(ng-modal="form.PrintTemplate")
-					option(value="none")  #{_('None')}
+				select.form-control(ng-model="form.PrintTemplate")
+					option(ng-repeat="plugin in plugins" value="{{plugin.id}}")  {{plugin.name}}
 					
 	.row.ng-hide(ng-show="editFormView", ng-cloak)
 		.col-lg-12
