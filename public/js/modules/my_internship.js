@@ -27,6 +27,10 @@
 					var oneHour = moment().utc().subtract(1, 'hours');
 					data.form.FormData._existingId = data.form._id;
 					
+					if(!data.form.FormData.Intervals){
+						data.form.FormData.Intervals = defaultIntervals;
+					}
+					
 					var standAloneForm = !!data.form.FormData.Intervals.find(function (interval) {
 						return interval.value === 'Once';
 					});
