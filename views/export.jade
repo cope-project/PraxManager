@@ -96,4 +96,4 @@ block content
 							from
 								.form-group
 									.btn-toolbar
-										a.btn.btn-primary(ng-disabled="!internship || !form", ng-href="/api/checkin/csv?internshipId={{internship._id}}&userId={{student._id}}") #{_('Download Forms')}
+										a.btn.btn-primary(ng-disabled="!internship || !form || !student", ng-href="/api/formsdata/csv?internshipId={{internship._id}}&userId={{student._id}}&formId={{form._id}}") #{_('Download Forms')}

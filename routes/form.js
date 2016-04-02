@@ -15,6 +15,8 @@ var Identity = require('./../lib/identity');
 // load internships model
 var InternshipModel = require('./../models/internship');
 
+var UserModel = require('./../models/user');
+
 // load export library
 var Export = require('./../lib/prax/export');
 
@@ -31,7 +33,7 @@ var lang = require('./../lib/lang');
 /**
  * Create new form data entry
  */
-router.post('', function (req, res) {
+router.post('', function(req, res) {
     var identity = new Identity(req.session);
 	var date = moment(req.body.Date).startOf('day').utc();
 
@@ -54,7 +56,7 @@ router.post('', function (req, res) {
 		'Date': date,
     };
 
-	FormModel.findOne(query, function (error, existingForm) {
+	FormModel.findOne(query, function(error, existingForm) {
 		if (error) {
 			return res.send(error, 500);
 		}
@@ -62,7 +64,7 @@ router.post('', function (req, res) {
 		if (existingForm) {
 			return res.send(existingForm);
 		} else {
-			return form.save(function (error) {
+			return form.save(function(error) {
 				if (error) {
 					res.send(error, 500);
 				} else {
@@ -76,11 +78,11 @@ router.post('', function (req, res) {
 /**
  * Update form data entry
  */
-router.put('/:id', function (req, res) {
+router.put('/:id', function(req, res) {
     var identity = new Identity(req.session);
     var query = { '_id': req.params.id, 'AccountId': identity.getAccountId() };
 
-    FormModel.findOne(query, function (error, form) {
+    FormModel.findOne(query, function(error, form) {
 		if (error || form == null) {
 			return res.send(error, 500);
 		}
@@ -91,7 +93,7 @@ router.put('/:id', function (req, res) {
 			form.ReviewFormData = req.body.ReviewFormData;
 		}
 
-		form.save(function (error, saved_form) {
+		form.save(function(error, saved_form) {
 			if (error) {
 				return res.send(error, 500);
 			}
@@ -106,7 +108,7 @@ router.put('/:id', function (req, res) {
 /**
  * Check if a genera form exists
  */
-router.get('/exists_general', function (req, res) {
+router.get('/exists_general', function(req, res) {
     var identity = new Identity(req.session);
     var query = {
 		AccountId: identity.getAccountId(),
@@ -114,7 +116,7 @@ router.get('/exists_general', function (req, res) {
 		FormTemplateId: req.query.formTemplateId,
 		InternshipId: req.query.internshipId
 	};
-    FormModel.findOne(query, function (error, form) {
+    FormModel.findOne(query, function(error, form) {
 		if (error) {
 			return res.send(error, 500);
 		}
@@ -130,7 +132,7 @@ router.get('/exists_general', function (req, res) {
 /**
  * Check if a daily form exists
  */
-router.get('/exists_daily', function (req, res) {
+router.get('/exists_daily', function(req, res) {
     var identity = new Identity(req.session);
     var query = {
 		AccountId: identity.getAccountId(),
@@ -139,7 +141,7 @@ router.get('/exists_daily', function (req, res) {
 		InternshipId: req.query.internshipId,
 		Date: req.query.date
 	};
-    FormModel.findOne(query, function (error, form) {
+    FormModel.findOne(query, function(error, form) {
 		if (error) {
 			return res.send(error, 500);
 		}
@@ -155,7 +157,7 @@ router.get('/exists_daily', function (req, res) {
 /**
  * Fetch general forms for student and internship
  */
-router.get('/query_general', function (req, res) {
+router.get('/query_general', function(req, res) {
     var identity = new Identity(req.session);
     var query = {
 		AccountId: identity.getAccountId(),
@@ -164,7 +166,7 @@ router.get('/query_general', function (req, res) {
 		'FormData.Interval': 'once',
 		InternshipId: req.query.internshipId,
 	};
-    FormModel.find(query, function (error, forms) {
+    FormModel.find(query, function(error, forms) {
 		if (error) {
 			return res.send(error, 500);
 		}
@@ -176,7 +178,7 @@ router.get('/query_general', function (req, res) {
 /**
  * Fetch daily forms for student and internship
  */
-router.get('/query_daily', function (req, res) {
+router.get('/query_daily', function(req, res) {
     var identity = new Identity(req.session);
     var query = {
 		AccountId: identity.getAccountId(),
@@ -184,7 +186,7 @@ router.get('/query_daily', function (req, res) {
 		InternshipId: req.query.internshipId,
 		'FormData.Interval': 'daily',
 	};
-    FormModel.find(query, function (error, forms) {
+    FormModel.find(query, function(error, forms) {
 		if (error) {
 			return res.send(error, 500);
 		}
@@ -196,7 +198,7 @@ router.get('/query_daily', function (req, res) {
 /**
  * Query forms data
  */
-router.get('/query', function (req, res) {
+router.get('/query', function(req, res) {
 
     var identity = new Identity(req.session);
 
@@ -206,7 +208,7 @@ router.get('/query', function (req, res) {
 		InternshipId: req.query.internshipId,
 	};
 
-    FormModel.find(query, function (error, forms) {
+    FormModel.find(query, function(error, forms) {
 
 		if (error) {
 			return res.send(error, 500);
@@ -219,8 +221,8 @@ router.get('/query', function (req, res) {
 /**
  * Generate internship summary in csv format
  */
-router.get('/summary/csv', function (req, res) {
-	
+router.get('/summary/csv', function(req, res) {
+
 	var _ = lang._('forms');
 
     var identity = new Identity(req.session);
@@ -231,7 +233,7 @@ router.get('/summary/csv', function (req, res) {
 		internshipId: req.query.internshipId,
 	};
 
-	Export.InternshipFormMR.map(options, function (data) {
+	Export.InternshipFormMR.map(options, function(data) {
 		if (!data) {
 			return res.send({ 'Message': 'No data.' }, 500);
 		}
@@ -251,6 +253,98 @@ router.get('/summary/csv', function (req, res) {
 		wb.addSheet(ws);
 		return res.send(wb.toStream());
 	});
+});
+
+/**
+ * Export forms to xlsx format
+ */
+router.get('/csv', function(req, res) {
+	var _ = lang._('export');
+	var identity = new Identity(req.session);
+
+	var query = {
+		AccountId: identity.getAccountId(),
+		FormTemplateId: req.query.formId,
+		InternshipId: req.query.internshipId,
+		UserId: req.query.userId
+	};
+
+	var internshipQuery = { _id: req.query.internshipId, AccountId: identity.getAccountId() };
+	var userQuery = { _id: req.query.userId, AccountId: identity.getAccountId() };
+	
+	var tabel = [[_('Date'), _('Student'), _('Internship'), _('Form'), _('Subject'), _('Question') , _('Question Type'), _('Answer')]];
+
+	var internshipPromise = new Promise(function(resolve, reject) {
+		InternshipModel.findOne(internshipQuery, function(error, internship) {
+			if (error || !internship) {
+				return reject(error);
+			}
+
+			return resolve(internship);
+		});
+	})
+
+	var userPromise = new Promise(function(resolve, reject) {
+		UserModel.findOne(userQuery, function(error, user) {
+			if (error || !user) {
+				return reject(error);
+			}
+
+			return resolve(user);
+		});
+	});
+
+	var formsPromise = new Promise(function(resolve, reject) {
+		FormModel.find(query, function(error, forms) {
+            if (error) {
+                return reject(error);
+            }
+			return resolve(forms);
+        });
+	});
+
+	Promise.all([internshipPromise, userPromise, formsPromise])
+	.then(function(args) {
+		var internship = args[0];
+		var user = args[1];
+		var forms = args[2];
+		forms.forEach(function(form) {
+			form.FormData.Questions.forEach(function(subject) {
+				subject.Questions.forEach(function(question) {
+					var studentName = user.FirstName + ' ' + user.LastName;
+					var answer = question.Value;
+					
+					if(typeof answer === 'object'){
+						if (question.Type === 'MultipleChoiceMultipleAnswer'){
+							answer = question.Options.reduce(function (answer, value, index) {
+								if(question.Value[index]){
+									answer.push(value);
+								}
+								return answer;
+							}, []).join(', ');
+						} else {
+							answer = _('Not available');
+						}
+					}
+					
+					tabel.push([form.Date, studentName, internship.Name, 
+					form.FormData.Name, subject.Name, question.Question, question.Type, answer]);
+				});
+			});
+		});
+		
+		res.setHeader('Content-disposition', 'attachment; filename=internship_forms_' + internship._id.toString() + '.xlsx');
+		res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		var wb = new Excel.Workbook();
+		var ws = Excel.Sheet.fromArray(tabel);
+		var internshipName = internship.Name;
+		ws.sheetName = _('Internship Forms') + ' (' + internshipName + ')';
+		wb.addSheet(ws);
+		return res.send(wb.toStream());
+	}, function(error) {
+		res.send(error, 500);
+	});
+
 });
 
 
