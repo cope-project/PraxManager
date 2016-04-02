@@ -272,7 +272,7 @@ router.get('/csv', function(req, res) {
 	var internshipQuery = { _id: req.query.internshipId, AccountId: identity.getAccountId() };
 	var userQuery = { _id: req.query.userId, AccountId: identity.getAccountId() };
 	
-	var tabel = [[_('Date'), _('Student'), _('Internship'), _('Form'), _('Subject'), _('Question') , _('Question Type'), _('Answer')]];
+	var tabel = [[_('Date'), _('Student'), _('Internship'), _('Form'), _('Subject'), _('Question') , _('Question Type'), _('Answer'), _('Comment')]];
 
 	var internshipPromise = new Promise(function(resolve, reject) {
 		InternshipModel.findOne(internshipQuery, function(error, internship) {
@@ -328,7 +328,8 @@ router.get('/csv', function(req, res) {
 					}
 					
 					tabel.push([form.Date, studentName, internship.Name, 
-					form.FormData.Name, subject.Name, question.Question, question.Type, answer]);
+					form.FormData.Name, subject.Name, question.Question, 
+					question.Type, answer ,question.Comment || '']);
 				});
 			});
 		});
