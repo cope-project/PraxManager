@@ -61,7 +61,8 @@ block content
 	.row(ng-cloak)
 		.col-lg-12(ng-repeat="form_group in forms")
 			.page-header
-				h4 #{_('Submit teacher review')}: {{form_group.Name}}
+				a.btn.btn-default.pull-right(href="/print/form?internshipId={{internship._id}}&userId={{student._id}}&formId={{form_group.templateId}}") #{_('Print')}
+				h4 #{_('Submit teacher review')}: {{form_group.Name}} 
 			table.table.table-bordered.table-hover.table-striped(ng-show="form_group.Forms.length != 0")
 				thead
 					tr

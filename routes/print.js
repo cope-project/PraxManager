@@ -219,7 +219,7 @@ router.get('/form', function(req, res) {
         
         return formater.format(internship, user, forms, function (html) {
             res.send(html);
-        })
+        }, lang);
 	}, function (error) {
          res.send(error);
     });

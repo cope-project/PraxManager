@@ -69,9 +69,9 @@ block content
 					tr(ng-repeat="checkin in checkins")
 						td {{student.FirstName}} {{student.LastName}} -  {{student.Email}}
 						td {{checkin.Date | date: yyyy-MM-dd}}
-						th {{checkin.CreateDate | date: yyyy-MM-dd}}
+						td {{checkin.CreateDate | date: yyyy-MM-dd}}
 						td {{checkin.Time}} 
-						th
+						td
 							span(ng-show="checkin.Status == 'pending'") #{_('Pending')}
 							span(ng-show="checkin.Status == 'approved'") #{_('Approved')}
 							span(ng-show="checkin.Status == 'rejected'") #{_('Rejected')}

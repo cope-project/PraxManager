@@ -51,9 +51,10 @@ let incrementCounter = (counter, question, meta) => {
     }
 };
 
-let format = (internship, student, forms, callback) => {
+let format = (internship, student, forms, callback, lang) => {
+    _ = lang._('plugins.formatters.tasks'); // set module var
     let view = jade.compileFile(__dirname + '/views/tasks.jade');
-    let header = ['Subject','Task', 'Comment'];
+    let header = [_('Subject'), _('Task'), _('Comment')];
     let tabel = [];
     let meta = { keys: {} };
     let formsSummary = {};
@@ -99,6 +100,7 @@ let format = (internship, student, forms, callback) => {
     
     return callback(view({
         'internship': internship,
+        'title': internship.Name,
         'student': student,
         'tabel': tabel,
         '_' : _
@@ -106,9 +108,9 @@ let format = (internship, student, forms, callback) => {
 }
 
 module.exports = {
-    format: (internship, student, forms, callback) => {
+    format: (internship, student, forms, callback, lang) => {
         try {
-            return format(internship, student, forms, callback);
+            return format(internship, student, forms, callback, lang);
         } catch (error) {
             console.log(error);
         }

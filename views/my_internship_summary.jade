@@ -11,16 +11,16 @@ block content
 		.col-lg-12
 			h1.page-header
 				| PraxManager  
-				small #{_('My Internships')}
+				small  #{_('My Internships')}
 			ol.breadcrumb
 				li
 					i.fa.fa-home
 					a(href='/')  PraxManager
 				li
 					i.fa.fa-calendar  
-					a(href="/student") #{_('My Internships')} 
+					a(href="/student")  #{_('My Internships')} 
 				li
-					a(href="/my_internship/{{internship._id}}") {{internship.Name}}
+					a(href="/my_internship/{{internship._id}}")  {{internship.Name}}
 
 				li
 					| #{_('Summary')}
@@ -40,7 +40,10 @@ block content
 						td {{checkin.Date | amDateFormat:'dddd, MMMM Do YYYY'}}
 						td.hidden-xs {{checkin.CreateDate | amDateFormat:'dddd, MMMM Do YYYY'}}
 						td {{checkin.Time}}
-						td {{checkin.Status}}
+						td
+							span(ng-show="checkin.Status == 'pending'") #{_('Pending')}
+							span(ng-show="checkin.Status == 'approved'") #{_('Approved')}
+							span(ng-show="checkin.Status == 'rejected'") #{_('Rejected')}
 						td {{checkin.RejectionComment}}
 						
 	.row(ng-cloak)
@@ -48,7 +51,23 @@ block content
 			label(ng-show="internship.ColectDataType == 'time'") #{_('Total number of hours')}: {{timeSum}}
 			label(ng-show="internship.ColectDataType == 'day'") #{_('Total number of days')}: {{timeSum}}
 		.col-lg-6(ng-show="checkins.length != 0")
-			a.btn.btn-primary.pull-right(href="/print/student_presence?internshipId={{internship._id}}&userId={{user._id}}") #{_('Print / Download')}
+			a.btn.btn-primary.pull-right(href="/print/student_presence?internshipId={{internship._id}}&userId={{user._id}}") #{_('Print')}
 		
 		.col-lg-12(ng-show="checkins.length == 0")
 			p #{_('No data avalable')}
+			
+	.row(ng-cloak)
+		.col-lg-12
+			h2 #{_('Forms')}
+			table.table.table-bordered.table-hover.table-striped
+				thead
+					tr
+						th #{_('Form Name')}
+						th #{_('Description')}
+						th #{_('Print')}
+				tbody
+					tr(ng-repeat="form in internship.AssignedForms")
+						td {{form.Name}}
+						td {{form.Description}}
+						td
+							a.btn.btn-default(href="/print/form?internshipId={{internship._id}}&userId={{user._id}}&formId={{form._id}}") #{_('Print')}

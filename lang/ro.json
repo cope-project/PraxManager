@@ -61,9 +61,9 @@
         "Preview Form": "Vizualizare formular",
         "Read Only": "Mod citire",
         "Close": "Închide",
-        "Add Form": "Adaugă fomular",
+        "Add Form": "Adaugă formular",
         "Forms": "Formulare",
-        "Form Name": "Nume fomular",
+        "Form Name": "Nume formular",
         "Number of Questions": "Numar întrebari",
         "Edit": "Editează",
         "Duplicate": "Dublare",
@@ -210,7 +210,8 @@
             "Submit teacher review": "Înregistrează observațiile tutorelui de practică",
             "Edit review": "Editează formular completat de cursant",
             "Teacher Evaluation":"Evaluare tutore",
-            "Review": "Recenzie"
+            "Review": "Recenzie",
+            "Print": "Printează"
         },
         "presence": {
             "Student Presence": "Prezența cursantului",
@@ -310,7 +311,14 @@
         "Total number of hours": "Numărul total de ore",
         "Total number of days": "Numărul total de zile",
         "Print / Download": "Printează / descarcă",
-        "No data avalable": "Nu sunt date disponibile"
+        "No data avalable": "Nu sunt date disponibile",
+        "Pending": "În așteptare",
+        "Approved": "Aprobat",
+        "Rejected": "Respins",
+        "Forms": "Formulare",
+        "Form Name": "Nume formular",
+        "Print": "Printează",
+        "Description": "Descriere"
     },
     "profile": {
         "Change Password": "Schimbă parola",
@@ -449,5 +457,24 @@
         "Student name": "Numele cursantului",
         "Internship name":"Numele stagiului",
         "Internship presence":"Prezenţa stagiu"
+    },
+    "plugins": {
+        "formatters": {
+            "default": {
+                "This form is not avalable in print version.": "Acest formular nu este disponibil."
+            },
+            "tasks": {
+                "Subject": "Subiect",
+                "Task": "Sarcină",
+                "Comment": "Comentariu",
+                "True": "Adevărat",
+                "False": "Fals",
+                "Yes": "Da",
+                "No": "Nu",
+                "Internship Tasks": "Tehnici efectuate",
+                "Student name": "Numele cursantului",
+                "Internship name": "Numele stagiului"
+            }
+        }
     }
 }

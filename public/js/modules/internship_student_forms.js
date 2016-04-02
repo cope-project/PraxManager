@@ -36,7 +36,7 @@
                 })
 
                 if (form_group === null) {
-                    forms_data.push({ _id: form.FormData._id, Name: form.FormData.Name, Forms: [form] })
+                    forms_data.push({ _id: form.FormData._id, Name: form.FormData.Name, Forms: [form], templateId: form.FormTemplateId})
                 } else {
                     form_group.Forms.push(form);
                 }
