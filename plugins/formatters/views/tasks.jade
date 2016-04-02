@@ -1,0 +1,25 @@
+- var head = tabel.shift()
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title #{title} | PraxManager 
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
+  body
+    .container
+      h2 #{_('Internship Tasks')}
+      div.clear-fix
+        h4 #{_('Student name')} : #{student.FirstName} #{student.LastName} (#{student.Tag})
+        h4 #{_('Internship name')} : #{internship.Name}
+      table.table.table-bordered.table-hover
+        thead
+          tr
+            each header in head
+              th(style="text-align:center;")= header
+        tbody
+          each row in tabel
+            tr
+              each col in row
+                td(style="text-align:center;")= col
+          

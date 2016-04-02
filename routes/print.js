@@ -22,11 +22,19 @@ var CheckinModel = require('./../models/checkin');
 // load user model library
 var UserModel = require('./../models/user');
 
+var FormModel = require('./../models/form')
+
 // load internship library
 var InternshipModel = require('./../models/internship');
 
+// load form templates library
+var FormsTemplateModel = require('./../models/formtemplate');
+
 // load language translation library
 var lang = require('./../lib/lang');
+
+// load plugins
+var plugins = require('./../plugins/plugins');
 
 
 /**
@@ -144,7 +152,77 @@ router.get('/student_presence', (req, res) => {
  * Print students forms in the context of an intenship
  */
 router.get('/form', function(req, res) {
-    var identity = new Identity(req.session);
+	var _ = lang._('export');
+	var identity = new Identity(req.session);
+
+	var query = {
+		AccountId: identity.getAccountId(),
+		FormTemplateId: req.query.formId,
+		InternshipId: req.query.internshipId,
+		UserId: req.query.userId
+	};
+
+	var internshipQuery = { _id: req.query.internshipId, AccountId: identity.getAccountId() };
+	var userQuery = { _id: req.query.userId, AccountId: identity.getAccountId() };
+    var formsTemplateQuery = {_id: req.query.formId, AccountId: identity.getAccountId()};
+	
+    var internshipPromise = new Promise(function(resolve, reject) {
+		InternshipModel.findOne(internshipQuery, function(error, internship) {
+			if (error || !internship) {
+				return reject(error);
+			}
+			return resolve(internship);
+		});
+	})
+
+	var userPromise = new Promise(function(resolve, reject) {
+		UserModel.findOne(userQuery, function(error, user) {
+			if (error || !user) {
+				return reject(error);
+			}
+			return resolve(user);
+		});
+	});
+
+	var formsPromise = new Promise(function(resolve, reject) {
+		FormModel.find(query, function(error, forms) {
+            if (error) {
+                return reject(error);
+            }
+			return resolve(forms);
+        });
+	});
+    
+    var formsTemplatePromise = new Promise(function(resolve, reject) {
+        FormsTemplateModel.findOne(formsTemplateQuery, function (error, template) {
+            if (error || !template) {
+                return reject(error);
+            }
+            return resolve(template);
+        });
+    });
+    
+
+	Promise.all([internshipPromise, userPromise, formsPromise, formsTemplatePromise])
+	.then(function(args) {
+		var internship = args[0];
+		var user = args[1];
+		var forms = args[2];
+        var template = args[3];
+		var formater = plugins.getFormatPlugins().find(function (plugin) {
+            return template.PrintTemplate === plugin.id;
+        });
+        
+        if(!formater){
+            return res.send({'message': 'plugin not found'}, 500);
+        }
+        
+        return formater.format(internship, user, forms, function (html) {
+            res.send(html);
+        })
+	}, function (error) {
+         res.send(error);
+    });
 
 });
 
