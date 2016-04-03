@@ -99,6 +99,8 @@ router.get('/reset_password', function (req, res) {
     if (!req.query.token) {
         return res.redirect('/auth/login');
     }
+    
+    var _ = lang._('reset_password');
 
     var token = req.query.token;
     UserModel.findOne({ ResetPasswordToken: token }, function (error, user) {
@@ -121,15 +123,15 @@ router.get('/reset_password', function (req, res) {
                 return res.redirect('/auth/login');
             }
 
-            var message = "Your new password is: " + password;
+            var message = _("Your new password is: ") + password;
             var e = user.FirstName + '' + user.LastName + ' <' + user.Email + '>';
-            var subject = "PraxManager - New password";
+            var subject = 'PraxManager - ' + _("New password");
 
             emailer.sendNotificationEmail(subject, message, e, function (error, info) {
                 if (error) {
                     return res.redirect('/auth/login');
                 } else {
-                    res.render('reset_password', { title: 'Reset password', 'lang': lang});
+                    res.render('reset_password', { title: _('Reset password'), 'lang': lang});
                 }
             });
         });
@@ -142,8 +144,8 @@ router.get('/reset_password', function (req, res) {
 router.post('/reset_password', function (req, res) {
     var identity = new Identity(req.session);
     var email = req.body.email;
-
-
+    var _ = lang._('reset_password');
+    
     UserModel.findOne({ Email: email }, function (error, user) {
 
         if (error) {
@@ -161,11 +163,11 @@ router.post('/reset_password', function (req, res) {
                     return res.send({ password_reseted: false }, 500);
                 }
 
-                var message = "Click the link below to reset you account password:<br>"
+                var message = _("Click the link below to reset your account password:") + '<br>';
                 var url = 'http://' + config.domain + '/auth/reset_password?token=' + token;
                 message += '<a href="' + url + '">' + url + '</a>';
                 var e = user.FirstName + '' + user.LastName + ' <' + user.Email + '>';
-                var subject = "PraxManager - Reset password";
+                var subject = "PraxManager - " + _('Reset password');
 
                 emailer.sendNotificationEmail(subject, message, e, function (error, info) {
                     if (error) {
