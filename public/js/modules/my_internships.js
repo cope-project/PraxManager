@@ -24,7 +24,9 @@
 					days = 30;
 				}
 				
-				var internshipEnded = moment(internship.EndDate).add(days, 'days').utc().isBefore(moment().utc());
+				var end = moment(internship.EndDate);
+				end.add(days, 'days');
+				var internshipEnded = !end.utc().isBefore(moment().utc());
 				return internshipEnded;
 			});
 		})
