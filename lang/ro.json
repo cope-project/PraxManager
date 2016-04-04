@@ -416,7 +416,8 @@
             "Profile": "Profil",
             "Inbox": "Căsuță intrare",
             "Settings": "Setări",
-            "Log Out": "Deconectare"
+            "Log Out": "Deconectare",
+            "Student View":"Vizualizare Cursant"
         },
         "questions": {
             "True": "Adevărat",
