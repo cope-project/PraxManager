@@ -99,7 +99,8 @@
         "Category":"Categoria",
         "Required for checkin (required)":"Dupa checkin (necesar)",
         "Internship Summary":"Rezumat stagiu",
-        "Empty":"Gol"
+        "Empty":"Gol",
+        "Download":"Descarcă"
     },
     "inbox": {
         "Inbox": "Căsuță intrari",
@@ -121,6 +122,8 @@
         "PRAX-Manager, the software developed in the project is tested and documented during the project lifetime, in local context, in the daily activities of other partner schools and in transnational mobilities for students.": "PRAX-Manager, software-ul dezvoltat în acest proiect este testat și documentat pe perioada proiectului, în contexte locale, în activitățile zilnice ale școlilor partenere din proiect și în mobilități transnaționale pentru cursanți."
     },
     "internships": {
+        "Add Internship Manager":"Adaugă tutore",
+        "A student can change his answer for (required)":"Un student poate schimba răspunsul său pentru (obligatoriu)",
         "Add students by tag": "Aduaga cursanți folosind etichete",
         "Search":"Cauta",
         "Students":"Cursanți",

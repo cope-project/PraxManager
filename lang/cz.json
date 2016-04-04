@@ -241,7 +241,8 @@
         "Add Form": "Přidat dotazník", 
         "Name of the form": "Název dotazníku", 
         "Preview": "Náhled", 
-        "Please provide feedback on the following questions.": "Prosím, poskytovat zpětnou vazbu na následující otázky."
+        "Please provide feedback on the following questions.": "Prosím, poskytovat zpětnou vazbu na následující otázky.",
+        "Download":"Uložit"
     }, 
     "notifications": {
         "Notification from": "Upozornit od"
@@ -359,6 +360,7 @@
     "internships": {
         "Manage": "Upravit", 
         "Manage Internship": "Upravit praxi", 
+        "Add Internship Manager":"Výběr správce praxe",
         "presence": {
             "Student Presence": "Docházka žáka", 
             "Save": "Uložit", 
@@ -409,7 +411,8 @@
             "Cancel": "Zrušit", 
             "Close": "Zavřít", 
             "Message": "Zpráva"
-        }, 
+        },
+        "A student can change his answer for (required)":"Žák může změnit odpověď (povinné)",
         "Add Manager to internship": "Přidat správce praxe", 
         "Next": "Další", 
         "Completion Interval Limit (required)": "Limit pro vyplnění", 
@@ -489,9 +492,9 @@
         "Internship Name": "Název praxe", 
         "Archive": "Archiv", 
         "Add Internship": "Přidat praxi", 
-        "Add students by tag": "Přidejte studenty podle značky", 
-        "Search": "Vyhledávání", 
-        "Students": "studenti", 
+        "Add students by tag": "Přidat žáka do záložky", 
+        "Search": "Výběr", 
+        "Students": "Žáci", 
         "Tags": "Tagy"
     }
 }
