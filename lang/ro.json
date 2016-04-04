@@ -303,7 +303,8 @@
         "Description": "Descriere",
         "No forms available to complete.": "Nu există formulare de completat.",
         "Yes": "Da",
-        "No": "Nu"
+        "No": "Nu",
+        "Save":"Salvează"
     },
     "my_internship_summary": {
         "My Internships": "Stagiile mele de practică",
