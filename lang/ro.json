@@ -34,6 +34,7 @@
         }
     },
     "forms": {
+        "Please provide feedback on the following questions.":"",
         "Edit Question": "Editeaza întrebarea",
         "True or false": "Adevarat sau Fals",
         "Yes or No": "Da sau Nu",
@@ -83,7 +84,7 @@
         "Category of the form": "Tip formular",
         "Completed By  (required)": "Completat de (obligatoriu)",
         "Student": "Cursant",
-        "Student and teacher": "Cursant și profesor",
+        "Student and teacher": "Cursant și tutore",
         "Print Template": "Formular tipizat",
         "None": "Niciunul",
         "Description:": "Descriere",
@@ -336,7 +337,7 @@
         "Login email address": "adresa de e-mail pentru logare",
         "Type": "Tip",
         "Administrator": "Administrator",
-        "Teacher": "Profesor",
+        "Teacher": "Tutore",
         "Student": "Cursant",
         "Type of user": "Tip utilizator",
         "Save": "Salveaza"
