@@ -107,7 +107,8 @@
         "Close": "Kapat", 
         "Form Name": "Form adı", 
         "Checkin": "Giriş", 
-        "Please leave a comment here or upload a audio / video file": "Lütfen bir açıklama yazın veya bir ses dosyası yükleyin"
+        "Please leave a comment here or upload a audio / video file": "Lütfen bir açıklama yazın veya bir ses dosyası yükleyin", 
+        "Save": "Kaydet"
     }, 
     "settings": {
         "All": "Tümü", 
@@ -153,7 +154,12 @@
         "Approved": "onaylı", 
         "Print / Download": "Yazdır / İndir"
     }, 
-    "reset_password": {}, 
+    "reset_password": {
+        "Your new password is: ": "Yeni şifre:", 
+        "New password": "Yeni Şifre", 
+        "Reset password": "Şifreyi yenile", 
+        "Click the link below to reset your account password:": "Hesap şifrenizi sıfırlamak için aşağıdaki linki tıklayın:"
+    }, 
     "includes": {
         "head": {
             "Profile": "Profil", 
@@ -161,7 +167,8 @@
             "Log Out": "Çıkış", 
             "Toggle navigation": "Aramayı değiştir", 
             "Inbox": "Gelen Kutusu", 
-            "Read All New Messages": "Tüm yeni mesajları oku"
+            "Read All New Messages": "Tüm yeni mesajları oku", 
+            "Student View": "Öğrenci görüntüle"
         }, 
         "sidebar": {
             "Forms": "Formlar", 
@@ -251,7 +258,8 @@
         "Close": "Kapat", 
         "Form Name": "Form Adı", 
         "Name of the form": " Form Adı", 
-        "Preview": "Öngörünüm"
+        "Preview": "Öngörünüm", 
+        "Please provide feedback on the following questions.": "Aşağıdaki soruları hakkında geri bildirim veriniz."
     }, 
     "notifications": {
         "Notification from": "Kimden uyarı"
@@ -475,6 +483,10 @@
         "Start Date": "Staj başlangıç zamanı", 
         "Internship Name": "Staj İsmi", 
         "Archive": "Arşiv", 
-        "Add Internship": "Staj Ekle"
+        "Add Internship": "Staj Ekle", 
+        "Add students by tag": "etikete göre öğrencilere ekle", 
+        "Search": "Arama", 
+        "Students": "Öğrenciler", 
+        "Tags": "Etiketler"
     }
 }

@@ -108,7 +108,8 @@
         "Number of Questions": "Počet otázek", 
         "Checkin": "Zadat docházku", 
         "No forms available to complete.": "Nejsou k dispozici žádné formuláře k vyplnění.", 
-        "Please leave a comment here or upload a audio / video file": "Prosím, přidejte komentář nebo připojte audio/video"
+        "Please leave a comment here or upload a audio / video file": "Prosím, přidejte komentář nebo připojte audio/video", 
+        "Save": "Uložit"
     }, 
     "settings": {
         "All": "Vše", 
@@ -135,7 +136,12 @@
         "Date": "Datum"
     }, 
     "error": {}, 
-    "reset_password": {}, 
+    "reset_password": {
+        "Your new password is: ": "Vaše nové heslo je:", 
+        "New password": "Nové heslo", 
+        "Reset password": "Obnovit heslo", 
+        "Click the link below to reset your account password:": "Kliknutím na odkaz níže resetovat heslo k účtu:"
+    }, 
     "includes": {
         "head": {
             "Profile": "Profil", 
@@ -143,7 +149,8 @@
             "Log Out": "Odhlásit", 
             "Toggle navigation": "Přepnout navigaci", 
             "Inbox": "Inbox", 
-            "Read All New Messages": "Přečíst všechny nové zprávy"
+            "Read All New Messages": "Přečíst všechny nové zprávy", 
+            "Student View": "Student View"
         }, 
         "sidebar": {
             "Forms": "Dotazníky", 
@@ -233,7 +240,8 @@
         "Number of Questions": "Počet otázek", 
         "Add Form": "Přidat dotazník", 
         "Name of the form": "Název dotazníku", 
-        "Preview": "Náhled"
+        "Preview": "Náhled", 
+        "Please provide feedback on the following questions.": "Prosím, poskytovat zpětnou vazbu na následující otázky."
     }, 
     "notifications": {
         "Notification from": "Upozornit od"
@@ -480,6 +488,10 @@
         "Start Date": "Datum od", 
         "Internship Name": "Název praxe", 
         "Archive": "Archiv", 
-        "Add Internship": "Přidat praxi"
+        "Add Internship": "Přidat praxi", 
+        "Add students by tag": "Přidejte studenty podle značky", 
+        "Search": "Vyhledávání", 
+        "Students": "studenti", 
+        "Tags": "Tagy"
     }
 }

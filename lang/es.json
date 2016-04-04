@@ -26,7 +26,7 @@
         "Welcome !": "¡Bienvenido!", 
         "PraxManager is on line instrument destined to monitor and evaluate the practical training of the students in several specializations from healthcare education field, offering in the same time an overview on the evolution of the students during their training and the performance of the schools in time.": "PraxManager es un instrumento de evaluación online destinado a monitorizar y evaluar el período de prácticas de los estudiantes en varias especialidades del campo sanitario en educación, ofreciendo al mismo tiempo una visión de la evolución del estudiante durante sus prácticas y su formación en los centros educativos.", 
         "Internship": "Práctica", 
-        "PRAX-Manager, the software developed in the project is tested and documented during the project lifetime, in local context, in the daily activities of other partner schools and in transnational mobilities for students.": "PraxManager, el software desarrollado en el proyecto es chequeado y documentado durante el período de vida del mismo, en un contexto local, en las actividades diarias de otras escuelas socias y en movilidades transnacionales de los estudiantes.",
+        "PRAX-Manager, the software developed in the project is tested and documented during the project lifetime, in local context, in the daily activities of other partner schools and in transnational mobilities for students.": "PraxManager, el software desarrollado en el proyecto es chequeado y documentado durante el período de vida del mismo, en un contexto local, en las actividades diarias de otras escuelas socias y en movilidades transnacionales de los estudiantes.", 
         "Start": "Comenzar", 
         "You can start by creating a new": "Puedes comenzar creando uno", 
         "or by defining a new": "o definir uno nuevo", 
@@ -108,7 +108,8 @@
         "Close": "Cerrar", 
         "Form Name": "Nombre de formulario", 
         "No forms available to complete.": "No hay formularios disponibles para completar.", 
-        "Please leave a comment here or upload a audio / video file": "Por favor deje un comentario aquí o suba un archive de audio"
+        "Please leave a comment here or upload a audio / video file": "Por favor deje un comentario aquí o suba un archive de audio", 
+        "Save": "Salvar"
     }, 
     "settings": {
         "All": "Todo", 
@@ -135,7 +136,12 @@
         "Date": "Fecha"
     }, 
     "error": {}, 
-    "reset_password": {}, 
+    "reset_password": {
+        "Your new password is: ": "Su nueva contraseña es:", 
+        "New password": "Nueva contraseña", 
+        "Reset password": "Restablecer la contraseña", 
+        "Click the link below to reset your account password:": "Haga clic en el siguiente enlace para restablecer la contraseña de la cuenta:"
+    }, 
     "includes": {
         "head": {
             "Profile": "Perfil", 
@@ -143,7 +149,8 @@
             "Log Out": "Desconectarse", 
             "Toggle navigation": "Conmutar navegación", 
             "Inbox": "Bandeja de entrada", 
-            "Read All New Messages": "Leer nuevos mensajes"
+            "Read All New Messages": "Leer nuevos mensajes", 
+            "Student View": "Ver estudiante"
         }, 
         "sidebar": {
             "Forms": "Formularios", 
@@ -233,7 +240,8 @@
         "Form Name": "Nombre de formulario", 
         "Add Form": "Agregar formulario", 
         "Name of the form": " Nombre de formulario ", 
-        "Preview": "Vista previa"
+        "Preview": "Vista previa", 
+        "Please provide feedback on the following questions.": "Por favor proporcionar información sobre las siguientes preguntas."
     }, 
     "notifications": {
         "Notification from": "Notificación de"
@@ -518,6 +526,9 @@
             "Internships": "Prácticas"
         }, 
         "Total number of days": "Número total de días", 
-        "Internship Student Presence": "Asistencia del estudiante a las prácticas"
+        "Internship Student Presence": "Asistencia del estudiante a las prácticas", 
+        "Add students by tag": "Añadir los estudiantes por etiqueta", 
+        "Search": "Buscar", 
+        "Tags": "Etiquetas"
     }
 }

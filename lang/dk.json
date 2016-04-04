@@ -110,7 +110,8 @@
         "Number of Questions": "Antal spørgsmål", 
         "Checkin": "Check-in", 
         "No forms available to complete.": "Ingen formularer til rådighed til at fuldføre.", 
-        "Please leave a comment here or upload a audio / video file": "Efterlad en kommentar eller upload en audio/video fil her"
+        "Please leave a comment here or upload a audio / video file": "Efterlad en kommentar eller upload en audio/video fil her", 
+        "Save": "Spare"
     }, 
     "settings": {
         "All": "Alle", 
@@ -137,7 +138,12 @@
         "Date": "Dato"
     }, 
     "error": {}, 
-    "reset_password": {}, 
+    "reset_password": {
+        "Your new password is: ": "Din nye adgangskode er:", 
+        "New password": "Nyt kodeord", 
+        "Reset password": "Nulstille kodeord", 
+        "Click the link below to reset your account password:": "Klik på linket nedenfor for at nulstille adgangskoden til din konto:"
+    }, 
     "includes": {
         "head": {
             "Profile": "Profil", 
@@ -145,7 +151,8 @@
             "Log Out": "Log af", 
             "Toggle navigation": "Skift navigation", 
             "Inbox": "Indbakke", 
-            "Read All New Messages": "Læs alle nye beskeder"
+            "Read All New Messages": "Læs alle nye beskeder", 
+            "Student View": "Student View"
         }, 
         "sidebar": {
             "Forms": "Webskemaer", 
@@ -235,7 +242,8 @@
         "Number of Questions": "Antal spørgsmål", 
         "Add Form": "Tilføj webskema", 
         "Name of the form": "Navn på webskema", 
-        "Preview": "Forhåndsvisning"
+        "Preview": "Forhåndsvisning", 
+        "Please provide feedback on the following questions.": "Giv feedback på følgende spørgsmål."
     }, 
     "notifications": {
         "Notification from": "Anmeldelse fra"
@@ -482,6 +490,10 @@
         "Start Date": "Startdato", 
         "Internship Name": "Praktikpladsens navn", 
         "Archive": "Arkiv", 
-        "Add Internship": "Tilføj praktikplads"
+        "Add Internship": "Tilføj praktikplads", 
+        "Add students by tag": "Tilføj studerende efter tag", 
+        "Search": "Søge", 
+        "Students": "Studerende", 
+        "Tags": "Tags"
     }
 }
