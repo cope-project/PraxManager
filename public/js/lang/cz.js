@@ -10,7 +10,7 @@ loadLanguagePack({
 	'Are you sure you want to archive this internship ?': 'Skutečně chcete převést tuto praxi do archivu?',
 	'Are you sure you want to remove this student ?':'Skutečně chcete odstranit účet tohoto studenta?',
 	'Are you sure you want to remove this manager ?': 'Skutečně chcete odstranit účet tohoto správce?',
-	'Checkin Current Day': 'Check in ziua curenta',
+	'Checkin Current Day': 'Zadat aktuální den',
 	'Current Day': 'Aktuální den',
 	'Pending': 'Čeká na schválení',
 	'Approved': 'Schváleno',
