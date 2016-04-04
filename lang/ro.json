@@ -116,7 +116,7 @@
         "or by defining a new": "sau prin a crea un nou",
         "Form template": "Formular tip",
         "What is PraxManager ?": "Ce este PraxManager?",
-        "PraxManager is on line instrument destined to monitor and evaluate the practical training of the students in several specializations from healthcare education field, offering in the same time an overview on the evolution of the students during their training and the performance of the schools in time.": "PraxManager este un instrument online destinat monitorizării și evaluării stagiilor de instruire practică a cursanților din domeniul VET, care oferă o privire de ansamblu asupra evoluției cursanților și a activității școlilor în timp.",
+        "PraxManager is on line instrument destined to monitor and evaluate the practical training of the students in several specializations from healthcare education field, offering in the same time an overview on the evolution of the students during their training and the performance of the schools in time.": "PraxManager este un instrument online destinat monitorizării și evaluării stagiilor de instruire practică a cursanților din domeniul VET, care oferă o privire de ansamblu asupra evoluției cursanților și a activității școlilor de-a lungul timpului.",
         "PRAX-Manager, the software developed in the project is tested and documented during the project lifetime, in local context, in the daily activities of other partner schools and in transnational mobilities for students.": "PRAX-Manager, software-ul dezvoltat în acest proiect este testat și documentat pe perioada proiectului, în contexte locale, în activitățile zilnice ale școlilor partenere din proiect și în mobilități transnaționale pentru cursanți."
     },
     "internships": {
@@ -155,12 +155,12 @@
         "Internship location": "Adresa instituției de stagiu (ex. Str. Cuza Voda)",
         "Next": "Pasul următor",
         "Add students to internship": "Adaugă cursanți la stagiu",
-        "Add forms to internship": "Adaugă formulare de evaluare a stagiului",
+        "Add forms to internship": "Adaugă formularele de evaluare a stagiului",
         "Add Manager to internship": "Adaugă administrator/tutore la stagiu",
         "Save": "Salvează",
         "Measure presence in (required)": "Masoara prezenta in (obligatoriu)",
         "Warning!": "Atentie!",
-        "Make changes in this section as admin only if you know what you are doing.": "Asigurati-va ca stiti ceea ce faceti cand faceti modificari in aceasta sectiune.",
+        "Make changes in this section as admin only if you know what you are doing.": "Faceți modificari in aceasta sectiune, doar dacă sunteți sigur de ceea ce faceți.",
         "Register":"Catalog",
         "View as student":"Vizualizare student",
         "Archive": "Arhivare",
@@ -177,16 +177,16 @@
             "Student Presence": "Prezența cursanului",
             "Send Notification": "Trimite notificare",
             "Grades": "Note",
-            "Internship Grades": "Note Practica",
+            "Internship Grades": "Note Practică",
             "Student":"Cursantul",
-            "Final Grade":"Nota Finala",
-            "Save": "Salveaza",
-            "Cancel": "Anuleaza",
+            "Final Grade":"Nota Finală",
+            "Save": "Salvează",
+            "Cancel": "Anulează",
             "Student Notification": "Trimite notificare",
             "Message": "Mesaj",
             "Type your message here": "Scrieți mesajul dumneavoastra aici",
             "Send": "Trimite",
-            "Close": "Inchide",
+            "Close": "Închide",
             "None": "Niciunul"
         },
         "forms": {
@@ -226,10 +226,10 @@
             "Close": "Închidere",
             "Internship Student Presence": "Prezența cursantului la practică",
             "Internships": "Stagiu de practică",
-            "Internships Students": "Cursanții participanți la stagiile practice",
+            "Internships Students": "Cursanții participanți la stagiile de practică",
             "Name": "Nume",
             "Date": "Data",
-            "Checkin Date": "Data checkin",
+            "Checkin Date": "Data check-in",
             "Logged Time": "Timp logare",
             "Status": "Status",
             "Manage": "Administrează",
@@ -242,11 +242,11 @@
             "Internships": "Stagii de practică",
             "Register": "Catalog",
             "Name": "Nume",
-            "Email":"Email",
+            "Email":"e-mail",
             "Comment":"Comentariu",
             "Approve":"Prezent",
             "None":"Nespecificat",
-            "No student checkins for": "Nici un cursant nu a facut checkin pentru data"
+            "No student checkins for": "Nici un cursant nu a facut check-in pentru data"
         }
     },
     "layout": {
@@ -255,21 +255,21 @@
     "login": {
         "Sign In": "Conectare",
         "Forgot password?": "Aţi uitat parola?",
-        "Invalid username or password": "Nume de utilizator sau parola este incorecta",
+        "Invalid username or password": "Numele de utilizator sau parola este incorectă",
         "Login": "Autentificare",
         "Terms and Conditions": "Termeni și condiții",
         "Forgot password": "Aţi uitat parola",
-        "Email address not found": "Adresa de email nu a fost găsită",
-        "Thank you for your registration! Your account is now ready to use.":"Va multumim pentru inregistrare! Contul dvs. este acum gata de utilizare.",
+        "Email address not found": "Adresa de e-mail nu a fost găsită",
+        "Thank you for your registration! Your account is now ready to use.":"Vă mulțumim pentru înregistrare! Contul dvs. este acum gata de utilizare.",
         "Account successfully created":"Cont creat cu succes"
     },
     "my_internship": {
-        "Checkin": "Checkin",
+        "Checkin": "Check-in",
         "Error": "Eroare",
         "Error while checking in": "Eroaare în timpul checkin-ului",
         "Hours (required)": "Ore (obligatoriu)",
         "Comment": "Comentariu",
-        "Please leave a comment here or upload a audio / video file": "Vă rugăm Lăsați un comentariu aici sau încărcați un fișier audio sau video",
+        "Please leave a comment here or upload a audio / video file": "Vă rugăm lăsați un comentariu aici sau încărcați un fișier audio sau video",
         "The media file has been uploaded": "Fișierul media a fost încărcat",
         "Download Audio File": "Descarcă fișier audio",
         "Uploading ...": "Se încarcă...",
@@ -284,7 +284,7 @@
         "Number of Questions": "Număr întrebări",
         "Required": "Obligatoriu",
         "Status": "Status",
-        "Submit": "Completeaza",
+        "Submit": "Completează",
         "Completed": "Finalizat",
         "Not completed": "Nu s-a finalizat",
         "Edit": "Editează",
@@ -293,10 +293,10 @@
         "Internship review forms": "Formulare de evaluare a stagiului de practică",
         "No forms available to complete": "Nu există formulare de completat",
         "The internship has not completed yet": "Stagiul de practică nu s-a finalizat încă",
-        "You need to submit the form in order to checkin.": "Trebuie sa completati formularul pentru a putea face check-in.",
-        "Warning!":"Atentie!",
+        "You need to submit the form in order to checkin.": "Trebuie să completați formularul pentru a putea face check-in.",
+        "Warning!":"Atenție!",
         "Description": "Descriere",
-        "No forms available to complete.": "Nu existentă formulare de completat.",
+        "No forms available to complete.": "Nu există formulare de completat.",
         "Yes": "Da",
         "No": "Nu"
     },
@@ -304,7 +304,7 @@
         "My Internships": "Stagiile mele de practică",
         "Summary": "Sumar",
         "Date": "Data",
-        "Checkin Date": "Data checkin",
+        "Checkin Date": "Data check-in",
         "Time": "Ora",
         "Status": "Status",
         "Rejection Comment": "Motivație respingere",
@@ -342,15 +342,15 @@
         "Save": "Salveaza"
     },
     "reset_password": {
-        "Your new password is: ": "Noua dumneavoastra parola este: ",
-        "New password": "Parolă Noua",
-        "Reset password": "Reseteaza parola",
+        "Your new password is: ": "Noua dumneavoastră parolă este: ",
+        "New password": "Parolă nouă",
+        "Reset password": "Resetează parola",
         "Click the link below to reset your account password:": "Faceți clic pe link-ul de mai jos pentru a reseta parola contului:"
     },
     "settings": {
         "Settings": "Setări",
         "Language": "Limbă",
-        "Default application language": "Limba aplicație implicită",
+        "Default application language": "Limbă aplicație implicită",
         "Send Email Notifications": "Trimite notificări pe mail",
         "All": "Toate",
         "Send application notifications via Email": "Trimite notificări ale aplicației prin e-mail",
@@ -362,8 +362,8 @@
     "student": {
         "My Internships": "Stagiul meu de practică",
         "Expand": "Vizualizare",
-        "Warning!": "Atentie!",
-        "Make changes in this section as admin only if you know what you are doing.": "Asigurati-va ca stiti ceea ce faceti cand faceti modificari in aceasta sectiune."
+        "Warning!": "Atenție!",
+        "Make changes in this section as admin only if you know what you are doing.": "Faceți modificari in aceasta sectiune, doar dacă sunteți sigur de ceea ce faceți."
     },
     "student_layout": {},
     "users": {
@@ -372,7 +372,7 @@
         "Email address already in use or other validation error": "Adresă de e-mail aflată deja în uz sau altă eroare de validare",
         "First Name (required)": "Prenume (obligatoriu)",
         "Last Name (required)": "Nume de familie (obligatoriu)",
-        "Email (required)": "Email (obligatoriu)",
+        "Email (required)": "e-mail (obligatoriu)",
         "Type (required)": "Tip (obligatoriu)",
         "Administrator": "Administrator",
         "Teacher": "Tutore",
@@ -380,33 +380,33 @@
         "Save User": "Salvare utilizator",
         "Cancel": "Anulare",
         "Send new password": "Trimite parolă nouă",
-        "An error occurred while updating the password": "A intervenit o eroare în timp ce va reactualizați parola",
+        "An error occurred while updating the password": "A intervenit o eroare în timp ce vă reactualizați parola",
         "Change Password for": "Schimbați parola din cauză că",
         "This operation will replace the existing password with a new password": "Această operațiune va înlocui parola existentă cu una nouă",
-        "The new password will be sent to the user via email": "Parola nouă va fi trimisă prin mail la utilizator",
+        "The new password will be sent to the user via email": "Parola nouă va fi trimisă prin e-mail la utilizator",
         "Users": "Utilizator",
         "Add User": "Adaugă utilizator",
         "First Name": "Prenume",
         "Last Name": "Nume",
-        "Email": "Email",
+        "Email": "e-mail",
         "Type": "Tip",
         "Moodle Account": "Cont Moodle",
         "Actions": "Acțiuni",
         "Edit": "Editează",
         "Send Password": "Trimite parolă",
         "Delete": "Șterge",
-        "Your account is now ready to use.": "Contul dumneavoastra este activ.",
+        "Your account is now ready to use.": "Contul dumneavoastră este activ.",
         "Account successfully created": "Contul a fost creat cu success",
-        "Your password has been updated by the Administrator": "Parola dumneavoastra a fost actualizata de Administrator",
-        "Your new password is": "Noua dumneavoastra parola este",
-        "Your password has been updated": "Parola dumneavoastra a fost actualizata",
-        "Upload Users": "Incarca cursanti",
+        "Your password has been updated by the Administrator": "Parola dumneavoastră a fost actualizată de administrator",
+        "Your new password is": "Noua dumneavoastră parolă este",
+        "Your password has been updated": "Parola dumneavoastră a fost actualizată",
+        "Upload Users": "Încarcă cursanți",
         "Tag": "Etichetă"
     },
     "includes": {
         "head": {
             "Toggle navigation": "Comutați navigare",
-            "Read All New Messages": "Citește Toate Mesajele Noi",
+            "Read All New Messages": "Citește toate mesajele noi",
             "Profile": "Profil",
             "Inbox": "Căsuță intrare",
             "Settings": "Setări",
@@ -423,7 +423,7 @@
             "Download Audio File": "Descarcă fișier audio",
             "Download Image": "Descarcă imagine",
             "Download Document": "Descarcă document",
-            "Give feedback to the student here": "Ofera feedback pentru cursant aici",
+            "Give feedback to the student here": "Oferă feedback pentru cursant aici",
             "Teacher Evaluation": "Evaluare tutore",
             "Teacher Comment": "Comentariu tutore",
             "Student Comment": "Comentariu cursant"
@@ -461,12 +461,12 @@
         "Week":"Săptămână",
         "Student name": "Numele cursantului",
         "Internship name":"Numele stagiului",
-        "Internship presence":"Prezenţa stagiu"
+        "Internship presence":"Prezenţa la stagiu"
     },
     "plugins": {
         "formatters": {
             "default": {
-                "This form is not avalable in print version.": "Acest formular nu este disponibil."
+                "This form is not avalable in print version.": "Acest formular nu este disponibil în variantă printabilă."
             },
             "tasks": {
                 "Subject": "Subiect",
