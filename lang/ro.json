@@ -155,7 +155,7 @@
         "Last 3 days": "Ultimele 3 zile",
         "Last 7 days": "Ultimele 7 zile",
         "Last 30 days": "Ultimele 30 de zile",
-        "How many days has the student to complete the forms": "Perioada în care studentul poate să completeze formularele",
+        "How many days has the student to complete the forms": "Perioada în care cursantul poate să completeze formularele",
         "Location": "Adresa instituției de stagiu",
         "Internship location": "Adresa instituției de stagiu (ex. Str. Cuza Voda)",
         "Next": "Pasul următor",
@@ -167,7 +167,7 @@
         "Warning!": "Atentie!",
         "Make changes in this section as admin only if you know what you are doing.": "Faceți modificari in aceasta sectiune, doar dacă sunteți sigur de ceea ce faceți.",
         "Register":"Catalog",
-        "View as student":"Vizualizare student",
+        "View as student":"Vizualizare cursant",
         "Archive": "Arhivare",
         "results": {
             "Internship Students": "Cursanți participanți la stagiu",
