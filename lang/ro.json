@@ -121,9 +121,13 @@
         "PRAX-Manager, the software developed in the project is tested and documented during the project lifetime, in local context, in the daily activities of other partner schools and in transnational mobilities for students.": "PRAX-Manager, software-ul dezvoltat în acest proiect este testat și documentat pe perioada proiectului, în contexte locale, în activitățile zilnice ale școlilor partenere din proiect și în mobilități transnaționale pentru cursanți."
     },
     "internships": {
+        "Add students by tag": "Aduaga cursanți folosind etichete",
+        "Search":"Cauta",
+        "Students":"Cursanți",
         "Add Student": "Adaugă cursant",
         "Cancel": "Anulează",
         "Add Form": "Adaugă formular",
+        "Tags":"Etichete",
         "Internships": "Stagii de practică",
         "Add Internship": "Adaugă stagiu",
         "Internship Name": "Nume stagiu",

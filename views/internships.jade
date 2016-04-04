@@ -10,17 +10,17 @@ block footer
 			.form-group
 				label
 					input(type="checkbox", ng-model="useTag")
-					|  Add students by tag
+					|  #{_('Add students by tag')}
 			.form-group(ng-hide="useTag")
-				label Search
+				label #{_('Search')}
 				input.form-control(type="text", ng-model="searchText")
 				
 			.form-group(ng-hide="useTag")
-				label Students
+				label #{_('Students')}
 				select.form-control(ng-model="selected", ng-options="user.FirstName + ' ' + user.LastName + ' - ' + user.Email + ' ['+user.Tag+']' for user in users | filter:{Email:searchText}:hasValue")
 			
 			.form-group(ng-show="useTag")
-				label Tags
+				label #{_('Tags')}
 				select.form-control(ng-model="tag", ng-options="tag for tag in tags")
 				
 		.modal-footer
