@@ -39,13 +39,13 @@ block footer
 				.form-group
 					input(type="file", name="upload_file", ng-disabled="form.readOnly", accept="audio/*", capture="microphone")
 					input(type="hidden", name="type", value="audio", ng-disabled="form.readOnly")
-					input(type="submit", value="Upload Audio", ng-disabled="form.readOnly")
+					input(type="submit", value="#{_('Upload Audio')}", ng-disabled="form.readOnly")
 
 			form(method="post", enctype="multipart/form-data", ng-submit="uploadAudio($event)",  action="/api/files", ng-show="isAppleIOS")
 				.form-group
 					input(type="file", name="upload_file", ng-disabled="form.readOnly", accept="video/*", capture="video/*;capture=camcorder")
 					input(type="hidden", name="type", value="video", ng-disabled="form.readOnly")
-					input(type="submit", value="Upload Video", ng-disabled="form.readOnly")
+					input(type="submit", value="#{_('Upload Video')}", ng-disabled="form.readOnly")
 				
 		.modal-footer
 			button.btn.btn-primary(ng-click="doCheckin()", ng-disabled="checkinForm.$invalid || uploading") #{_('Checkin')}

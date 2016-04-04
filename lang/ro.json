@@ -307,7 +307,9 @@
         "No forms available to complete.": "Nu există formulare de completat.",
         "Yes": "Da",
         "No": "Nu",
-        "Save":"Salvează"
+        "Save":"Salvează",
+        "Upload Audio": "Incarca fisier audio",
+        "Upload Video": "Incarca fisier video"
     },
     "my_internship_summary": {
         "My Internships": "Stagiile mele de practică",
