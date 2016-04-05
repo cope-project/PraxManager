@@ -124,7 +124,7 @@
     "internships": {
         "Add Internship Manager":"Adaugă tutore",
         "A student can change his answer for (required)":"Un student poate schimba răspunsul său pentru (obligatoriu)",
-        "Add students by tag": "Aduaga cursanți folosind etichete",
+        "Add students by tag": "Adaugă cursanți folosind etichete",
         "Search":"Cauta",
         "Students":"Cursanți",
         "Add Student": "Adaugă cursant",
@@ -164,7 +164,7 @@
         "Next": "Pasul următor",
         "Add students to internship": "Adaugă cursanți la stagiu",
         "Add forms to internship": "Adaugă formularele de evaluare a stagiului",
-        "Add Manager to internship": "Adaugă administrator/tutore la stagiu",
+        "Add Manager to internship": "Adaugă tutore la stagiu",
         "Save": "Salvează",
         "Measure presence in (required)": "Masoara prezenta in (obligatoriu)",
         "Warning!": "Atentie!",
