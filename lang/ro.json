@@ -34,6 +34,7 @@
         }
     },
     "forms": {
+        "The student needs to complete this form before checkin":"Cursantul trebuie să completeze acest formular înainte de check-in",
         "Please provide feedback on the following questions.":"",
         "Edit Question": "Editeaza întrebarea",
         "True or false": "Adevarat sau Fals",
