@@ -1,3 +1,28 @@
+// Catalan Translation
 loadLanguagePack({
-    // no translation for english
+	"The current window has unsaved changes.": "La finestra actual té canvis sense desar.",
+	"Are you sure you want to delete this form ?": "¿Segur que voleu suprimir aquest formulari?",
+	"Are you sure you want to delete this subject ?": "¿Segur que voleu suprimir aquest tema?",
+	"Are you sure you want to delete this question ?" : "¿Esteu segur que voleu eliminar aquesta pregunta?",
+	"Copy" : "Copiar",
+	"File upload error.": "Error de càrrega de fitxe.",
+	"Are you sure you want to delete this internship ?" : "¿Esteu segur que voleu eliminar aquesta pràctica?",
+	"Are you sure you want to archive this internship ?": "¿Esteu segur que voleu arxivar aquesta pràctica?",
+	"Are you sure you want to remove this student ?":"¿Segur que vol eliminar aquest estudiant? ",
+	"Are you sure you want to remove this manager ?": "¿Segur que vol eliminar aquest tutor? ",
+	"Checkin Current Day": "Validació del dia actual",
+	"Current Day": "Dia actual",
+	"Pending": "Pendent",
+	"Approved": "Aprovat",
+	"Rejected":"Rebutjat",
+	"Edit Checkin":"Edita l'hora d"arribada",
+	"Checked in":"Registrat",
+	"Sunday": "Dilluns",
+	"Monday": "Dimarts",
+	"Tuesday": "Dimecres",
+	"Wednesday": "Dijous",
+	"Thursday": "Divendres",
+	"Friday": "Dissabte",
+	"Saturday": "Diumenge",
+	"Once": "Només una vegada"
 });
