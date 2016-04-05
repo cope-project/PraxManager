@@ -1,4 +1,4 @@
-// Catalan Translation
+﻿// Catalan Translation
 loadLanguagePack({
 	"The current window has unsaved changes.": "La finestra actual té canvis sense desar.",
 	"Are you sure you want to delete this form ?": "¿Segur que voleu suprimir aquest formulari?",
@@ -15,7 +15,7 @@ loadLanguagePack({
 	"Pending": "Pendent",
 	"Approved": "Aprovat",
 	"Rejected":"Rebutjat",
-	"Edit Checkin":"Edita l'hora d"arribada",
+	"Edit Checkin":"Edita l'hora d'arribada",
 	"Checked in":"Registrat",
 	"Sunday": "Dilluns",
 	"Monday": "Dimarts",
