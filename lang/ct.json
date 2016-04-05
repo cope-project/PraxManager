@@ -1,4 +1,4 @@
-﻿{
+{
     "presence": {
         "Status": "Estat", 
         "Student Comment": "Comentari de l'Estudiant", 
@@ -13,7 +13,7 @@
         "Total number of days": "Total nombre de Dias", 
         "Total number of hours": "Total nombre d'Hores", 
         "Pending": "Pendent", 
-        "Internships Students": "Pràctica de l'Estudiant",
+        "Internships Students": "Pràctica de l'Estudiant", 
         "Student Presence Confirmation": "Confirmació de l'Assistència de l'Estudiant", 
         "Close": "Tancar", 
         "Checkin Dóna't": "Revisió de la Data", 
@@ -166,7 +166,10 @@
         "Close": "Tancar", 
         "Form Name": "Nom de formulari", 
         "No forms available to complete.": "No hi ha formularis disponibles per completar.", 
-        "Please leave a comment here or upload a audio / video file": "Si us plau deixi un comentari o penja un fitxer d'àudio"
+        "Please leave a comment here or upload a audio / video file": "Si us plau deixi un comentari o penja un fitxer d'àudio", 
+        "Save": "Desar", 
+        "Upload Audio": "Càrrega d&#39;àudio", 
+        "Upload Video": "Pujar vídeo"
     }, 
     "forms": {
         "Audio recording": "Gravar àudio", 
@@ -246,7 +249,11 @@
         "Add Form": "Afegir formulari", 
         "Name of the form": "Nom del formulari", 
         "Preview": "Vista prèvia", 
-        "Dóna't": "Data"
+        "Dóna't": "Data", 
+        "The student needs to complete this form before checkin": "L&#39;estudiant ha de completar aquest formulari abans de registrar", 
+        "Please provide feedback on the following questions.": "Si us plau proporcionar informació sobre les següents preguntes.", 
+        "Short answer": "Resposta curta", 
+        "Download": "descarregar"
     }, 
     "print": {
         "Week": "Setmana", 
@@ -269,7 +276,7 @@
             "Send": "Enviar", 
             "Save": "Desar", 
             "Email": "Correu electrònic", 
-            "Internships": "Mobilitat",
+            "Internships": "Mobilitat", 
             "Send Notification": "Enviar notificació", 
             "Students": "els estudiants", 
             "Student": "Estudiant", 
@@ -285,7 +292,8 @@
             "Tag": "Etiqueta", 
             "Cancel": "Cancel·lar", 
             "Close": "Tancar", 
-            "Message": "Missatge"
+            "Message": "Missatge", 
+            "Name": "Nom"
         }, 
         "Completion Interval Limit (required)": "Completar el límit de l'interval  (requerit)", 
         "Logged Time": "Temps loguejat", 
@@ -320,7 +328,7 @@
         "Form Name": "Nom de Formulari", 
         "Register": "Registre", 
         "Last 3 days": "Últims 3 dies", 
-        "Add forms to internship": "Afegir formulari a la mobbilitat",
+        "Add forms to internship": "Afegir formulari a la mobbilitat", 
         "Name of the internship": "Nom de la mobilitat", 
         "General Form": "Formulari General", 
         "Internship Forms Student": "Formularis de la mobilitat de l'estudiant", 
@@ -429,7 +437,12 @@
             "Internships": "Mobilitat"
         }, 
         "Total number of days": "Nombre total de dies", 
-        "Internship Student Presence": "Presència de l'estudiant en les mobilitats"
+        "Internship Student Presence": "Presència de l'estudiant en les mobilitats", 
+        "Add Internship Manager": "Afegir pràctiques Administrador", 
+        "A student can change his answer for (required)": "Un estudiant pot canviar la seva resposta per (requerit)", 
+        "Add students by tag": "Afegir els estudiants per etiqueta", 
+        "Search": "Cerca", 
+        "Tags": "etiquetes"
     }, 
     "profile": {
         "Profile": "Profile", 
@@ -509,7 +522,8 @@
             "Log Out": "Tancar sessió", 
             "Toggle navigation": "Cambi de navegació", 
             "Inbox": "S'afata d'entrada", 
-            "Read All New Messages": "Llegir tots els missatges nous"
+            "Read All New Messages": "Llegir tots els missatges nous", 
+            "Student View": "veure estudiant"
         }, 
         "sidebar": {
             "Forms": "Formularis", 
@@ -555,7 +569,12 @@
         "Save": "Guardar", 
         "Default application language": "Idioma per defecte"
     }, 
-    "reset_password": {}, 
+    "reset_password": {
+        "Your new password is: ": "La seva nova contrasenya és:", 
+        "New password": "Nova contrasenya", 
+        "Reset password": "Restablir la contrasenya", 
+        "Click the link below to reset your account password:": "Feu clic al següent enllaç per restablir la contrasenya del compte:"
+    }, 
     "error": {}, 
     "login": {
         "Terms and Conditions": "Termes i condicions d'ús", 

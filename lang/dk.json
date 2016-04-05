@@ -111,7 +111,9 @@
         "Checkin": "Check-in", 
         "No forms available to complete.": "Ingen spørgeskemaer at udfylde endnu.", 
         "Please leave a comment here or upload a audio / video file": "Efterlad en kommentar eller upload en audio/video fil her", 
-        "Save": "Gem"
+        "Save": "Gem", 
+        "Upload Audio": "Upload Audio", 
+        "Upload Video": "Upload video"
     }, 
     "settings": {
         "All": "Alle", 
@@ -243,7 +245,9 @@
         "Add Form": "Tilføj spørgeskema", 
         "Name of the form": "Spørgeskemanavn", 
         "Preview": "Forhåndsvisning", 
-        "Please provide feedback on the following questions.": "Giv feedback på følgende spørgsmål."
+        "Please provide feedback on the following questions.": "Giv feedback på følgende spørgsmål.", 
+        "The student needs to complete this form before checkin": "Den studerende skal udfylde denne formular før checkin", 
+        "Download": "Hent"
     }, 
     "notifications": {
         "Notification from": "Notifikation fra"
@@ -494,6 +498,8 @@
         "Add students by tag": "Tilføj studerende efter tag", 
         "Search": "Søge", 
         "Students": "Studerende", 
-        "Tags": "Tags"
+        "Tags": "Tags", 
+        "Add Internship Manager": "Tilføj Praktik manager", 
+        "A student can change his answer for (required)": "En studerende kan ændre hans svar til (påkrævet)"
     }
 }

@@ -108,7 +108,9 @@
         "Form Name": "Form adı", 
         "Checkin": "Giriş", 
         "Please leave a comment here or upload a audio / video file": "Lütfen bir açıklama yazın veya bir ses dosyası yükleyin", 
-        "Save": "Kaydet"
+        "Save": "Kaydet", 
+        "Upload Audio": "yükleme Ses", 
+        "Upload Video": "video"
     }, 
     "settings": {
         "All": "Tümü", 
@@ -259,7 +261,9 @@
         "Form Name": "Form Adı", 
         "Name of the form": " Form Adı", 
         "Preview": "Öngörünüm", 
-        "Please provide feedback on the following questions.": "Aşağıdaki soruları hakkında geri bildirim veriniz."
+        "Please provide feedback on the following questions.": "Aşağıdaki soruları hakkında geri bildirim veriniz.", 
+        "The student needs to complete this form before checkin": "Öğrenci tarihi önce bu formu doldurmanız gerekiyor", 
+        "Download": "indir"
     }, 
     "notifications": {
         "Notification from": "Kimden uyarı"
@@ -487,6 +491,8 @@
         "Add students by tag": "etikete göre öğrencilere ekle", 
         "Search": "Arama", 
         "Students": "Öğrenciler", 
-        "Tags": "Etiketler"
+        "Tags": "Etiketler", 
+        "Add Internship Manager": "Staj Yöneticisi ekle", 
+        "A student can change his answer for (required)": "Bir öğrenci için, onun cevabını değiştirebilir (gerekli)"
     }
 }

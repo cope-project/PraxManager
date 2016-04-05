@@ -1,4 +1,3 @@
-
 {
     "profile": {
         "Profile": "Archivo", 
@@ -110,7 +109,9 @@
         "Form Name": "Nombre de formulario", 
         "No forms available to complete.": "No hay formularios disponibles para completar.", 
         "Please leave a comment here or upload a audio / video file": "Por favor deje un comentario aquí o suba un archive de audio", 
-        "Save": "Guardar"
+        "Save": "Guardar", 
+        "Upload Audio": "Carga de audio", 
+        "Upload Video": "Subir vídeo"
     }, 
     "settings": {
         "All": "Todo", 
@@ -242,7 +243,9 @@
         "Add Form": "Agregar formulario", 
         "Name of the form": " Nombre de formulario ", 
         "Preview": "Vista previa", 
-        "Please provide feedback on the following questions.": "Por favor proporcionar información sobre las siguientes preguntas."
+        "Please provide feedback on the following questions.": "Por favor proporcionar información sobre las siguientes preguntas.", 
+        "The student needs to complete this form before checkin": "El estudiante tiene que completar este formulario antes de registrar", 
+        "Download": "Descargar"
     }, 
     "notifications": {
         "Notification from": "Notificación de"
@@ -530,6 +533,8 @@
         "Internship Student Presence": "Asistencia del estudiante a la práctica", 
         "Add students by tag": "Añadir los estudiantes por etiqueta", 
         "Search": "Buscar", 
-        "Tags": "Etiquetas"
+        "Tags": "Etiquetas", 
+        "Add Internship Manager": "Añadir prácticas Administrador", 
+        "A student can change his answer for (required)": "Un estudiante puede cambiar su respuesta para (requerido)"
     }
 }

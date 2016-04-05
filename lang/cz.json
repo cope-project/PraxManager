@@ -109,7 +109,9 @@
         "Checkin": "Zadat docházku", 
         "No forms available to complete.": "Nejsou k dispozici žádné formuláře k vyplnění.", 
         "Please leave a comment here or upload a audio / video file": "Prosím, přidejte komentář nebo připojte audio/video", 
-        "Save": "Uložit"
+        "Save": "Uložit", 
+        "Upload Audio": "Nahrát Audio", 
+        "Upload Video": "Nahrát video"
     }, 
     "settings": {
         "All": "Vše", 
@@ -241,8 +243,9 @@
         "Add Form": "Přidat dotazník", 
         "Name of the form": "Název dotazníku", 
         "Preview": "Náhled", 
-        "Please provide feedback on the following questions.": "Prosím, poskytovat zpětnou vazbu na následující otázky.",
-        "Download":"Uložit"
+        "Please provide feedback on the following questions.": "Prosím, poskytovat zpětnou vazbu na následující otázky.", 
+        "Download": "Uložit", 
+        "The student needs to complete this form before checkin": "Student musí vyplnit tento formulář před checkin"
     }, 
     "notifications": {
         "Notification from": "Upozornit od"
@@ -360,7 +363,7 @@
     "internships": {
         "Manage": "Upravit", 
         "Manage Internship": "Upravit praxi", 
-        "Add Internship Manager":"Výběr správce praxe",
+        "Add Internship Manager": "Výběr správce praxe", 
         "presence": {
             "Student Presence": "Docházka žáka", 
             "Save": "Uložit", 
@@ -411,8 +414,8 @@
             "Cancel": "Zrušit", 
             "Close": "Zavřít", 
             "Message": "Zpráva"
-        },
-        "A student can change his answer for (required)":"Žák může změnit odpověď (povinné)",
+        }, 
+        "A student can change his answer for (required)": "Žák může změnit odpověď (povinné)", 
         "Add Manager to internship": "Přidat správce praxe", 
         "Next": "Další", 
         "Completion Interval Limit (required)": "Limit pro vyplnění", 
