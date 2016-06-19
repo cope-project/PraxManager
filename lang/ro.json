@@ -393,7 +393,7 @@
         "Cancel": "Anulare",
         "Send new password": "Trimite parolă nouă",
         "An error occurred while updating the password": "A intervenit o eroare în timp ce vă reactualizați parola",
-        "Change Password for": "Schimbați parola din cauză că",
+        "Change Password for": "Schimbați parola pentru utilizatorul",
         "This operation will replace the existing password with a new password": "Această operațiune va înlocui parola existentă cu una nouă",
         "The new password will be sent to the user via email": "Parola nouă va fi trimisă prin e-mail la utilizator",
         "Users": "Utilizator",
