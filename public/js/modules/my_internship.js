@@ -550,7 +550,7 @@
 	/**
 	 * Upload audio file
 	 */
-	$scope.uploadAudio = function (e){
+	$scope.uploadFile = function (e){
 	    e.preventDefault();
 	    var form = angular.element(e.target);
 		$scope.uploading = true;

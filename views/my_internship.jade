@@ -35,15 +35,9 @@ block footer
 				.progress-bar.progress-bar-striped.active(style="width: 100%") #{_('Uploading ...')}
 				
 
-			form(method="post", enctype="multipart/form-data", ng-submit="uploadAudio($event)",  action="/api/files", ng-hide="isAppleIOS")
+			form(method="post", enctype="multipart/form-data", ng-submit="uploadFile($event)",  action="/api/files")
 				.form-group
-					input(type="file", name="upload_file", ng-disabled="form.readOnly", accept="audio/*", capture="microphone")
-					input(type="hidden", name="type", value="audio", ng-disabled="form.readOnly")
-					input(type="submit", value="#{_('Upload Audio')}", ng-disabled="form.readOnly")
-
-			form(method="post", enctype="multipart/form-data", ng-submit="uploadAudio($event)",  action="/api/files", ng-show="isAppleIOS")
-				.form-group
-					input(type="file", name="upload_file", ng-disabled="form.readOnly", accept="video/*", capture="video/*;capture=camcorder")
+					input(type="file", name="upload_file", ng-disabled="form.readOnly")
 					input(type="hidden", name="type", value="video", ng-disabled="form.readOnly")
 					input(type="submit", value="#{_('Upload Video')}", ng-disabled="form.readOnly")
 				
