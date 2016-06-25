@@ -48,7 +48,7 @@ router.post('/', function (req, res) {
 		'AccountId': identity.getAccountId(),
 		'Name': req.body.Name,
 		'StartDate': moment(req.body.StartDate).startOf('day'),
-		'EndDate': moment(req.body.EndDate).endOf('day'),
+		'EndDate': moment(req.body.EndDate).startOf('day'),
 		'AssignedUsers': req.body.AssignedUsers,
 		'AssignedForms': req.body.AssignedForms,
 		'AssignedAdministrators': req.body.AssignedAdministrators,

@@ -261,6 +261,9 @@
 				$scope.tableViewToolbar = true;
 				$scope.formViewToolBar = false;
 
+				$scope.internship.StartDate = moment($scope.internship.StartDate).format('YYYY-MM-DD');
+				$scope.internship.EndDate = moment($scope.internship.EndDate).format('YYYY-MM-DD');
+
 				if ($scope.editingMode) {
 					$http.put('/api/internships/' + $scope.internship._id, $scope.internship).success(function () {
 						$http.get('/api/internships').success(function (internships) {
