@@ -265,12 +265,19 @@ router.get('/csv', function(req, res) {
 	var query = {
 		AccountId: identity.getAccountId(),
 		FormTemplateId: req.query.formId,
-		InternshipId: req.query.internshipId,
-		UserId: req.query.userId
+		InternshipId: req.query.internshipId
 	};
 
+	if(req.query.userId){
+		query.UserId = req.query.userId;
+	}
+	
 	var internshipQuery = { _id: req.query.internshipId, AccountId: identity.getAccountId() };
-	var userQuery = { _id: req.query.userId, AccountId: identity.getAccountId() };
+	var userQuery = { AccountId: identity.getAccountId() };
+
+	if(req.query.userId){
+		userQuery._id = req.query.userId;
+	}
 	
 	var tabel = [[_('Date'), _('Student'), _('Internship'), _('Form'), _('Subject'), _('Question') , _('Question Type'), _('Answer'), _('Comment')]];
 
@@ -285,7 +292,7 @@ router.get('/csv', function(req, res) {
 	})
 
 	var userPromise = new Promise(function(resolve, reject) {
-		UserModel.findOne(userQuery, function(error, user) {
+		UserModel.find(userQuery, function(error, user) {
 			if (error || !user) {
 				return reject(error);
 			}
@@ -303,12 +310,19 @@ router.get('/csv', function(req, res) {
         });
 	});
 
+	function getUserById(users, id){
+		return users.find(function (user) {
+			return id == user._id.toString();
+		}) || {};
+	}
+
 	Promise.all([internshipPromise, userPromise, formsPromise])
 	.then(function(args) {
 		var internship = args[0];
-		var user = args[1];
+		var users = args[1];
 		var forms = args[2];
 		forms.forEach(function(form) {
+			user = getUserById(users, form.UserId.toString())
 			form.FormData.Questions.forEach(function(subject) {
 				subject.Questions.forEach(function(question) {
 					var studentName = user.FirstName + ' ' + user.LastName;
