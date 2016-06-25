@@ -6,7 +6,7 @@
     /**
      * Internshp students controller
      */
-    NSPraxManager.controller('InternshipRegisterController', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
+    NSPraxManager.controller('InternshipRegisterController', ['$scope', '$http', '$modal', '$q',function($scope, $http, $modal, $q) {
         $scope.internship = {};
         $scope.checkins = [];
         $scope.users = [];
@@ -51,7 +51,7 @@
             delete checkin['Approve'];
             delete checkin['user'];
             
-            $http.put('/api/checkin/' + checkin._id, checkin);
+            return $http.put('/api/checkin/' + checkin._id, checkin);
         };
 
         $scope.dateOptions = {
@@ -73,6 +73,21 @@
 
         $scope.onDateChange = function() {
             fetch();
+        };
+
+        $scope.approveAll = function () {
+            var items = [];
+            $scope.checkins.forEach(function (checkin) {
+                checkin.Approve = true;
+                var item = $scope.onApprove(checkin);
+                items.push(item);
+            });
+
+            $q.all(items).then(function () {
+                fetch();
+            }, function () {
+                fetch();
+            });
         };
 
     }]);

@@ -34,13 +34,14 @@ block content
 						i.glyphicon.glyphicon-calendar
 	.row(ng-cloak)
 		.col-lg-12
-			table.table.table-bordered.table-hover.table-striped(ng-show="checkins.length > 0")
+			table.table.table-bordered.table-hover.table-striped(ng-show1="checkins.length > 0")
 				thead
 					tr
 						th #{_('Name')}
 						th #{_('Email')}
 						th #{_('Comment')}
-						th #{_('Approve')}
+						th
+							button(ng-click="approveAll()") #{_('Approve')} 
 				tbody
 					tr(ng-repeat="checkin in checkins | orderBy:'user.FirstName'")
 						td {{checkin.user.FirstName}} {{checkin.user.LastName}}
