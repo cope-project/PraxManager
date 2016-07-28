@@ -48,7 +48,7 @@
 			}
 
 			function loadForms() {
-				$http.get('/api/forms').success(function (forms, status, headers) {
+				$http.get('/api/forms?limit='+ limit + '&skip=' + (page * limit)).success(function (forms, status, headers) {
 					$scope.forms = forms;
 					var itemsCount = headers()['x-items-count'];
 					$scope.pages = pagination(itemsCount, limit);

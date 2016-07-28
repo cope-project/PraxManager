@@ -77,7 +77,7 @@
 			$scope.endDatePikerOpened = false;
 
 			function loadInternships() {
-				$http.get('/api/internships').success(function (internships, status, headers) {
+				$http.get('/api/internships?limit='+ limit + '&skip=' + (page * limit)).success(function (internships, status, headers) {
 					$scope.internships = internships;
 					var itemsCount = headers()['x-items-count'];
 					$scope.pages = pagination(itemsCount, limit);
