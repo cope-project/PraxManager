@@ -20,6 +20,10 @@ var Identity = require('./../lib/identity');
  * Return all internships
  */
 router.get('/', function (req, res) {
+	var range = {};
+	range.limit = req.query.limit || 30;
+	range.skip = req.query.skip || 0;
+
     var identity = new Identity(req.session);
 	var query = { AccountId: identity.getAccountId(), Status: { $nin: ['deleted', 'archived'] } };
 
@@ -28,12 +32,35 @@ router.get('/', function (req, res) {
 		query.AssignedAdministrators = { $elemMatch: { _id: identity.getUserId() } };
 	}
 
-    return InternshipModel.find(query, function (err, internships) {
-		if (!err) {
-			return res.send(internships);
-		} else {
-			return res.send(err, 500);
-		}
+	var internshipsPromise = new Promise(function (resolve, reject) {
+		InternshipModel.find(query)
+			.sort({ Name: 1 })
+			.limit(range.limit)
+			.skip(range.skip)
+			.exec(function (err, internships) {
+				if (!err) {
+					resolve(internships)
+				} else {
+					reject(err);
+				}
+			});
+	});
+
+	var countPromise = new Promise(function (resolve, reject) {
+		InternshipModel.count(query, function (error, count) {
+			if(!error){
+				resolve(count);
+			}else{
+				reject(error);
+			}
+		});
+	});
+
+	Promise.all([internshipsPromise, countPromise]).then(function (args) {
+		res.setHeader("X-Items-Count", args[1]);
+		res.send(args[0]).end();
+	}).catch(function (reason) {
+		res.send(reason, 500).end();
 	});
 });
 
@@ -157,7 +184,7 @@ router.get('/:id', function (req, res) {
 	if (identity.getUser().Type == 'teacher') {
 		query.AssignedAdministrators = { $elemMatch: { _id: identity.getUserId() } };
 	}
-	
+
     return InternshipModel.findOne(query, function (err, internship) {
 		if (!err) {
 			return res.send(internship);
@@ -213,7 +240,7 @@ router.post('/:id/archive', function (req, res) {
 	if (identity.getUser().Type == 'teacher') {
 		query.AssignedAdministrators = { $elemMatch: { _id: identity.getUserId() } };
 	}
-	
+
     return InternshipModel.findOne(query, function (error, internship) {
 		internship.Status = 'archived';
 		internship.save(function (error) {

@@ -141,5 +141,11 @@ block content
 										a(href='#edit', ng-click="sendPassword(user)") #{_('Send Password')}
 									li
 										a(href='#edit', ng-click="deleteUser(user)") #{_('Delete')}
+	.row
+		.col-lg-12
+			nav
+				ul(class="pagination")
+					li(ng-repeat="page in pages" ng-class="pageActive(page)")
+						a(href="#/{{page + 1}}", ng-click="selectPage(page)" ) {{page + 1}}
 										
 									

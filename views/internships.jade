@@ -229,3 +229,9 @@ block content
 							
 					
 						
+	.row(ng-show="tableView", ng-cloak)
+		.col-lg-12
+			nav
+				ul(class="pagination")
+					li(ng-repeat="page in pages" ng-class="pageActive(page)")
+						a(href="#/{{page + 1}}", ng-click="selectPage(page)" ) {{page + 1}}

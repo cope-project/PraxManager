@@ -305,3 +305,10 @@ block content
 					.btn-toolbar
 						button.btn.btn-primary(ng-click="save()", ng-disabled="editFormForm.$invalid || form.Questions.length == 0")  #{_('Save')}
 						button.btn.btn-default(ng-click="cancel()")  #{_('Cancel')}
+
+	.row(ng-show="tableView", ng-cloak)
+		.col-log-12
+			nav
+				ul(class="pagination")
+					li(ng-repeat="page in pages" ng-class="pageActive(page)")
+						a(href="#/{{page + 1}}", ng-click="selectPage(page)" ) {{page + 1}}

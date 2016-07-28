@@ -9,12 +9,31 @@
     NSPraxManager.controller('UsersController', ['$scope', '$http', '$modal', function ($scope, $http, $modal) {
 		$scope.users = [];
 	
+		var limit = 30;
+		var skip = 0;
+		var page = 0;
+
+
+		$scope.selectPage = function (_page) {
+			page = _page;
+			loadUsersFromServer();
+		};
+
+		$scope.pageActive = function (_page){
+			if(_page == page){
+				return 'active';
+			}
+			return '';
+		}
+
 		/**
 		 * Load users
 		 */
 		function loadUsersFromServer() {
-			$http.get('/api/users').success(function (users) {
+			$http.get('/api/users?limit='+ limit + '&skip=' + (page * limit)).success(function (users,  tatus, headers) {
 				$scope.users = users;
+				var itemsCount = headers()['x-items-count'];
+				$scope.pages = pagination(itemsCount, limit);
 			});
 		}
 

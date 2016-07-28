@@ -32,23 +32,48 @@ var userslib = require('./../lib/prax/users');
  * GET all users
  */
 router.get('/', function (req, res) {
+
+	var range = {};
+	range.limit = req.query.limit || 30;
+	range.skip = req.query.skip || 0;
+
     var identity = new Identity(req.session);
 	var query = { AccountId: identity.getAccountId(), Status: { $ne: 'deleted' } };
-	
-	if(req.query.type){
-		var types = req.query.type.split(',');
-		query.Type = {'$in': types};
-	}
-	
-    return UserModel.find(query)
-	.sort({FirstName: 1, LastName: 1})
-	.exec(function (err, users) {
 
-		if (!err) {
-			return res.send(users);
-		} else {
-			return res.send(err, 500);
-		}
+	if (req.query.type) {
+		var types = req.query.type.split(',');
+		query.Type = { '$in': types };
+	}
+
+	var usersPromise = new Promise(function (resolve, reject) {
+		UserModel.find(query)
+			.limit(range.limit)
+			.skip(range.skip)
+			.sort({ FirstName: 1, LastName: 1 })
+			.exec(function (err, users) {
+				if (!err) {
+					resolve(users);
+				} else {
+					reject(err);
+				}
+			});
+	});
+
+	var countPromise = new Promise(function (resolve, reject) {
+		UserModel.count(query, function( err, count){
+			if(!err){
+				resolve(count);
+			}else{
+				reject(err);
+			}
+		});
+	});
+
+	Promise.all([usersPromise, countPromise]).then(function (args) {
+		res.setHeader("X-Items-Count", args[1]);
+		res.send(args[0]).end();
+	}).catch(function (reason) {
+		res.send(reason, 500).end();
 	});
 });
 

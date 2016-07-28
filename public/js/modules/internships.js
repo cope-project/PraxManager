@@ -9,7 +9,7 @@
 	 */
     NSPraxManager.controller('InternshipsController', ['$scope', '$http', '$modal', '$timeout',
 		function ($scope, $http, $modal, $timeout) {
-    	
+
 			// bootstrapping
 			$scope.internships = [];
 
@@ -26,6 +26,23 @@
 			$scope.students = [];
 			$scope.forms = [];
 			$scope.managers = [];
+
+			var limit = 30;
+			var skip = 0;
+			var page = 0;
+
+
+			$scope.selectPage = function (_page) {
+				page = _page;
+				loadInternships();
+			};
+
+			$scope.pageActive = function (_page) {
+				if (_page == page) {
+					return 'active';
+				}
+				return '';
+			}
 
 			$scope.$watch('internship', function (newValue, oldValue) {
 				if (newValue != defaultInternship) {
@@ -59,11 +76,16 @@
 			$scope.startDatePikerOpened = false;
 			$scope.endDatePikerOpened = false;
 
+			function loadInternships() {
+				$http.get('/api/internships').success(function (internships, status, headers) {
+					$scope.internships = internships;
+					var itemsCount = headers()['x-items-count'];
+					$scope.pages = pagination(itemsCount, limit);
+				});
+			}
 
-			$http.get('/api/internships').success(function (internships) {
-				$scope.internships = internships;
-			})
-		
+			loadInternships();
+
 			/**
 			 * Open start date, date picker
 			 */
@@ -72,8 +94,8 @@
 				$event.stopPropagation();
 				$scope.startDatePikerOpened = true;
 			}
-		
-		
+
+
 			/**
 			 * Open end date, date picker
 			 */
@@ -103,9 +125,7 @@
 				}
 
 				$http.delete('/api/internships/' + internship._id).success(function () {
-					$http.get('/api/internships').success(function (internships) {
-						$scope.internships = internships;
-					});
+					loadInternships();
 				});
 
 			};
@@ -115,13 +135,11 @@
 					return;
 				}
 				$http.post('/api/internships/' + internship._id + '/archive').success(function () {
-					$http.get('/api/internships').success(function (internships) {
-						$scope.internships = internships;
-					});
+					loadInternships();
 				});
 
 			};
-		
+
 			/**
 			 * Cancel edit internship
 			 */
@@ -141,7 +159,7 @@
 					NSPraxManager.unsavedChanges = false;
 				});
 			};
-		
+
 			/**
 			 * Go to the next step of editing
 			 */
@@ -153,7 +171,7 @@
 				$scope.tableViewToolbar = false;
 				$scope.formViewToolBar = true;
 			};
-		
+
 			/**
 			 * Add form to internship
 			 */
@@ -200,7 +218,7 @@
 				}, function () {
 				});
 			}
-		
+
 			/**
 			 * Add manager to internship
 			 */
@@ -214,7 +232,7 @@
 				}, function () {
 				});
 			}
-		
+
 			/**
 			 * Remove student form internship
 			 */
@@ -224,7 +242,7 @@
 				}
 				$scope.students.splice(index, 1);
 			}
-		
+
 			/**
 			 * Remove form from internship
 			 */
@@ -234,7 +252,7 @@
 				}
 				$scope.forms.splice(index, 1);
 			}
-		
+
 			/**
 			 * Remove manager form internship
 			 */
@@ -244,8 +262,8 @@
 				}
 				$scope.managers.splice(index, 1);
 			};
-		
-		
+
+
 			/**
 			 * Save internship
 			 */
@@ -282,8 +300,8 @@
 				}
 
 			}
-		
-		
+
+
 			/**
 			 * Edit internship
 			 */
@@ -302,7 +320,7 @@
 			};
 
 		}]);
-    
+
     /**
 	 * Add student modal controller
 	 */
@@ -320,7 +338,7 @@
 			if (!expected) {
 				return true;
 			}
-			
+
 			return actual.indexOf(expected) !== -1;
 		};
 
@@ -337,7 +355,7 @@
 
 			$scope.tags = Object.keys(tags);
 		});
-	
+
 		/**
 		 * Add student to internship
 		 */
@@ -365,7 +383,7 @@
 			}
 
 		};
-	
+
 		/**
 		 * Close modal
 		 */
@@ -373,7 +391,7 @@
 			$modalInstance.dismiss('cancel');
 		};
     }]);
-	
+
 	/**
 	 * Add manager modal controller
 	 */
@@ -385,7 +403,7 @@
 		$http.get('/api/users?type=teacher').success(function (users) {
 			$scope.users = users
 		});
-		
+
 		/**
 		 * Add manager to internship
 		 */
@@ -396,7 +414,7 @@
 
 			$modalInstance.close($scope.selected);
 		};
-		
+
 		/**
 		 * Close modal
 		 */
@@ -404,7 +422,7 @@
 			$modalInstance.dismiss('cancel');
 		};
     }]);
-    
+
 	/**
 	 * Add form modal controller
 	 */
@@ -416,7 +434,7 @@
 		$http.get('/api/forms').success(function (forms) {
 			$scope.forms = forms
 		});
-	
+
 		/**
 		 * Add form to internship
 		 */
@@ -426,7 +444,7 @@
 			}
 			$modalInstance.close($scope.selected);
 		};
-	
+
 		/**
 		 * Close modal
 		 */

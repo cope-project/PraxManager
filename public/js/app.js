@@ -5,14 +5,14 @@
 // define application
 var NSPraxManager = angular.module('PraxManager', ['ui.calendar', 'ui.bootstrap', 'angularMoment', 'ngTagsInput', 'ui.bootstrap.datepicker'])
 
-!function() {
+!function () {
     /**
      * Notifications controller
      */
-    NSPraxManager.controller('NotificationsController', ['$scope', '$http', function($scope, $http) {
+    NSPraxManager.controller('NotificationsController', ['$scope', '$http', function ($scope, $http) {
 	       $scope.notifications = []
 
-	       $http.get('/notifications').success(function(notifications) {
+	       $http.get('/notifications').success(function (notifications) {
             $scope.notifications = notifications
 	       })
 
@@ -23,7 +23,7 @@ var NSPraxManager = angular.module('PraxManager', ['ui.calendar', 'ui.bootstrap'
     NSPraxManager.constant('angularMomentConfig', { timezone: null });
 
     // setup application
-    NSPraxManager.run(['amMoment', function(amMoment) {
+    NSPraxManager.run(['amMoment', function (amMoment) {
         if (PraxManager_lang == 'dk') {
             PraxManager_lang = 'da';
         }
@@ -41,7 +41,7 @@ var NSPraxManager = angular.module('PraxManager', ['ui.calendar', 'ui.bootstrap'
 
     NSPraxManager.unsavedChanges = false;
 
-    window.onbeforeunload = function(e) {
+    window.onbeforeunload = function (e) {
         if (NSPraxManager.unsavedChanges) {
             return $t('The current window has unsaved changes.');
         }
@@ -49,14 +49,36 @@ var NSPraxManager = angular.module('PraxManager', ['ui.calendar', 'ui.bootstrap'
 } ();
 
 // translate
-window.$t = function (m) {return m};
+window.$t = function (m) { return m };
 
 function loadLanguagePack(dict) {
-    window.$t = function(message) {
+    window.$t = function (message) {
         if (dict[message]) {
             return dict[message];
         }
 
         return message;
     };
+}
+
+/**
+ * Pagination helper
+ */
+function pagination(count, _limit) {
+    if (count <= 0) {
+        return [0];
+    }
+
+    var pages = count / _limit;
+
+    if (pages <= 1) {
+        return [0];
+    }
+
+    var list = [];
+    for (var i = 0; i < Math.ceil(pages); i++) {
+        list.push(i);
+    }
+
+    return list;
 }

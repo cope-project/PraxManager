@@ -19,15 +19,43 @@ var fs = require('fs');
  * Return all form templates
  */
 router.get('', function (req, res) {
+	var range = {};
+	range.limit = req.query.limit || 30;
+	range.skip = req.query.skip || 0;
+
     var identity = new Identity(req.session);
 	var query = { AccountId: identity.getAccountId(), Status: { $ne: 'deleted' } };
-    FormTemplateModel.find(query, function (error, formTemplates) {
-		if (error) {
-			res.send(error, 500);
-		} else {
-			res.send(formTemplates)
-		}
-    })
+
+	var formsPromise = new Promise(function (resolve, reject) {
+		FormTemplateModel.find(query)
+			.limit(range.limit)
+			.skip(range.skip)
+			.sort({ Name: 1 })
+			.exec(function (error, formTemplates) {
+				if (error) {
+					reject(error);
+				} else {
+					resolve(formTemplates);
+				}
+			});
+	});
+
+	var countPromise = new Promise(function (resolve, reject) {
+		FormTemplateModel.count(query, function (err, count) {
+			if (!err) {
+				resolve(count);
+			} else {
+				reject(err);
+			}
+		});
+	});
+
+	Promise.all([formsPromise, countPromise]).then(function (args) {
+		res.setHeader("X-Items-Count", args[1]);
+		res.send(args[0]).end();
+	}).catch(function (reason) {
+		res.send(reason, 500).end();
+	});
 });
 
 /**
