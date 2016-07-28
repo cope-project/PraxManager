@@ -37,7 +37,7 @@
 
 			$scope.selectPage = function (_page) {
 				page = _page;
-				loadInternships();
+				loadForms();
 			};
 
 			$scope.pageActive = function (_page) {
