@@ -71,3 +71,7 @@ block content
 						td {{form.Description}}
 						td
 							a.btn.btn-default(href="/print/form?internshipId={{internship._id}}&userId={{user._id}}&formId={{form._id}}") #{_('Print')}
+
+	.row(ng-cloak)
+		.col-lg-12
+			p #{_('Final Grade')}: {{finalGrade || '#{_('Not available')}'}}

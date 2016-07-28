@@ -330,7 +330,9 @@
         "Forms": "Formulare",
         "Form Name": "Nume formular",
         "Print": "Printează",
-        "Description": "Descriere"
+        "Description": "Descriere",
+        "Final Grade": "Nota Finală",
+        "Not available": "Nu este disponibila"
     },
     "profile": {
         "Change Password": "Schimbă parola",
