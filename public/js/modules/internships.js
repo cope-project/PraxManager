@@ -343,7 +343,7 @@
 		};
 
 
-		$http.get('/api/users?type=student').success(function (users) {
+		$http.get('/api/users?type=student&limit=0').success(function (users) {
 			$scope.users = users;
 			var tags = {};
 
@@ -400,7 +400,7 @@
 		$scope.selected = null;
 
 
-		$http.get('/api/users?type=teacher').success(function (users) {
+		$http.get('/api/users?type=teacher&limit=0').success(function (users) {
 			$scope.users = users
 		});
 

@@ -16,7 +16,7 @@
             $scope.internship = internship;
         });
         
-        $http.get('/api/users').success(function (users) {
+        $http.get('/api/users?limit=0').success(function (users) {
             $scope.users = users;
             fetch();
         });
