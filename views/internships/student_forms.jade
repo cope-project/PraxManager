@@ -85,3 +85,6 @@ block content
 								button.btn.btn-default.dropdown-toggle(type="button", ng-click="reviewForm(form)")
 									| #{_('Review')}  
 									i.fa.fa-eye
+		
+	.row(ng-cloak, ng-show="forms.length == 0")
+		.col-lg-12 #{_('No forms submitted by students')}  

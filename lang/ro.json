@@ -220,7 +220,8 @@
             "Edit review": "Editează formular completat de cursant",
             "Teacher Evaluation":"Evaluare tutore",
             "Review": "Recenzie",
-            "Print": "Printează"
+            "Print": "Printează",
+            "No forms submitted by students":"Nu există formulare trimise de cursanti"
         },
         "presence": {
             "Student Presence": "Prezența cursantului",
